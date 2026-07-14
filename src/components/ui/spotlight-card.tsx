@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, ReactNode } from 'react';
+import { useInView } from 'framer-motion';
 
 interface GlowCardProps {
   children: ReactNode;
@@ -10,6 +11,7 @@ interface GlowCardProps {
   width?: string | number;
   height?: string | number;
   customSize?: boolean; // When true, ignores size prop and uses width/height or className
+  style?: React.CSSProperties;
 }
 
 const glowColorMap = {
@@ -34,12 +36,16 @@ const GlowCard: React.FC<GlowCardProps> = ({
   size = 'md',
   width,
   height,
-  customSize = false
+  customSize = false,
+  style = {}
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef);
 
   useEffect(() => {
+    if (!isInView) return;
+
     const syncPointer = (e: PointerEvent) => {
       const { clientX: x, clientY: y } = e;
       
@@ -53,7 +59,7 @@ const GlowCard: React.FC<GlowCardProps> = ({
 
     document.addEventListener('pointermove', syncPointer);
     return () => document.removeEventListener('pointermove', syncPointer);
-  }, []);
+  }, [isInView]);
 
   const { base, spread } = glowColorMap[glowColor];
 
@@ -67,6 +73,7 @@ const GlowCard: React.FC<GlowCardProps> = ({
 
   const getInlineStyles = () => {
     const baseStyles: React.CSSProperties = {
+      ...style,
       '--base': base,
       '--spread': spread,
       '--radius': '14',

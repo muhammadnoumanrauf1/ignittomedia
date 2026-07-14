@@ -544,6 +544,8 @@ class App {
     }
   }
   update() {
+    if (this.rafActive === false) return;
+    
     if (!this.isDown && this.autoScrollSpeed) {
       this.scroll.target += this.autoScrollSpeed;
     }
@@ -555,7 +557,10 @@ class App {
     }
     this.renderer.render({ scene: this.scene, camera: this.camera });
     this.scroll.last = this.scroll.current;
-    this.raf = window.requestAnimationFrame(this.update.bind(this));
+    
+    if (this.rafActive !== false) {
+      this.raf = window.requestAnimationFrame(this.update.bind(this));
+    }
   }
   addEventListeners() {
     this.boundOnResize = this.onResize.bind(this);
@@ -628,11 +633,34 @@ export default function CircularGallery({
         autoScrollSpeed,
         onItemClick
       });
+      // Start paused until observer triggers
+      app.rafActive = false;
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!app.rafActive) {
+              app.rafActive = true;
+              app.update();
+            }
+          } else {
+            app.rafActive = false;
+            window.cancelAnimationFrame(app.raf);
+          }
+        });
+      }, { threshold: 0 });
+      
+      observer.observe(containerRef.current);
+      
+      app.observer = observer;
     });
 
     return () => {
       isMounted = false;
-      if (app) app.destroy();
+      if (app) {
+        if (app.observer) app.observer.disconnect();
+        app.destroy();
+      }
     };
   }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase, autoScrollSpeed, onItemClick]);
   return (

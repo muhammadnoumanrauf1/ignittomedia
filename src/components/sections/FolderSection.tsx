@@ -38,7 +38,7 @@ export default function FolderSection() {
           <Folder 
             color="#00DFA2" 
             size={1.6} 
-            items={folderItems} 
+            items={folderItems as any} 
             className="z-10"
           />
         </div>

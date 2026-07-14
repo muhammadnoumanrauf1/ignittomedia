@@ -10,7 +10,7 @@ interface ClickSparkProps {
   duration?: number;
   easing?: 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
   extraScale?: number;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 interface Spark {

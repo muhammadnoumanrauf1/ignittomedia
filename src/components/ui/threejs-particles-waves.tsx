@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { useInView } from 'framer-motion';
 
 interface ParticleWavesProps {
   hideControls?: boolean;
@@ -99,43 +100,6 @@ const ParticleWaves = ({ hideControls = false }: ParticleWavesProps) => {
     rendererRef.current.setSize(window.innerWidth, window.innerHeight);
   };
 
-  const animate = () => {
-    if (!cameraRef.current || !rendererRef.current || !sceneRef.current) return;
-    
-    animationRef.current = requestAnimationFrame(animate);
-    
-    // Update camera
-    cameraRef.current.position.x += (mouseRef.current.x - cameraRef.current.position.x) * 0.05;
-    cameraRef.current.position.y += (-mouseRef.current.y - cameraRef.current.position.y) * 0.05;
-    cameraRef.current.lookAt(sceneRef.current.position);
-    
-    // Update particles
-    let i = 0;
-    for (let ix = 0; ix < density; ix++) {
-      for (let iy = 0; iy < density; iy++) {
-        if (i < particlesRef.current.length) {
-          const particle = particlesRef.current[i++];
-          
-          particle.position.y = -400 + 
-            (Math.sin((ix + countRef.current) * 0.3) * amplitude) + 
-            (Math.sin((iy + countRef.current) * 0.5) * amplitude);
-          
-          const scale = (Math.sin((ix + countRef.current) * 0.3) + 1) * 2 + 
-                       (Math.sin((iy + countRef.current) * 0.5) + 1) * 2;
-          particle.scale.setScalar(scale * 2);
-        }
-      }
-    }
-    
-    rendererRef.current.render(sceneRef.current, cameraRef.current);
-    countRef.current += speed;
-  };
-
-  const applyPreset = (pColor: string, bColor: string) => {
-    setParticleColor(pColor);
-    setBgColor(bColor);
-  };
-
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -165,13 +129,7 @@ const ParticleWaves = ({ hideControls = false }: ParticleWavesProps) => {
     document.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('resize', handleResize);
 
-    // Start animation
-    animate();
-
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', handleResize);
@@ -181,6 +139,57 @@ const ParticleWaves = ({ hideControls = false }: ParticleWavesProps) => {
       }
     };
   }, []);
+
+  const isInView = useInView(containerRef);
+
+  const applyPreset = (pColor: string, bColor: string) => {
+    setParticleColor(pColor);
+    setBgColor(bColor);
+  };
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const animateLoop = () => {
+      if (!cameraRef.current || !rendererRef.current || !sceneRef.current) return;
+      
+      animationRef.current = requestAnimationFrame(animateLoop);
+      
+      // Update camera
+      cameraRef.current.position.x += (mouseRef.current.x - cameraRef.current.position.x) * 0.05;
+      cameraRef.current.position.y += (-mouseRef.current.y - cameraRef.current.position.y) * 0.05;
+      cameraRef.current.lookAt(sceneRef.current.position);
+      
+      // Update particles
+      let i = 0;
+      for (let ix = 0; ix < density; ix++) {
+        for (let iy = 0; iy < density; iy++) {
+          if (i < particlesRef.current.length) {
+            const particle = particlesRef.current[i++];
+            
+            particle.position.y = -400 + 
+              (Math.sin((ix + countRef.current) * 0.3) * amplitude) + 
+              (Math.sin((iy + countRef.current) * 0.5) * amplitude);
+            
+            const scale = (Math.sin((ix + countRef.current) * 0.3) + 1) * 2 + 
+                         (Math.sin((iy + countRef.current) * 0.5) + 1) * 2;
+            particle.scale.setScalar(scale * 2);
+          }
+        }
+      }
+      
+      rendererRef.current.render(sceneRef.current, cameraRef.current);
+      countRef.current += speed;
+    };
+
+    animateLoop();
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isInView, amplitude, density, speed]);
 
   useEffect(() => {
     if (rendererRef.current) {

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import SplitText from "../ui/SplitText";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 export default function Story() {
   const pillars = [
@@ -67,11 +68,15 @@ export default function Story() {
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group relative p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-brand-glow/30 transition-all duration-500 overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-glow/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{pillar.title}.</h3>
-                <p className="text-brand-text-muted text-sm relative z-10">{pillar.desc}</p>
+                <GlowCard 
+                  customSize={true} 
+                  glowColor="theme" 
+                  className="group relative p-8 rounded-2xl bg-white/[0.02] border border-white/5 overflow-hidden h-full"
+                >
+                  <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{pillar.title}.</h3>
+                  <p className="text-brand-text-muted text-sm relative z-10">{pillar.desc}</p>
+                </GlowCard>
               </motion.div>
             ))}
           </div>

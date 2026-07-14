@@ -332,9 +332,9 @@ export function CinematicHero({
                     }}
                   >
                     {/* VIDEO PLAYER */}
-                    <div className="relative w-full max-w-[1000px] aspect-video rounded-xl md:rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 group bg-black/50">
+                    <div className="relative w-full max-w-[800px] max-h-[50vh] aspect-video rounded-xl md:rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 group bg-black/50 mx-auto">
                       <div className="absolute inset-0 screen-glare z-40 pointer-events-none" aria-hidden="true" />
-                      <div className="relative w-full h-full video-container" onClick={togglePlay}>
+                      <div className="relative w-full h-full video-container">
                         <video 
                           ref={videoRef} 
                           src={videoSrc} 
@@ -342,19 +342,21 @@ export function CinematicHero({
                           preload="auto"
                           playsInline 
                           loop 
-                          controls={false}
+                          controls={true}
                           onPlay={() => setIsPlaying(true)}
                           onPause={() => setIsPlaying(false)}
+                          className="w-full h-full object-cover"
                         />
-                        <div className={`absolute inset-0 flex items-center justify-center z-20 transition-all cursor-pointer ${isPlaying ? 'bg-black/0 opacity-0 group-hover:opacity-100 group-hover:bg-black/20' : 'bg-black/40 opacity-100 backdrop-blur-sm'}`}>
-                          <div className="w-20 h-20 rounded-full bg-brand-glow/20 flex items-center justify-center backdrop-blur-md border border-brand-glow/50 transition-transform hover:scale-110 shadow-[0_0_30px_rgba(0,223,162,0.3)]">
-                            {isPlaying ? (
-                              <Pause className="w-8 h-8 text-brand-glow fill-brand-glow" />
-                            ) : (
+                        {!isPlaying && (
+                          <div 
+                            className="absolute inset-0 flex items-center justify-center z-20 transition-all cursor-pointer bg-black/40 backdrop-blur-sm"
+                            onClick={togglePlay}
+                          >
+                            <div className="w-20 h-20 rounded-full bg-brand-glow/20 flex items-center justify-center backdrop-blur-md border border-brand-glow/50 transition-transform hover:scale-110 shadow-[0_0_30px_rgba(0,223,162,0.3)]">
                               <Play className="w-8 h-8 text-brand-glow fill-brand-glow ml-1" />
-                            )}
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                     </div>
 

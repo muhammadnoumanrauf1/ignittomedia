@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import SplitText from "../ui/SplitText";
 import ScrollReveal from "../ui/ScrollReveal";
-import { GlowCard } from "@/components/ui/spotlight-card";
 
 export default function Problem() {
   const badTimeline = ["Idea", "Camera", "Editing Bottleneck", "Never Published"];
@@ -45,20 +44,20 @@ export default function Problem() {
         </div>
 
         {/* Bad Timeline */}
-        <GlowCard customSize={true} glowColor="red" className="flex flex-col items-center bg-brand-bg/50 p-12 rounded-3xl border border-white/5 relative overflow-hidden">
+        <div className="flex flex-col items-center bg-brand-bg/50 p-12 rounded-3xl border border-white/5 relative overflow-hidden group hover:border-red-500/30 transition-colors duration-500">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-red-500/5 pointer-events-none" />
           {badTimeline.map((item, i) => (
             <TimelineItem key={item} text={item} isLast={i === badTimeline.length - 1} isGood={false} delay={0.2 + (i * 0.15)} />
           ))}
-        </GlowCard>
+        </div>
 
         {/* Good Timeline */}
-        <GlowCard customSize={true} glowColor="theme" className="flex flex-col items-center bg-brand-glow/5 p-12 rounded-3xl border border-brand-glow/20 relative overflow-hidden glow-shadow">
+        <div className="flex flex-col items-center bg-brand-glow/5 p-12 rounded-3xl border border-brand-glow/20 relative overflow-hidden glow-shadow group hover:border-brand-glow/50 transition-colors duration-500">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-glow/10 pointer-events-none" />
           {goodTimeline.map((item, i) => (
             <TimelineItem key={item} text={item} isLast={i === goodTimeline.length - 1} isGood={true} delay={0.4 + (i * 0.15)} />
           ))}
-        </GlowCard>
+        </div>
       </div>
 
       <div className="max-w-4xl mx-auto text-center mt-12 mb-32">
@@ -76,11 +75,12 @@ export default function Problem() {
           }
         `}} />
         <div className="highlight-earned text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-glow text-white">
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={3}
-            blurStrength={10}
+          <ScrollReveal 
+            baseOpacity={0} 
+            enableBlur={true} 
+            baseRotation={3} 
+            blurStrength={2}
+            scrollContainerRef={null as any}
           >
             {"Attention isn't captured.\nIt's earned."}
           </ScrollReveal>
