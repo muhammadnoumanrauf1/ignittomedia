@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  /* Premium near-black background */
+  --color-brand-bg: #030A12;
+  --color-brand-bg-secondary: #011F41; /* Prussian Blue */
+  
+  /* The new palette used for accents, glows, and highlights */
+  --color-brand-accent: #00DFA2; /* Vibrant Teal/Green pop */
+  --color-brand-glow: #01C3FF; /* Deep Sky Blue glow */
+  
+  --color-pacific-blue: #00A2BC;
+  --color-stormy-teal: #006B75;
+  --color-prussian-blue: #011F41;
+  --color-teal-green: #00DFA2;
+
+  --color-brand-text: #FFFFFF;
+  --color-brand-text-secondary: #C8D5E0;
+  --color-brand-text-muted: #8A98A8;
+  
+  --font-sans: var(--font-inter);
+}
+
+:root {
+  --background: #030A12;
+  --foreground: #FFFFFF;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-brand-bg text-brand-text antialiased selection:bg-brand-glow/30 selection:text-white;
+    font-family: var(--font-sans), sans-serif;
+    overflow-x: clip;
+  }
+
+  /* Hide default cursor only when the custom cursor class is active */
+  html.custom-cursor-active, 
+  html.custom-cursor-active * {
+    cursor: none;
+  }
+}
+
+@layer utilities {
+  .glow-shadow {
+    box-shadow: 0 0 60px rgba(1, 195, 255, 0.18);
+  }
+  .glow-shadow-lg {
+    box-shadow: 0 0 100px rgba(1, 195, 255, 0.3);
+  }
+  .border-glow {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .text-glow {
+    text-shadow: 0 0 20px rgba(1, 195, 255, 0.4);
+  }
+}

@@ -1,0 +1,147 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Play, Scissors, MessageSquareCheck, Rocket } from "lucide-react";
+import { useState } from "react";
+import { GlowCard } from "@/components/ui/spotlight-card";
+
+const steps = [
+  {
+    id: "01",
+    title: "Upload & Ideation",
+    icon: Play,
+    phase: "PHASE 1",
+    desc: "You drop your raw footage into our portal. We review the material and strategize the optimal narrative hook and pacing.",
+    color: "#00DFA2", // brand-glow
+    position: "left-[5%] bottom-[20%]"
+  },
+  {
+    id: "02",
+    title: "Editorial Engineering",
+    icon: Scissors,
+    phase: "PHASE 2",
+    desc: "We don't just edit; we engineer attention. We cut the fluff, add dynamic b-roll, motion graphics, and perfect the pacing.",
+    color: "#01C3FF", // cyan accent
+    position: "left-[25%] top-[15%]"
+  },
+  {
+    id: "03",
+    title: "Review & Refine",
+    icon: MessageSquareCheck,
+    phase: "PHASE 3",
+    desc: "You receive the first cut in our seamless review platform. Add frame-accurate comments, and we implement revisions fast.",
+    color: "#FFFFFF",
+    position: "right-[20%] bottom-[25%]"
+  },
+  {
+    id: "04",
+    title: "Publish & Scale",
+    icon: Rocket,
+    phase: "PHASE 4",
+    desc: "Get the final exported files optimized for every platform. Post your content and watch your audience engagement soar.",
+    color: "#FFFFFF",
+    position: "right-[5%] top-[10%]"
+  }
+];
+
+export default function ProcessMap() {
+  const [activeStep, setActiveStep] = useState<string | null>("02");
+
+  return (
+    <section id="process-map" className="bg-brand-bg-secondary min-h-[120vh] relative overflow-hidden flex flex-col items-center py-32 px-6">
+      
+      {/* Top Header */}
+      <div className="flex flex-col items-center text-center z-10 relative">
+        <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.02] mb-6">
+          <span className="text-[10px] font-semibold tracking-widest text-brand-text-muted uppercase">
+            How It Works
+          </span>
+        </div>
+        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] max-w-4xl mx-auto">
+          From raw footage to content that scales — in four steps.
+        </h2>
+      </div>
+
+      {/* Interactive Map Area */}
+      <div className="relative w-full max-w-5xl mt-24 h-[600px] flex items-center justify-center">
+        
+        {/* Placeholder for Map / Graphic */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9, rotateX: 20 }}
+          whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
+          transition={{ duration: 1 }}
+          className="relative w-full max-w-[600px] h-[400px] bg-gradient-to-br from-brand-glow/5 to-transparent border border-white/5 rounded-3xl flex items-center justify-center overflow-hidden"
+        >
+          {/* We use a cinematic editing bay or abstract graphic here */}
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-bg-secondary via-transparent to-transparent" />
+        </motion.div>
+
+        {/* Floating Steps */}
+        {steps.map((step) => {
+          const isActive = activeStep === step.id;
+          const Icon = step.icon;
+
+          return (
+            <div 
+              key={step.id} 
+              className={`absolute ${step.position} z-20 flex flex-col items-start`}
+              onMouseEnter={() => setActiveStep(step.id)}
+              onMouseLeave={() => setActiveStep(null)}
+            >
+              {/* Pill */}
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                className={`flex items-center space-x-3 px-5 py-3 rounded-full cursor-pointer transition-all duration-300 backdrop-blur-md ${
+                  isActive ? 'bg-white/10 border-white/20' : 'bg-brand-bg/80 border-white/5 hover:border-white/20'
+                } border`}
+              >
+                <div 
+                  className="w-8 h-8 rounded-full flex items-center justify-center border border-current/20"
+                  style={{ color: step.color, backgroundColor: `${step.color}10` }}
+                >
+                  <Icon size={14} />
+                </div>
+                <span className="font-semibold text-white text-sm whitespace-nowrap">
+                  {step.id}. {step.title}
+                </span>
+              </motion.div>
+
+              {/* Expanded Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                animate={{ 
+                  opacity: isActive ? 1 : 0, 
+                  y: isActive ? 0 : 10,
+                  scale: isActive ? 1 : 0.95,
+                  pointerEvents: isActive ? "auto" : "none"
+                }}
+                transition={{ duration: 0.3 }}
+                className="absolute top-full mt-4 left-0 w-80 rounded-3xl backdrop-blur-xl border border-white/10 shadow-2xl"
+              >
+                <GlowCard 
+                  customSize={true} 
+                  glowColor="theme" 
+                  className="w-full h-full p-6 rounded-3xl"
+                  style={{
+                    background: "linear-gradient(145deg, rgba(30,30,30,0.4) 0%, rgba(10,10,10,0.8) 100%)",
+                  }}
+                >
+                  <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: step.color }}>
+                    {step.phase}
+                  </p>
+                  <h3 className="text-xl font-bold text-white mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-brand-text-muted">
+                    {step.desc}
+                  </p>
+                </GlowCard>
+              </motion.div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
