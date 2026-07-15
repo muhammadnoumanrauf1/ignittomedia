@@ -25,8 +25,12 @@ export default function Home() {
         <Problem />
         <Metrics />
         <Services />
-        <Portfolio />
-        <FolderSection />
+        <div className="hidden md:block">
+          <Portfolio />
+        </div>
+        <div className="md:hidden block">
+          <FolderSection />
+        </div>
         <ProcessMap />
         <Testimonials />
         <Contact />

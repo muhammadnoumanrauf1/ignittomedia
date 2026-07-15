@@ -13,6 +13,11 @@ export default function CustomCursor() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
+    // Disable on touch devices
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
+
     document.documentElement.classList.add("custom-cursor-active");
 
     const moveCursor = (e: MouseEvent) => {

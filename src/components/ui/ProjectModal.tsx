@@ -30,9 +30,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
   // Map aspect ratio to Tailwind classes
   const aspectClass = {
     "16:9": "aspect-video",
-    "9:16": "aspect-[9/16] max-h-[70vh]",
-    "1:1": "aspect-square",
-    "4:5": "aspect-[4/5] max-h-[70vh]",
+    "9:16": "aspect-[9/16] max-h-[50vh] md:max-h-[70vh]",
+    "1:1": "aspect-square max-h-[50vh] md:max-h-[70vh]",
+    "4:5": "aspect-[4/5] max-h-[50vh] md:max-h-[70vh]",
   }[project.aspectRatio];
 
   return (
@@ -54,9 +54,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", duration: 0.5 }}
-            className="relative w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl"
+            className="relative w-full max-w-5xl rounded-3xl overflow-y-auto overflow-x-hidden max-h-[90vh] shadow-2xl"
           >
-            <GlowCard customSize={true} glowColor="theme" className="w-full h-full flex flex-col md:flex-row bg-[#0F1110]/90 backdrop-blur-xl border-white/10 !p-0">
+            <GlowCard customSize={true} glowColor="theme" className="w-full min-h-min flex flex-col md:flex-row bg-[#0F1110]/90 backdrop-blur-xl border-white/10 !p-0">
               {/* Close Button */}
               <button
                 onClick={onClose}
