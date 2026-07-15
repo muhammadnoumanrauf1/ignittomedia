@@ -15,6 +15,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,9 +26,28 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const footerElement = document.getElementById("footer-reveal");
+    if (!footerElement) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // Trigger when 10% of the footer wrapper is visible
+    );
+
+    observer.observe(footerElement);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <header 
-      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[95%] max-w-5xl rounded-full ${
+      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[95%] max-w-5xl rounded-full ${
+        isFooterVisible 
+          ? "-translate-y-32 opacity-0 pointer-events-none" 
+          : "translate-y-0 opacity-100"
+      } ${
         scrolled 
           ? "py-3 px-6 bg-brand-bg/80 backdrop-blur-md border border-white/10 shadow-2xl" 
           : "py-4 px-6 bg-transparent"

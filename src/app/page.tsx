@@ -7,32 +7,33 @@ import Services from "@/components/sections/Services";
 import Portfolio from "@/components/sections/Portfolio";
 import FolderSection from "@/components/sections/FolderSection";
 import Metrics from "@/components/sections/Metrics";
-import Process from "@/components/sections/Process";
 import ProcessMap from "@/components/sections/ProcessMap";
 import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
 import FinalCTA from "@/components/sections/FinalCTA";
-import Footer from "@/components/sections/Footer";
+import { CinematicFooter } from "@/components/ui/motion-footer";
 
 export default function Home() {
   return (
-    <main className="relative w-full">
+    <div className="relative w-full bg-brand-bg min-h-screen font-sans selection:bg-white/20 overflow-x-hidden">
       <CustomCursor />
       <BackgroundAtmosphere />
 
-      <CinematicHeroDemo />
-      <Story />
-      <Problem />
-      <Metrics />
-      <Services />
-      <Portfolio />
-      <FolderSection />
-      <ProcessMap />
-      <Process />
-      <Testimonials />
-      <Contact />
-      <FinalCTA />
-      <Footer />
-    </main>
+      <main className="relative z-10 w-full bg-brand-bg text-white border-b border-white/10 shadow-2xl rounded-b-[40px] md:rounded-b-[80px]">
+        <CinematicHeroDemo />
+        <Story />
+        <Problem />
+        <Metrics />
+        <Services />
+        <Portfolio />
+        <FolderSection />
+        <ProcessMap />
+        <Testimonials />
+        <Contact />
+        <FinalCTA />
+      </main>
+
+      <CinematicFooter />
+    </div>
   );
 }
