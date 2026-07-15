@@ -318,18 +318,18 @@ export function CinematicHero({
         >
           <div className="card-sheen" aria-hidden="true" />
 
-          {/* DYNAMIC RESPONSIVE GRID: Flex-col layout for the video player */}
-          <div className="relative w-full h-full max-w-6xl mx-auto px-4 lg:px-12 flex flex-col justify-center items-center z-10 py-6 lg:py-0 gap-8">
+          {/* DYNAMIC RESPONSIVE GRID */}
+          <div className="relative w-full h-full max-w-6xl mx-auto px-4 lg:px-12 flex items-center justify-center z-10">
 
             {/* 1. TOP TEXT */}
-            <div className="card-top-text gsap-reveal flex justify-center text-center z-20 w-full px-4">
+            <div className="card-top-text gsap-reveal flex justify-center text-center z-20 w-full absolute top-12 sm:top-16 md:top-24 lg:top-32 px-4 left-0 right-0">
               <h3 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight drop-shadow-lg">
                 {cardTopText}
               </h3>
             </div>
 
             {/* 2. CENTER: VIDEO MOCKUP */}
-            <div className="mockup-scroll-wrapper relative w-full max-w-[90vw] md:max-w-[75vw] lg:max-w-[800px] flex items-center justify-center z-10 mt-8 md:mt-0" style={{ perspective: "1000px" }}>
+            <div className="mockup-scroll-wrapper relative w-full max-w-[90vw] md:max-w-[75vw] lg:max-w-[800px] flex items-center justify-center z-10" style={{ perspective: "1000px" }}>
 
               <div
                 ref={mockupRef}
@@ -368,6 +368,7 @@ export function CinematicHero({
                       preload="auto"
                       playsInline
                       loop
+                      muted
                       autoPlay
                       controls={true}
                       onPlay={() => setIsPlaying(true)}
@@ -390,7 +391,7 @@ export function CinematicHero({
             </div>
 
             {/* 3. BOTTOM TEXT */}
-            <div className="card-bottom-text gsap-reveal flex justify-center text-center z-20 w-full px-4">
+            <div className="card-bottom-text gsap-reveal flex justify-center text-center z-20 w-full absolute bottom-12 sm:bottom-16 md:bottom-20 lg:bottom-24 px-4 left-0 right-0">
               <blockquote className="text-xl md:text-2xl lg:text-3xl font-medium text-brand-text-secondary leading-snug text-center max-w-3xl drop-shadow-lg">
                 {cardBottomText}
               </blockquote>
