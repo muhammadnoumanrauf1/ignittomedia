@@ -49,7 +49,7 @@ export default function ProcessMap() {
 
   return (
     <section id="process-map" className="bg-brand-bg-secondary min-h-screen md:min-h-[120vh] relative overflow-hidden flex flex-col items-center py-20 md:py-32 px-4 md:px-6">
-      
+
       {/* Top Header */}
       <div className="flex flex-col items-center text-center z-10 relative">
         <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.02] mb-6">
@@ -58,15 +58,15 @@ export default function ProcessMap() {
           </span>
         </div>
         <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] max-w-4xl mx-auto">
-          From raw footage to content that scales — in four steps.
+          From raw footage to content that scales in four steps.
         </h2>
       </div>
 
       {/* Interactive Map Area (Desktop) */}
       <div className="hidden md:flex relative w-full max-w-5xl mt-24 h-[600px] items-center justify-center">
-        
+
         {/* Placeholder for Map / Graphic */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.9, rotateX: 20 }}
           whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
           transition={{ duration: 1 }}
@@ -83,20 +83,19 @@ export default function ProcessMap() {
           const Icon = step.icon;
 
           return (
-            <div 
-              key={step.id} 
+            <div
+              key={step.id}
               className={`absolute ${step.position} z-20 flex flex-col items-start`}
               onMouseEnter={() => setActiveStep(step.id)}
               onMouseLeave={() => setActiveStep(null)}
             >
               {/* Pill */}
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.05 }}
-                className={`flex items-center space-x-3 px-5 py-3 rounded-full cursor-pointer transition-all duration-300 backdrop-blur-md ${
-                  isActive ? 'bg-white/10 border-white/20' : 'bg-brand-bg/80 border-white/5 hover:border-white/20'
-                } border`}
+                className={`flex items-center space-x-3 px-5 py-3 rounded-full cursor-pointer transition-all duration-300 backdrop-blur-md ${isActive ? 'bg-white/10 border-white/20' : 'bg-brand-bg/80 border-white/5 hover:border-white/20'
+                  } border`}
               >
-                <div 
+                <div
                   className="w-8 h-8 rounded-full flex items-center justify-center border border-current/20"
                   style={{ color: step.color, backgroundColor: `${step.color}10` }}
                 >
@@ -110,8 +109,8 @@ export default function ProcessMap() {
               {/* Expanded Card */}
               <motion.div
                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                animate={{ 
-                  opacity: isActive ? 1 : 0, 
+                animate={{
+                  opacity: isActive ? 1 : 0,
                   y: isActive ? 0 : 10,
                   scale: isActive ? 1 : 0.95,
                   pointerEvents: isActive ? "auto" : "none"
@@ -119,9 +118,9 @@ export default function ProcessMap() {
                 transition={{ duration: 0.3 }}
                 className="absolute top-full mt-4 left-0 w-80 rounded-3xl backdrop-blur-xl border border-white/10 shadow-2xl"
               >
-                <GlowCard 
-                  customSize={true} 
-                  glowColor="theme" 
+                <GlowCard
+                  customSize={true}
+                  glowColor="theme"
                   className="w-full h-full p-6 rounded-3xl"
                   style={{
                     background: "linear-gradient(145deg, rgba(30,30,30,0.4) 0%, rgba(10,10,10,0.8) 100%)",
@@ -151,7 +150,7 @@ export default function ProcessMap() {
         {steps.map((step) => {
           const Icon = step.icon;
           return (
-            <motion.div 
+            <motion.div
               key={step.id}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -159,7 +158,7 @@ export default function ProcessMap() {
               className="relative pl-16 pr-2 py-2"
             >
               {/* Icon / Node */}
-              <div 
+              <div
                 className="absolute left-2 top-4 w-10 h-10 rounded-full flex items-center justify-center border border-current/20 z-10 bg-brand-bg"
                 style={{ color: step.color }}
               >
@@ -168,8 +167,8 @@ export default function ProcessMap() {
 
               {/* Card */}
               <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-5 shadow-lg relative overflow-hidden">
-                <div 
-                  className="absolute top-0 left-0 w-1 h-full" 
+                <div
+                  className="absolute top-0 left-0 w-1 h-full"
                   style={{ backgroundColor: step.color }}
                 />
                 <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: step.color }}>
