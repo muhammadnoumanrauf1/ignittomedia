@@ -17,12 +17,18 @@ const ParticleWaves = ({ hideControls = false }: ParticleWavesProps) => {
   const materialRef = useRef<THREE.SpriteMaterial | null>(null);
   const animationRef = useRef<number | null>(null);
   
-  const [density, setDensity] = useState(50);
+  const [density, setDensity] = useState(30);
   const [speed, setSpeed] = useState(0.1);
   const [amplitude, setAmplitude] = useState(50);
   const [separation, setSeparation] = useState(100);
   const [particleColor, setParticleColor] = useState('#00BFFF');
   const [bgColor, setBgColor] = useState('#001F3F');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setDensity(window.innerWidth < 768 ? 15 : 45); // 225 particles on mobile vs 2025 on desktop
+    }
+  }, []);
   
   const countRef = useRef(0);
   const mouseRef = useRef({ x: 0, y: 0 });
