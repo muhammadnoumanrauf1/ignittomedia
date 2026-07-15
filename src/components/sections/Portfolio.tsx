@@ -18,9 +18,9 @@ export default function Portfolio() {
   };
 
   return (
-    <section id="portfolio" className="relative min-h-screen bg-brand-bg py-32 px-6 overflow-hidden flex flex-col items-center justify-center">
+    <section id="portfolio" className="relative min-h-screen bg-brand-bg py-20 md:py-32 px-4 md:px-6 overflow-hidden flex flex-col items-center justify-center">
       <div className="w-full flex flex-col items-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-silver-matte z-10 pointer-events-none">
+        <h2 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-silver-matte z-10 pointer-events-none">
           Selected Works
         </h2>
 

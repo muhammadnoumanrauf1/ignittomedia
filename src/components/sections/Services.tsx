@@ -61,19 +61,42 @@ const demoFrames = [
 
 export default function Services() {
   return (
-    <section id="services" className="relative min-h-screen bg-brand-bg py-32 px-4 md:px-6 overflow-hidden flex flex-col items-center">
-      <div className="max-w-[1400px] w-full flex flex-col h-[100vh] min-h-[800px]">
-        <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-silver-matte">
+    <section id="services" className="relative min-h-screen bg-brand-bg py-20 md:py-32 px-4 md:px-6 flex flex-col items-center">
+      <div className="max-w-[1400px] w-full flex flex-col h-auto md:h-[100vh] min-h-[800px]">
+        <h2 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-silver-matte">
           Our Capabilities
         </h2>
         
         <div className="flex-1 w-full bg-brand-bg/50 rounded-3xl overflow-hidden p-2 md:p-4 border border-white/5">
-          <DynamicFrameLayout 
-            frames={demoFrames} 
-            className="w-full h-full" 
-            hoverSize={6}
-            gapSize={8}
-          />
+          {/* Desktop/Tablet View */}
+          <div className="hidden md:block w-full h-full">
+            <DynamicFrameLayout 
+              frames={demoFrames} 
+              className="w-full h-full" 
+              hoverSize={6}
+              gapSize={8}
+            />
+          </div>
+
+          {/* Mobile View */}
+          <div className="md:hidden flex flex-col gap-4 w-full">
+            {demoFrames.map(frame => (
+               <div key={frame.id} className="relative aspect-square sm:aspect-video rounded-xl overflow-hidden border border-white/10 group bg-black">
+                  <video 
+                    src={frame.video} 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    className="absolute inset-0 w-full h-full object-cover opacity-80" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
+                     <h3 className="text-white text-2xl font-bold mb-2">{frame.title}</h3>
+                     <p className="text-brand-text-muted text-sm leading-relaxed">{frame.description}</p>
+                  </div>
+               </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

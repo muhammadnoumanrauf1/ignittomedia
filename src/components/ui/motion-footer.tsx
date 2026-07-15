@@ -190,8 +190,9 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
       return () => ctx.revert();
     },[]);
 
+    const Comp = Component as any;
     return (
-      <Component
+      <Comp
         ref={(node: HTMLElement) => {
           (localRef as any).current = node;
           if (typeof forwardedRef === "function") forwardedRef(node);
@@ -201,7 +202,7 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
         {...props}
       >
         {children}
-      </Component>
+      </Comp>
     );
   }
 );
@@ -327,7 +328,7 @@ export function CinematicFooter() {
             <div ref={linksRef} className="flex flex-col items-center gap-8 w-full">
               {/* Action Links */}
               <div className="flex flex-wrap justify-center gap-4 w-full">
-                <MagneticButton as="a" href="/#contact" className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group text-white">
+                <MagneticButton as="button" onClick={() => document.getElementById("contact")?.scrollIntoView({behavior: "smooth"})} className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group text-white">
                   <svg className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                   </svg>
@@ -338,13 +339,13 @@ export function CinematicFooter() {
               {/* Main Nav Links */}
               <div className="flex flex-wrap justify-center gap-3 md:gap-6 w-full mt-4">
                 {[
-                  { name: "Services", href: "/#services" },
-                  { name: "Portfolio", href: "/#portfolio" },
-                  { name: "Process", href: "/#process" },
-                  { name: "Testimonials", href: "/#testimonials" },
-                  { name: "Contact", href: "/#contact" },
+                  { name: "Services", id: "services" },
+                  { name: "Portfolio", id: "portfolio" },
+                  { name: "Process", id: "process" },
+                  { name: "Testimonials", id: "testimonials" },
+                  { name: "Contact", id: "contact" },
                 ].map((link) => (
-                  <MagneticButton key={link.name} as="a" href={link.href} className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-white hover:border-brand-glow/30 transition-all">
+                  <MagneticButton key={link.name} as="button" onClick={() => document.getElementById(link.id)?.scrollIntoView({behavior: "smooth"})} className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-white hover:border-brand-glow/30 transition-all">
                     {link.name}
                   </MagneticButton>
                 ))}
@@ -360,9 +361,6 @@ export function CinematicFooter() {
                 </MagneticButton>
                 <MagneticButton as="a" href="/refund" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-white hover:border-brand-glow/30 transition-all">
                   Refund Policy
-                </MagneticButton>
-                <MagneticButton as="a" href="mailto:info@ignittomedia.com" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-white hover:border-brand-glow/30 transition-all">
-                  info@ignittomedia.com
                 </MagneticButton>
               </div>
             </div>
@@ -383,6 +381,35 @@ export function CinematicFooter() {
               <div className="text-muted-foreground text-[10px] md:text-xs font-semibold tracking-widest uppercase text-center md:text-left">
                 © {new Date().getFullYear()} IgnittoMedia. All rights reserved.
               </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-3 order-1 md:order-2">
+              <MagneticButton as="a" href="mailto:info@ignittomedia.com" aria-label="Email" className="w-10 h-10 rounded-full footer-glass-pill flex items-center justify-center text-muted-foreground hover:text-white hover:bg-[#EA4335] hover:border-transparent transition-all duration-300">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </MagneticButton>
+              <MagneticButton as="a" href="https://www.facebook.com/ignittomedia" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 rounded-full footer-glass-pill flex items-center justify-center text-muted-foreground hover:text-white hover:bg-[#1877F2] hover:border-transparent transition-all duration-300">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </MagneticButton>
+              <MagneticButton as="a" href="https://www.instagram.com/ignittomedia/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-full footer-glass-pill flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#e6683c] hover:to-[#bc1888] hover:border-transparent transition-all duration-300">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </MagneticButton>
+              <MagneticButton as="a" href="https://www.linkedin.com/company/ignitto-media" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-10 h-10 rounded-full footer-glass-pill flex items-center justify-center text-muted-foreground hover:text-white hover:bg-[#0A66C2] hover:border-transparent transition-all duration-300">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </MagneticButton>
             </div>
 
             {/* Back to top */}

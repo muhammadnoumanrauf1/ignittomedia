@@ -134,9 +134,14 @@ const ParticleWaves = ({ hideControls = false }: ParticleWavesProps) => {
       document.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', handleResize);
       
-      if (containerRef.current && renderer.domElement) {
+      if (containerRef.current && renderer.domElement && containerRef.current.contains(renderer.domElement)) {
         containerRef.current.removeChild(renderer.domElement);
       }
+
+      if (materialRef.current) {
+        materialRef.current.dispose();
+      }
+      renderer.dispose();
     };
   }, []);
 

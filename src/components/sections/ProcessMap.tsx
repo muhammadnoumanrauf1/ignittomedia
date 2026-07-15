@@ -48,7 +48,7 @@ export default function ProcessMap() {
   const [activeStep, setActiveStep] = useState<string | null>("02");
 
   return (
-    <section id="process-map" className="bg-brand-bg-secondary min-h-[120vh] relative overflow-hidden flex flex-col items-center py-32 px-6">
+    <section id="process-map" className="bg-brand-bg-secondary min-h-screen md:min-h-[120vh] relative overflow-hidden flex flex-col items-center py-20 md:py-32 px-4 md:px-6">
       
       {/* Top Header */}
       <div className="flex flex-col items-center text-center z-10 relative">
@@ -57,13 +57,13 @@ export default function ProcessMap() {
             How It Works
           </span>
         </div>
-        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] max-w-4xl mx-auto">
+        <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] max-w-4xl mx-auto">
           From raw footage to content that scales — in four steps.
         </h2>
       </div>
 
-      {/* Interactive Map Area */}
-      <div className="relative w-full max-w-5xl mt-24 h-[600px] flex items-center justify-center">
+      {/* Interactive Map Area (Desktop) */}
+      <div className="hidden md:flex relative w-full max-w-5xl mt-24 h-[600px] items-center justify-center">
         
         {/* Placeholder for Map / Graphic */}
         <motion.div 
@@ -139,6 +139,50 @@ export default function ProcessMap() {
                 </GlowCard>
               </motion.div>
             </div>
+          );
+        })}
+      </div>
+
+      {/* Mobile Timeline */}
+      <div className="md:hidden flex flex-col w-full mt-16 space-y-6 relative">
+        {/* Vertical line connecting steps */}
+        <div className="absolute left-[27px] top-4 bottom-4 w-px bg-white/10" />
+
+        {steps.map((step) => {
+          const Icon = step.icon;
+          return (
+            <motion.div 
+              key={step.id}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              className="relative pl-16 pr-2 py-2"
+            >
+              {/* Icon / Node */}
+              <div 
+                className="absolute left-2 top-4 w-10 h-10 rounded-full flex items-center justify-center border border-current/20 z-10 bg-brand-bg"
+                style={{ color: step.color }}
+              >
+                <Icon size={18} />
+              </div>
+
+              {/* Card */}
+              <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-5 shadow-lg relative overflow-hidden">
+                <div 
+                  className="absolute top-0 left-0 w-1 h-full" 
+                  style={{ backgroundColor: step.color }}
+                />
+                <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: step.color }}>
+                  {step.id}. {step.phase}
+                </p>
+                <h3 className="text-lg font-bold text-white mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-brand-text-muted">
+                  {step.desc}
+                </p>
+              </div>
+            </motion.div>
           );
         })}
       </div>

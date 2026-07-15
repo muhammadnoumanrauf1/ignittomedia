@@ -20,7 +20,7 @@ const darkenColor = (hex, percent) => {
 };
 
 const Folder = ({ color = '#5227FF', size = 1, items = [], className = '' }) => {
-  const maxItems = 3;
+  const maxItems = 6;
   const papers = items.slice(0, maxItems);
   while (papers.length < maxItems) {
     papers.push(null);

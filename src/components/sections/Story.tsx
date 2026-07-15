@@ -13,11 +13,11 @@ export default function Story() {
   ];
 
   return (
-    <section className="relative min-h-[120vh] bg-brand-bg py-32 px-6 overflow-hidden">
+    <section className="relative min-h-screen md:min-h-[120vh] bg-brand-bg py-20 md:py-32 px-6 overflow-hidden">
       {/* Background ambient glow */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-glow/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-brand-glow/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row gap-16 lg:gap-24 relative z-10">
+      <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row gap-12 lg:gap-24 relative z-10">
         
         {/* Left Column: Sticky Editorial Heading */}
         <div className="md:w-1/2 md:sticky top-32 h-fit">
@@ -32,7 +32,7 @@ export default function Story() {
             <span className="text-brand-glow text-sm font-semibold tracking-widest uppercase">Our Philosophy</span>
           </motion.div>
 
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
             <span className="text-white block mb-2">We Became</span>
             <span className="text-brand-text-secondary block mb-2">Editors Because</span>
             <span className="text-brand-text-muted block mb-4">We Were</span>
@@ -95,10 +95,10 @@ export default function Story() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-glow/10 blur-3xl rounded-full" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-glow/10 blur-3xl rounded-full" />
           
-          <div className="space-y-4 text-xl md:text-3xl relative z-10 font-medium max-w-4xl mx-auto">
+          <div className="space-y-4 text-lg md:text-3xl relative z-10 font-medium max-w-4xl mx-auto">
             <p className="text-brand-text-secondary">Every frame has a purpose.</p>
             <p className="text-brand-text-secondary">Every cut has intent.</p>
-            <p className="text-white text-3xl md:text-5xl font-bold mt-8 pt-8 border-t border-white/10">
+            <p className="text-white text-2xl md:text-5xl font-bold mt-8 pt-8 border-t border-white/10">
               Every second <span className="text-brand-glow">earns the next.</span>
             </p>
           </div>

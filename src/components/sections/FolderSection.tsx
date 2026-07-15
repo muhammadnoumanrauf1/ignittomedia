@@ -11,7 +11,7 @@ export default function FolderSection() {
 
   const icons = [FileVideo, FileImage, FileText];
 
-  const folderItems = projects.slice(0, 3).map((project, index) => {
+  const folderItems = projects.map((project, index) => {
     const Icon = icons[index % icons.length];
     return (
       <div 
@@ -34,13 +34,15 @@ export default function FolderSection() {
           Client Deliverables
         </h2>
         
-        <div className="relative w-full h-[600px] flex items-center justify-center rounded-3xl overflow-hidden interactive bg-brand-bg-secondary border border-white/5">
-          <Folder 
-            color="#00DFA2" 
-            size={1.6} 
-            items={folderItems as any} 
-            className="z-10"
-          />
+        <div className="relative w-full h-[400px] md:h-[600px] flex items-center justify-center rounded-3xl overflow-hidden interactive bg-brand-bg-secondary border border-white/5">
+          <div className="transform scale-[0.7] sm:scale-100 md:scale-125 lg:scale-150 transition-transform">
+            <Folder 
+              color="#00DFA2" 
+              size={1} 
+              items={folderItems as any} 
+              className="z-10"
+            />
+          </div>
         </div>
       </div>
 

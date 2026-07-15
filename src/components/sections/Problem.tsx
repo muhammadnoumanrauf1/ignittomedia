@@ -29,15 +29,15 @@ export default function Problem() {
   );
 
   return (
-    <section className="relative min-h-screen bg-brand-bg-secondary flex flex-col items-center justify-center py-32 px-6">
-      <div className="max-w-5xl mx-auto w-full text-center mb-24">
-        <h2 className="text-5xl md:text-7xl font-bold mb-6">
+    <section className="relative min-h-screen bg-brand-bg-secondary flex flex-col items-center justify-center py-20 md:py-32 px-6">
+      <div className="max-w-5xl mx-auto w-full text-center mb-16 md:mb-24">
+        <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6">
           <SplitText text="Great Ideas" type="words" delay={0.1} className="justify-center" />
           <SplitText text="Die in Bad Editing." type="words" delay={0.3} className="justify-center text-brand-text-muted mt-2" />
         </h2>
       </div>
 
-      <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 mb-32 relative">
+      <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-20 md:mb-32 relative">
         {/* VS Divider */}
         <div className="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-brand-bg border border-white/10 items-center justify-center text-sm font-bold text-white/30 z-10">
           VS
@@ -60,7 +60,7 @@ export default function Problem() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto text-center mt-12 mb-32">
+      <div className="max-w-4xl mx-auto text-center mt-12 mb-16 md:mb-32">
         <style dangerouslySetInnerHTML={{__html: `
           .highlight-earned .word:nth-of-type(4),
           .highlight-earned .word:nth-of-type(5) {
@@ -74,7 +74,7 @@ export default function Problem() {
             margin: 0;
           }
         `}} />
-        <div className="highlight-earned text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-glow text-white">
+        <div className="highlight-earned text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight text-glow text-white">
           <ScrollReveal 
             baseOpacity={0} 
             enableBlur={true} 

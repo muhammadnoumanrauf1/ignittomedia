@@ -36,7 +36,10 @@ export default function FinalCTA() {
         >
           <MagneticButton 
             variant="primary"
-            onClick={() => window.open("https://calendly.com/ahmar-nawab/new-meeting", "_blank")}
+            onClick={() => {
+              const el = document.getElementById("contact");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
           >
             Book a Strategy Call
           </MagneticButton>
