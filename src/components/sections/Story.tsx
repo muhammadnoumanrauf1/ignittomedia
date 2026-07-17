@@ -7,9 +7,9 @@ import { GlowCard } from "@/components/ui/spotlight-card";
 export default function Story() {
   const pillars = [
     { title: "Attention", desc: "Capturing the eye before the swipe." },
-    { title: "Rhythm", desc: "Pacing that dictates the heartbeat." },
+    { title: "Story", desc: "The invisible thread that holds it all." },
     { title: "Emotion", desc: "Connecting the viewer to the message." },
-    { title: "Story", desc: "The invisible thread that holds it all." }
+    { title: "Impact", desc: "Leaving a lasting impression that drives action." }
   ];
 
   return (
@@ -18,7 +18,7 @@ export default function Story() {
       <div className="absolute top-0 right-0 w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-brand-glow/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row gap-12 lg:gap-24 relative z-10">
-        
+
         {/* Left Column: Sticky Editorial Heading */}
         <div className="md:w-1/2 md:sticky top-32 h-fit">
           <motion.div
@@ -44,9 +44,9 @@ export default function Story() {
 
         {/* Right Column: Flowing Content */}
         <div className="md:w-1/2 space-y-16 pt-8 md:pt-32">
-          
+
           {/* Intro Text */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
@@ -62,16 +62,16 @@ export default function Story() {
           {/* Pillars Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {pillars.map((pillar, i) => (
-              <motion.div 
+              <motion.div
                 key={pillar.title}
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
-                <GlowCard 
-                  customSize={true} 
-                  glowColor="theme" 
+                <GlowCard
+                  customSize={true}
+                  glowColor="theme"
                   className="group relative p-8 rounded-2xl bg-white/[0.02] border border-white/5 overflow-hidden h-full"
                 >
                   <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{pillar.title}.</h3>
@@ -85,7 +85,7 @@ export default function Story() {
 
       {/* Full Width Closing Manifesto */}
       <div className="max-w-7xl mx-auto w-full relative z-10 mt-24 md:mt-32">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -94,7 +94,7 @@ export default function Story() {
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-glow/10 blur-3xl rounded-full" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-glow/10 blur-3xl rounded-full" />
-          
+
           <div className="space-y-4 text-lg md:text-3xl relative z-10 font-medium max-w-4xl mx-auto">
             <p className="text-brand-text-secondary">Every frame has a purpose.</p>
             <p className="text-brand-text-secondary">Every cut has intent.</p>
