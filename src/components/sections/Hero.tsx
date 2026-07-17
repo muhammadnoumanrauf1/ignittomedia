@@ -24,8 +24,12 @@ export default function Hero() {
         </motion.div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 text-glow leading-tight">
-          <SplitText text="Every Second" type="words" delay={0.4} className="justify-center" />
-          <SplitText text="Earns Attention." type="words" delay={0.6} className="justify-center text-brand-text-secondary" />
+          <span className="block">
+            <SplitText text="Every Second" type="words" delay={0.4} className="justify-center" />
+          </span>
+          <span className="block">
+            <SplitText text="Earns Attention." type="words" delay={0.6} className="justify-center text-brand-text-secondary" />
+          </span>
         </h1>
 
         <motion.div

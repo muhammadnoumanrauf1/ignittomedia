@@ -60,6 +60,9 @@ export default function ProcessMap() {
         <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] max-w-4xl mx-auto">
           From raw footage to content that scales in four steps.
         </h2>
+        <p className="mt-6 text-brand-text-muted text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          How does IgnittoMedia&apos;s video editing process work? You upload your raw footage, we engineer the narrative, refine with your feedback, and deliver platform-ready exports — all within 48 hours average turnaround.
+        </p>
       </div>
 
       {/* Interactive Map Area (Desktop) */}

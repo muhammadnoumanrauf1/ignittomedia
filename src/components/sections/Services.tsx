@@ -78,17 +78,19 @@ export default function Services() {
             />
           </div>
 
-          {/* Mobile View */}
+          {/* Mobile View — first video autoPlays, rest are lazy-loaded on intersection */}
           <div className="md:hidden flex flex-col gap-4 w-full">
-            {demoFrames.map(frame => (
+            {demoFrames.map((frame, index) => (
                <div key={frame.id} className="relative aspect-square sm:aspect-video rounded-xl overflow-hidden border border-white/10 group bg-black">
                   <video 
                     src={frame.video} 
-                    autoPlay 
+                    autoPlay={index === 0}
+                    preload={index === 0 ? "auto" : "none"}
                     loop 
                     muted 
                     playsInline 
-                    className="absolute inset-0 w-full h-full object-cover opacity-80" 
+                    className="absolute inset-0 w-full h-full object-cover opacity-80"
+                    aria-label={`${frame.title} video reel`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
                      <h3 className="text-white text-2xl font-bold mb-2">{frame.title}</h3>
