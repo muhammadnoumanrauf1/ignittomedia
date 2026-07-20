@@ -44,6 +44,17 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  // Close mobile menu on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isMobileMenuOpen]);
+
   return (
     <>
       <header 
@@ -59,7 +70,7 @@ export default function Navbar() {
       >
         <div className="w-full flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="relative flex items-center group" onClick={() => setIsMobileMenuOpen(false)}>
+          <Link href="/" className="relative flex items-center group focus:outline-none focus:ring-2 focus:ring-brand-glow rounded" onClick={() => setIsMobileMenuOpen(false)}>
             <Image 
               src="/ignitto-media-logo.png" 
               alt="Ignitto Media" 
@@ -76,7 +87,7 @@ export default function Navbar() {
               <Link 
                 key={link.name} 
                 href={link.href}
-                className="text-sm font-medium text-brand-text-secondary hover:text-brand-glow transition-colors duration-200"
+                className="text-sm font-medium text-brand-text-secondary hover:text-brand-glow transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-glow rounded px-2 py-1"
               >
                 {link.name}
               </Link>
@@ -85,7 +96,7 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <Link href="#contact">
+            <Link href="#contact" className="focus:outline-none focus:ring-2 focus:ring-brand-glow rounded-full block">
               <MagneticButton>
                 <span className="relative z-10 font-semibold tracking-wide text-sm px-4">Book a Call</span>
               </MagneticButton>
@@ -94,7 +105,7 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <button 
-            className="md:hidden text-brand-text hover:text-brand-glow transition-colors z-50 p-2"
+            className="md:hidden text-brand-text hover:text-brand-glow transition-colors z-50 p-2 focus:outline-none focus:ring-2 focus:ring-brand-glow rounded"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Menu"
           >
@@ -125,9 +136,9 @@ export default function Navbar() {
                   <Link 
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-3xl font-bold text-white hover:text-brand-glow transition-colors"
+                    className="text-3xl font-bold text-white hover:text-brand-glow transition-colors focus:outline-none focus:ring-2 focus:ring-brand-glow rounded px-4 py-2 block"
                   >
-                    {link.name}
+                    {navLinks[i].name}
                   </Link>
                 </motion.div>
               ))}
@@ -138,7 +149,7 @@ export default function Navbar() {
                 transition={{ delay: 0.1 + navLinks.length * 0.05 }}
                 className="pt-8 w-full max-w-[200px]"
               >
-                <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block w-full">
+                <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block w-full focus:outline-none focus:ring-2 focus:ring-brand-glow rounded-full">
                   <div className="w-full py-4 rounded-full bg-brand-glow/10 border border-brand-glow/30 text-brand-glow text-center font-bold text-lg hover:bg-brand-glow hover:text-black transition-all">
                     Book a Call
                   </div>

@@ -6,9 +6,15 @@ import { useInView } from 'framer-motion';
 
 interface ParticleWavesProps {
   hideControls?: boolean;
+  particleColor?: string;
+  bgColor?: string;
 }
 
-const ParticleWaves = ({ hideControls = false }: ParticleWavesProps) => {
+const ParticleWaves = ({ 
+  hideControls = false,
+  particleColor: initialParticleColor = '#00BFFF',
+  bgColor: initialBgColor = '#001F3F'
+}: ParticleWavesProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
@@ -21,8 +27,16 @@ const ParticleWaves = ({ hideControls = false }: ParticleWavesProps) => {
   const [speed, setSpeed] = useState(0.1);
   const [amplitude, setAmplitude] = useState(50);
   const [separation, setSeparation] = useState(100);
-  const [particleColor, setParticleColor] = useState('#00BFFF');
-  const [bgColor, setBgColor] = useState('#001F3F');
+  const [particleColor, setParticleColor] = useState(initialParticleColor);
+  const [bgColor, setBgColor] = useState(initialBgColor);
+
+  useEffect(() => {
+    setParticleColor(initialParticleColor);
+  }, [initialParticleColor]);
+
+  useEffect(() => {
+    setBgColor(initialBgColor);
+  }, [initialBgColor]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -220,7 +234,7 @@ const ParticleWaves = ({ hideControls = false }: ParticleWavesProps) => {
   }, [density, separation]);
 
   return (
-    <div className="absolute inset-0 w-full h-full bg-[#001F3F] overflow-hidden pointer-events-none">
+    <div style={{ backgroundColor: bgColor }} className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
       <div 
         ref={containerRef} 
         className="w-full h-full pointer-events-auto"

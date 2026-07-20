@@ -13,7 +13,7 @@ export default function Story() {
   ];
 
   return (
-    <section className="relative min-h-screen md:min-h-[120vh] bg-brand-bg py-20 md:py-32 px-6 overflow-hidden">
+    <section id="story" className="relative min-h-screen md:min-h-[120vh] bg-brand-bg py-20 md:py-32 px-6 overflow-hidden">
       {/* Background ambient glow */}
       <div className="absolute top-0 right-0 w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-brand-glow/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 

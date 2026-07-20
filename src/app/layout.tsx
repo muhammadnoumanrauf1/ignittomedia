@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import ClickSpark from "@/components/ui/ClickSpark";
 import Script from "next/script";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: 'swap',
-});
 
 const BASE_URL = "https://ignittomedia.com";
 
@@ -222,7 +215,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} h-full antialiased bg-brand-bg text-brand-text`}
+      className="h-full antialiased bg-brand-bg text-brand-text"
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         {/* JSON-LD Structured Data */}

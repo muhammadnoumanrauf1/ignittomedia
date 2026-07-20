@@ -1,28 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Paytone+One&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* Premium near-black background */
-  --color-brand-bg: #030A12;
-  --color-brand-bg-secondary: #011F41; /* Prussian Blue */
+  /* Restrict design palette strictly to user specified colors: #031e41, #006b75, #00b3dd, #00DFA2 */
+  --color-brand-bg: #031e41;
+  --color-brand-bg-secondary: #006b75;
   
-  /* The new palette used for accents, glows, and highlights */
-  --color-brand-accent: #00DFA2; /* Vibrant Teal/Green pop */
-  --color-brand-glow: #01C3FF; /* Deep Sky Blue glow */
+  --color-brand-accent: #00DFA2;
+  --color-brand-glow: #00b3dd;
   
-  --color-pacific-blue: #00A2BC;
-  --color-stormy-teal: #006B75;
-  --color-prussian-blue: #011F41;
+  --color-pacific-blue: #00b3dd;
+  --color-stormy-teal: #006b75;
+  --color-prussian-blue: #031e41;
   --color-teal-green: #00DFA2;
 
   --color-brand-text: #FFFFFF;
   --color-brand-text-secondary: #C8D5E0;
   --color-brand-text-muted: #8A98A8;
   
-  --font-sans: var(--font-inter);
+  /* Heading Combination: Paytone One + Charmonman, Paragraph: Inter */
+  --font-sans: 'Inter', sans-serif;
+  --font-paytone: 'Paytone One', sans-serif;
+  --font-charmonman: 'Charmonman', cursive;
 }
 
 :root {
-  --background: #030A12;
+  --background: #031e41;
   --foreground: #FFFFFF;
 }
 
@@ -36,6 +39,18 @@
     overflow-x: clip;
   }
 
+  /* Paytone One Display Font on Headings */
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: var(--font-paytone), sans-serif;
+    font-weight: 400; /* Paytone One is static weight 400 */
+    letter-spacing: -0.01em;
+  }
+
+  /* Cursive accent typography helper for Charmonman script accents */
+  .font-cursive, .script-accent, .font-cursive-accent {
+    font-family: var(--font-charmonman), cursive !important;
+  }
+
   /* Hide default cursor only when the custom cursor class is active */
   html.custom-cursor-active, 
   html.custom-cursor-active * {
@@ -45,15 +60,15 @@
 
 @layer utilities {
   .glow-shadow {
-    box-shadow: 0 0 60px rgba(1, 195, 255, 0.18);
+    box-shadow: 0 0 60px rgba(0, 179, 221, 0.18);
   }
   .glow-shadow-lg {
-    box-shadow: 0 0 100px rgba(1, 195, 255, 0.3);
+    box-shadow: 0 0 100px rgba(0, 179, 221, 0.3);
   }
   .border-glow {
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
   .text-glow {
-    text-shadow: 0 0 20px rgba(1, 195, 255, 0.4);
+    text-shadow: 0 0 20px rgba(0, 179, 221, 0.4);
   }
 }

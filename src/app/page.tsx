@@ -12,15 +12,17 @@ import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
 import FinalCTA from "@/components/sections/FinalCTA";
 import { CinematicFooter } from "@/components/ui/motion-footer";
+import ScrollZoomHero from "@/components/kingkong/ScrollZoomHero";
 
 export default function Home() {
   return (
-    <div className="relative w-full bg-brand-bg min-h-screen font-sans selection:bg-white/20 overflow-x-hidden">
+    <div className="relative w-full bg-brand-bg min-h-screen font-sans selection:bg-white/20 overflow-x-clip">
       <CustomCursor />
       <BackgroundAtmosphere />
 
       <main className="relative z-10 w-full bg-brand-bg text-white border-b border-white/10 shadow-2xl rounded-b-[40px] md:rounded-b-[80px]">
-        <CinematicHeroDemo />
+        {/* <CinematicHeroDemo /> */}
+        <ScrollZoomHero />
         <Story />
         <Problem />
         <Metrics />

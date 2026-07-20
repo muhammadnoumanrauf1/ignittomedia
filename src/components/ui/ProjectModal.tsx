@@ -25,6 +25,17 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     };
   }, [isOpen]);
 
+  // Close on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!project) return null;
 
   // Map aspect ratio to Tailwind classes
@@ -38,7 +49,12 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12">
+        <div 
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-project-title"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12"
+        >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -61,7 +77,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 {/* Close Button */}
                 <button
                   onClick={onClose}
-                  className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/80 rounded-full text-white/70 hover:text-white transition-colors backdrop-blur-md"
+                  className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/80 rounded-full text-white/70 hover:text-white transition-all backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-brand-glow"
+                  aria-label="Close Project Modal"
                 >
                   <X size={20} />
                 </button>
@@ -86,7 +103,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   <span className="text-brand-glow text-xs font-bold tracking-widest uppercase mb-2">
                     {project.category}
                   </span>
-                  <h2 className="text-3xl font-bold text-white mb-6">
+                  <h2 id="modal-project-title" className="text-3xl font-bold text-white mb-6">
                     {project.title}
                   </h2>
                   
