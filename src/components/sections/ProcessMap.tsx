@@ -48,19 +48,19 @@ export default function ProcessMap() {
   const [activeStep, setActiveStep] = useState<string | null>("02");
 
   return (
-    <section id="process-map" className="bg-brand-bg-secondary min-h-screen md:min-h-[120vh] relative overflow-hidden flex flex-col items-center py-20 md:py-32 px-4 md:px-6">
+    <section id="process" className="bg-brand-bg-secondary min-h-screen md:min-h-[120vh] relative overflow-hidden flex flex-col items-center py-20 md:py-32 px-4 md:px-6">
 
       {/* Top Header */}
       <div className="flex flex-col items-center text-center z-10 relative">
-        <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.02] mb-6">
-          <span className="text-[10px] font-semibold tracking-widest text-brand-text-muted uppercase">
+        <div className="px-4 py-1.5 rounded-full border border-brand-glow/30 bg-brand-glow/10 mb-6">
+          <span className="text-xs font-semibold tracking-[0.2em] text-brand-glow uppercase">
             How It Works
           </span>
         </div>
-        <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] max-w-4xl mx-auto">
+        <h2 className="text-3xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-wide leading-[1.1] max-w-4xl mx-auto">
           From raw footage to content that scales in four steps.
         </h2>
-        <p className="mt-6 text-brand-text-muted text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-6 text-brand-text-secondary text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
           How does IgnittoMedia&apos;s video editing process work? You upload your raw footage, we engineer the narrative, refine with your feedback, and deliver platform-ready exports — all within 48 hours average turnaround.
         </p>
       </div>
@@ -129,13 +129,13 @@ export default function ProcessMap() {
                     background: "linear-gradient(145deg, rgba(30,30,30,0.4) 0%, rgba(10,10,10,0.8) 100%)",
                   }}
                 >
-                  <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: step.color }}>
+                  <p className="text-xs font-semibold tracking-[0.18em] uppercase mb-2" style={{ color: step.color }}>
                     {step.phase}
                   </p>
                   <h3 className="text-xl font-bold text-white mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-brand-text-muted">
+                  <p className="text-sm leading-relaxed text-brand-text-secondary">
                     {step.desc}
                   </p>
                 </GlowCard>
@@ -174,13 +174,13 @@ export default function ProcessMap() {
                   className="absolute top-0 left-0 w-1 h-full"
                   style={{ backgroundColor: step.color }}
                 />
-                <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: step.color }}>
+                <p className="text-xs font-semibold tracking-[0.18em] uppercase mb-1" style={{ color: step.color }}>
                   {step.id}. {step.phase}
                 </p>
                 <h3 className="text-lg font-bold text-white mb-2">
                   {step.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-brand-text-muted">
+                <p className="text-sm leading-relaxed text-brand-text-secondary">
                   {step.desc}
                 </p>
               </div>

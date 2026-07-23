@@ -60,10 +60,10 @@ export default function Process() {
           <p className="text-xs font-semibold tracking-[0.25em] uppercase mb-4 text-brand-glow">
             Process
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-wide leading-tight mb-4 text-white">
             How It Works
           </h2>
-          <p className="text-sm md:text-base leading-relaxed text-brand-text-muted">
+          <p className="text-sm md:text-base leading-relaxed text-brand-text-secondary">
             A structured 4-step framework engineered to scale your content pipeline effortlessly.
           </p>
         </motion.div>
@@ -85,16 +85,16 @@ export default function Process() {
               <GlowCard customSize={true} glowColor="theme" className="h-full flex flex-col justify-between p-8 border-white/5">
                 <div>
                   <div
-                    className="font-bold mb-4 leading-none text-4xl text-brand-glow tracking-tighter"
+                    className="font-extrabold mb-4 leading-none text-4xl text-brand-glow tracking-tight"
                   >
                     {step.number}
                   </div>
 
-                  <h3 className="font-semibold text-lg mb-3 text-white">
+                  <h3 className="font-bold text-lg mb-3 text-white">
                     {step.title}
                   </h3>
 
-                  <p className="text-sm leading-relaxed mb-6 text-brand-text-muted">
+                  <p className="text-sm leading-relaxed mb-6 text-brand-text-secondary">
                     {step.body}
                   </p>
                 </div>
@@ -103,7 +103,7 @@ export default function Process() {
                   {step.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-1 rounded-md text-[10px] font-medium border bg-white/[0.02] border-white/5 text-brand-text-secondary"
+                      className="px-2.5 py-1 rounded-full text-xs font-semibold tracking-wider border bg-brand-glow/10 border-brand-glow/20 text-brand-glow"
                     >
                       {tag}
                     </span>

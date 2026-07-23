@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 // Register ScrollTrigger safely for React
 if (typeof window !== "undefined") {
@@ -328,7 +329,18 @@ export function CinematicFooter() {
             <div ref={linksRef} className="flex flex-col items-center gap-8 w-full">
               {/* Action Links */}
               <div className="flex flex-wrap justify-center gap-4 w-full">
-                <MagneticButton as="button" onClick={() => document.getElementById("contact")?.scrollIntoView({behavior: "smooth"})} className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group text-white">
+                <MagneticButton 
+                  as="button" 
+                  onClick={() => {
+                    const cal = document.getElementById("DogUPsjbSk7gsEqnoDqm_1784107343568") || document.getElementById("contact");
+                    if (cal) {
+                      cal.scrollIntoView({ behavior: "smooth" });
+                    } else {
+                      window.location.href = "/#contact";
+                    }
+                  }} 
+                  className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group text-white"
+                >
                   <svg className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                   </svg>
@@ -345,7 +357,19 @@ export function CinematicFooter() {
                   { name: "Testimonials", id: "testimonials" },
                   { name: "Contact", id: "contact" },
                 ].map((link) => (
-                  <MagneticButton key={link.name} as="button" onClick={() => document.getElementById(link.id)?.scrollIntoView({behavior: "smooth"})} className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-white hover:border-brand-glow/30 transition-all">
+                  <MagneticButton 
+                    key={link.name} 
+                    as="button" 
+                    onClick={() => {
+                      const el = document.getElementById(link.id);
+                      if (el) {
+                        el.scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        window.location.href = `/#${link.id}`;
+                      }
+                    }} 
+                    className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-white hover:border-brand-glow/30 transition-all"
+                  >
                     {link.name}
                   </MagneticButton>
                 ))}
@@ -371,14 +395,16 @@ export function CinematicFooter() {
             
             {/* Copyright and Logo */}
             <div className="flex flex-col md:flex-row items-center gap-4 order-2 md:order-1">
-              <Image 
-                src="/ignitto-media-logo.png" 
-                alt="Ignitto Media" 
-                width={140} 
-                height={35} 
-                className="h-8 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
-              />
-              <div className="text-muted-foreground text-[10px] md:text-xs font-semibold tracking-widest uppercase text-center md:text-left">
+              <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+                <Image 
+                  src="/ignitto-media-logo.png" 
+                  alt="Ignitto Media" 
+                  width={140} 
+                  height={35} 
+                  className="h-8 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
+                />
+              </Link>
+              <div className="text-brand-text-secondary text-xs md:text-sm font-semibold tracking-wider uppercase text-center md:text-left">
                 © {new Date().getFullYear()} IgnittoMedia. All rights reserved.
               </div>
             </div>

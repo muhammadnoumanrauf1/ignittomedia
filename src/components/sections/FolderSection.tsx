@@ -17,10 +17,13 @@ export default function FolderSection() {
       <div 
         key={project.id} 
         className="w-full h-full p-2 flex flex-col items-center justify-center text-black/80 cursor-pointer hover:bg-black/5 rounded-lg transition-colors"
-        onClick={() => setSelectedProject(project)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setSelectedProject(project);
+        }}
       >
         <Icon size={24} strokeWidth={1.5} />
-        <span className="text-[10px] mt-1 font-semibold text-center leading-tight">
+        <span className="text-xs font-semibold mt-1.5 text-center leading-tight">
           {project.title.split(' ')[0]}.mp4
         </span>
       </div>
@@ -28,9 +31,9 @@ export default function FolderSection() {
   });
 
   return (
-    <section className="relative min-h-screen bg-brand-bg py-32 px-6 overflow-hidden flex flex-col items-center justify-center">
+    <section id="portfolio" className="relative min-h-screen bg-brand-bg py-32 px-6 overflow-hidden flex flex-col items-center justify-center">
       <div className="w-full flex flex-col items-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-silver-matte z-10 pointer-events-none">
+        <h2 className="text-4xl md:text-5xl font-extrabold tracking-wider mb-12 text-center text-silver-matte z-10 pointer-events-none">
           Client Deliverables
         </h2>
         

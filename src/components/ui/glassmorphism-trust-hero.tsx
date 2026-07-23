@@ -29,7 +29,7 @@ const CLIENTS = [
 const StatItem = ({ value, label }: { value: string; label: string }) => (
   <div className="flex flex-col items-center justify-center transition-transform hover:-translate-y-1 cursor-default">
     <span className="text-xl font-bold text-white sm:text-2xl">{value}</span>
-    <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-medium sm:text-xs">{label}</span>
+    <span className="text-xs uppercase tracking-wider text-zinc-400 font-semibold">{label}</span>
   </div>
 );
 

@@ -11,9 +11,9 @@ export default function Manifesto() {
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-brand-bg to-transparent" />
       
       <div className="max-w-4xl mx-auto w-full flex flex-col items-center text-center z-10">
-        <h2 className="text-4xl md:text-6xl font-bold mb-16 tracking-tight">
-          <SplitText text="Don't Hire Us Yet." type="words" delay={0.1} className="justify-center text-brand-text" />
-          <SplitText text="Watch This First." type="words" delay={0.3} className="justify-center text-brand-text-muted mt-2" />
+        <h2 className="text-4xl md:text-6xl mb-16 leading-tight">
+          <SplitText text="Don't Hire Us Yet." type="words" delay={0.1} className="justify-center font-extrabold tracking-wide text-brand-text" />
+          <SplitText text="Watch This First." type="words" delay={0.3} className="justify-center font-light tracking-widest text-brand-glow mt-2" />
         </h2>
 
         {/* Video Player Placeholder - Auto Lightbox Concept */}

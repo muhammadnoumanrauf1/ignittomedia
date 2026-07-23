@@ -217,6 +217,8 @@ export default function RootLayout({
       lang="en"
       className="h-full antialiased bg-brand-bg text-brand-text"
     >
+      <head>
+      </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         {/* JSON-LD Structured Data */}
         <Script

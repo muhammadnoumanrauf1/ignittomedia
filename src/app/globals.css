@@ -1,5 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Paytone+One&display=swap');
 @import "tailwindcss";
+
+/* Local Font Definitions */
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/ClashDisplay-Extralight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/ClashDisplay-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/ClashDisplay-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/ClashDisplay-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/ClashDisplay-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/ClashDisplay-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Segoe UI Variable';
+  src: url('/SegoeUIVF.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme {
   /* Restrict design palette strictly to user specified colors: #031e41, #006b75, #00b3dd, #00DFA2 */
@@ -18,10 +74,9 @@
   --color-brand-text-secondary: #C8D5E0;
   --color-brand-text-muted: #8A98A8;
   
-  /* Heading Combination: Paytone One + Charmonman, Paragraph: Inter */
-  --font-sans: 'Inter', sans-serif;
-  --font-paytone: 'Paytone One', sans-serif;
-  --font-charmonman: 'Charmonman', cursive;
+  /* Font Stack: Clash Display for headings, Segoe UI Variable for body */
+  --font-sans: 'Segoe UI Variable', 'Segoe UI Variable Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-clash: 'Clash Display', 'Segoe UI Variable Display', 'Segoe UI', sans-serif;
 }
 
 :root {
@@ -35,20 +90,38 @@
   }
   body {
     @apply bg-brand-bg text-brand-text antialiased selection:bg-brand-glow/30 selection:text-white;
-    font-family: var(--font-sans), sans-serif;
+    font-family: 'Segoe UI Variable Text', 'Segoe UI Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: clip;
   }
 
-  /* Paytone One Display Font on Headings */
-  h1, h2, h3, h4, h5, h6, .font-heading {
-    font-family: var(--font-paytone), sans-serif;
-    font-weight: 400; /* Paytone One is static weight 400 */
-    letter-spacing: -0.01em;
+  /* Headings: Clash Display with differentiated weights & character spacing */
+  h1, h2, h3, h4, h5, h6, .font-heading, .font-clash {
+    font-family: 'Clash Display', 'Segoe UI Variable Display', 'Segoe UI', sans-serif;
   }
 
-  /* Cursive accent typography helper for Charmonman script accents */
-  .font-cursive, .script-accent, .font-cursive-accent {
-    font-family: var(--font-charmonman), cursive !important;
+  h1 {
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  h2 {
+    font-weight: 600;
+    letter-spacing: 0.025em;
+  }
+
+  h3 {
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  h4 {
+    font-weight: 500;
+    letter-spacing: 0.035em;
+  }
+
+  h5, h6 {
+    font-weight: 500;
+    letter-spacing: 0.04em;
   }
 
   /* Hide default cursor only when the custom cursor class is active */

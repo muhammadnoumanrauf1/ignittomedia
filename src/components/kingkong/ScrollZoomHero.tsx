@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { 
-  motion, 
-  useScroll, 
-  useTransform, 
-  useSpring, 
-  useReducedMotion, 
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useReducedMotion,
   cubicBezier
 } from "framer-motion";
 import ParticleWaves from "@/components/ui/threejs-particles-waves";
@@ -58,7 +58,7 @@ export default function ScrollZoomHero() {
 
   // Calculations for offsets and target scales
   const startX = (dimensions.vw - 0.12 * dimensions.cardWidth) - (dimensions.vw - dimensions.cardWidth) / 2;
-  
+
   // Calculate endScale to have at least 80px margin on top/bottom (vh - 160px) and 40px on left/right (vw - 80px) at max zoom
   const endScale = Math.min((dimensions.vw - 80) / dimensions.cardWidth, (dimensions.vh - 160) / dimensions.cardHeight);
 
@@ -67,7 +67,7 @@ export default function ScrollZoomHero() {
   // CARD TRANSLATIONS
   // x: Slides from peeking offset (startX) to center (0). p 0.4 -> 1: Remains centered (0).
   const x = useTransform(springProgress, [0, 0.4, 1], [startX, 0, 0], { ease: [easeInOut, easeInOut] });
-  
+
   // y: Shunted down by 100px on load to clear the fixed top navigation bar. p 0.4 -> 1: Centers horizontally/vertically (0).
   const cardY = useTransform(springProgress, [0, 0.4, 1], [100, 0, 0], { ease: [easeInOut, easeInOut] });
 
@@ -111,7 +111,7 @@ export default function ScrollZoomHero() {
 
       isPlayPending = true;
       playPromise = video.play();
-      
+
       playPromise
         .then(() => {
           isPlayPending = false;
@@ -123,11 +123,11 @@ export default function ScrollZoomHero() {
         .catch((error) => {
           isPlayPending = false;
           console.log("Unmuted play blocked by browser, falling back to muted autoplay:", error);
-          
+
           // Fall back to muted playback on policy block
           video.muted = true;
           setIsMuted(true);
-          
+
           isPlayPending = true;
           video.play()
             .then(() => {
@@ -202,23 +202,27 @@ export default function ScrollZoomHero() {
     }
   };
 
-  // Scroll to booking section
+  // Scroll to booking calendar widget
   const handleBookCall = () => {
-    const contact = document.getElementById("contact");
-    if (contact) {
-      contact.scrollIntoView({ behavior: "smooth" });
+    const calendarEl = document.getElementById("DogUPsjbSk7gsEqnoDqm_1784107343568") || document.getElementById("contact");
+    if (calendarEl) {
+      calendarEl.scrollIntoView({ behavior: "smooth" });
     } else {
       window.location.href = "/#contact";
     }
   };
 
-  // Scroll to manifesto section
+  // Play hero manifesto video with audio and zoom into video player
   const handleWatchManifesto = () => {
-    const story = document.getElementById("story");
-    if (story) {
-      story.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.location.href = "/#story";
+    const video = videoRef.current;
+    if (video) {
+      video.muted = false;
+      setIsMuted(false);
+      video.play().catch((err) => console.log("Unmuted play error:", err));
+    }
+    if (containerRef.current) {
+      const targetScroll = containerRef.current.offsetTop + window.innerHeight * 1.6;
+      window.scrollTo({ top: targetScroll, behavior: "smooth" });
     }
   };
 
@@ -237,14 +241,14 @@ export default function ScrollZoomHero() {
             IgnittoMedia helps founders, creators, and businesses transform raw footage into content that builds authority, earns trust, and drives measurable growth.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center">
-            <MagneticButton 
+            <MagneticButton
               onClick={handleBookCall}
               variant="primary"
               className="font-extrabold text-base focus:outline-none focus:ring-2 focus:ring-white"
             >
               Book a Strategy Call
             </MagneticButton>
-            <MagneticButton 
+            <MagneticButton
               onClick={handleWatchManifesto}
               variant="secondary"
               className="font-extrabold text-base border-brand-glow/30 focus:outline-none focus:ring-2 focus:ring-brand-glow"
@@ -253,15 +257,15 @@ export default function ScrollZoomHero() {
             </MagneticButton>
           </div>
         </div>
-        
+
         {/* Static Card with AutoPlay Video and Spotlight */}
-        <div 
+        <div
           style={{ width: dimensions.cardWidth, height: dimensions.cardHeight }}
-          className="bg-brand-bg rounded-2xl flex items-center justify-center border border-white/10 shadow-2xl overflow-hidden relative cursor-default"
+          className="bg-brand-bg rounded-2xl flex items-center justify-center border border-white/10 shadow-2xl overflow-hidden relative cursor-default z-100 "
         >
-          <GlowCard 
-            glowColor="theme" 
-            customSize={true} 
+          <GlowCard
+            glowColor="theme"
+            customSize={true}
             className="w-full h-full !p-0 !gap-0 bg-transparent border-0 rounded-2xl overflow-hidden shadow-none backdrop-blur-none"
           >
             <video
@@ -277,7 +281,7 @@ export default function ScrollZoomHero() {
               />
             </video>
           </GlowCard>
-          
+
           <button
             onClick={handleToggleMute}
             className="absolute bottom-4 right-4 z-30 p-2.5 bg-black/60 hover:bg-black/80 hover:scale-105 active:scale-95 text-white rounded-full transition-all border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-glow"
@@ -304,25 +308,25 @@ export default function ScrollZoomHero() {
   return (
     <section ref={containerRef} style={{ height: sceneHeight }} className="relative bg-brand-bg w-full">
       {/* Sticky Stage Container */}
-      <div className="sticky top-0 h-dvh w-full overflow-hidden flex items-center justify-center z-10">
-        
+      <div className="sticky top-0 h-dvh w-full overflow-hidden flex items-center justify-center z-100">
+
         {/* Background WebGL Particle Waves */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-          <ParticleWaves 
-            hideControls={true} 
-            particleColor="#00DFA2" 
-            bgColor="#030A12" 
+          <ParticleWaves
+            hideControls={true}
+            particleColor="#00DFA2"
+            bgColor="#030A12"
           />
         </div>
-        
+
         {/* Hero Content Layer */}
         <motion.div
-          style={{ 
-            opacity: heroOpacity, 
+          style={{
+            opacity: heroOpacity,
             y: heroY,
             pointerEvents: heroPointerEvents as any
           }}
-          className="absolute inset-0 z-10 px-6 text-center flex flex-col items-center justify-center pt-24 sm:pt-28 md:pt-32"
+          className="absolute inset-0 z-30 px-6 text-center flex flex-col items-center justify-center pt-24 sm:pt-28 md:pt-32"
         >
           <div className="px-6 py-2 rounded-full border border-brand-glow/30 bg-brand-bg/40 backdrop-blur-sm text-brand-glow font-bold uppercase tracking-widest text-xs sm:text-sm shadow-[0_0_20px_rgba(1,195,255,0.15)]">
             Content That People Remember
@@ -334,14 +338,14 @@ export default function ScrollZoomHero() {
             IgnittoMedia helps founders, creators, and businesses transform raw footage into content that builds authority, earns trust, and drives measurable growth.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center">
-            <MagneticButton 
+            <MagneticButton
               onClick={handleBookCall}
               variant="primary"
               className="font-extrabold text-base focus:outline-none focus:ring-2 focus:ring-white"
             >
               Book a Strategy Call
             </MagneticButton>
-            <MagneticButton 
+            <MagneticButton
               onClick={handleWatchManifesto}
               variant="secondary"
               className="font-extrabold text-base border-brand-glow/30 focus:outline-none focus:ring-2 focus:ring-brand-glow"
@@ -353,11 +357,11 @@ export default function ScrollZoomHero() {
 
         {/* Video Card Layer */}
         <motion.div
-          style={{ 
-            x, 
+          style={{
+            x,
             y: cardY,
-            rotate, 
-            scale, 
+            rotate,
+            scale,
             borderRadius,
             width: dimensions.cardWidth,
             height: dimensions.cardHeight,
@@ -365,9 +369,9 @@ export default function ScrollZoomHero() {
           }}
           className="absolute z-20 bg-brand-bg flex items-center justify-center shadow-[0_30px_100px_rgba(0,0,0,0.8)] border border-white/10 overflow-hidden cursor-default rounded-2xl"
         >
-          <GlowCard 
-            glowColor="theme" 
-            customSize={true} 
+          <GlowCard
+            glowColor="theme"
+            customSize={true}
             className="w-full h-full !p-0 !gap-0 bg-transparent border-0 rounded-2xl overflow-hidden shadow-none backdrop-blur-none"
           >
             {/* Loop Video Element */}
@@ -385,7 +389,7 @@ export default function ScrollZoomHero() {
                 />
                 Your browser does not support the video tag.
               </video>
-              
+
               {/* Interactive Mute/Unmute Overlay Button */}
               <button
                 onClick={handleToggleMute}

@@ -22,8 +22,8 @@ export default function Contact() {
           <p className="text-xs font-semibold tracking-[0.25em] uppercase mb-4 text-brand-glow">
             Let's Talk
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
-            Ready to Engineer <span className="text-brand-glow text-glow">Attention?</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-wide mb-6 text-white">
+            Ready to Engineer <span className="text-brand-glow text-glow font-black tracking-wider">Attention?</span>
           </h2>
           <p className="text-brand-text-muted max-w-xl mx-auto text-sm md:text-base leading-relaxed">
             Reach out or book a call with us below to discuss how we can transform your content pipeline and scale your brand.

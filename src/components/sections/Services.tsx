@@ -63,7 +63,7 @@ export default function Services() {
   return (
     <section id="services" className="relative min-h-screen bg-brand-bg py-20 md:py-32 px-4 md:px-6 flex flex-col items-center">
       <div className="max-w-[1400px] w-full flex flex-col h-auto md:h-[100vh] min-h-[800px]">
-        <h2 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-silver-matte">
+        <h2 className="text-3xl md:text-5xl font-extrabold tracking-wider mb-8 md:mb-12 text-center text-silver-matte">
           Our Services
         </h2>
 

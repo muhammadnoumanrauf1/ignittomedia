@@ -32,11 +32,11 @@ export default function Story() {
             <span className="text-brand-glow text-sm font-semibold tracking-widest uppercase">Our Philosophy</span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
-            <span className="text-white block mb-2">We Became</span>
-            <span className="text-brand-text-secondary block mb-2">Editors Because</span>
-            <span className="text-brand-text-muted block mb-4">We Were</span>
-            <span className="text-brand-glow inline-block" style={{ textShadow: "0 0 30px rgba(1, 195, 255, 0.4)" }}>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[1.1]">
+            <span className="text-white block font-extrabold tracking-wide mb-2">We Became</span>
+            <span className="text-brand-text-secondary block font-semibold tracking-normal mb-2">Editors Because</span>
+            <span className="text-brand-text-muted block font-light tracking-widest mb-4">We Were</span>
+            <span className="text-brand-glow inline-block font-black tracking-wider" style={{ textShadow: "0 0 30px rgba(1, 195, 255, 0.4)" }}>
               Students of Attention.
             </span>
           </h2>

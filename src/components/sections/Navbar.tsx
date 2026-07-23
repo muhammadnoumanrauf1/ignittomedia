@@ -8,11 +8,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { name: "Services", href: "#services" },
-  { name: "Portfolio", href: "#portfolio" },
-  { name: "Process", href: "#process" },
-  { name: "Testimonials", href: "#testimonials" },
-  { name: "Contact", href: "#contact" },
+  { name: "Services", href: "/#services", id: "services" },
+  { name: "Portfolio", href: "/#portfolio", id: "portfolio" },
+  { name: "Process", href: "/#process", id: "process" },
+  { name: "Testimonials", href: "/#testimonials", id: "testimonials" },
+  { name: "Contact", href: "/#contact", id: "contact" },
 ];
 
 export default function Navbar() {
@@ -55,6 +55,24 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isMobileMenuOpen]);
 
+  const handleNavClick = (e: React.MouseEvent, id: string, href: string) => {
+    const targetEl = document.getElementById(id);
+    if (targetEl) {
+      e.preventDefault();
+      targetEl.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleBookCallClick = (e: React.MouseEvent) => {
+    const calendarEl = document.getElementById("DogUPsjbSk7gsEqnoDqm_1784107343568") || document.getElementById("contact");
+    if (calendarEl) {
+      e.preventDefault();
+      calendarEl.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <>
       <header 
@@ -70,7 +88,14 @@ export default function Navbar() {
       >
         <div className="w-full flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="relative flex items-center group focus:outline-none focus:ring-2 focus:ring-brand-glow rounded" onClick={() => setIsMobileMenuOpen(false)}>
+          <Link 
+            href="/" 
+            className="relative flex items-center group focus:outline-none focus:ring-2 focus:ring-brand-glow rounded" 
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
             <Image 
               src="/ignitto-media-logo.png" 
               alt="Ignitto Media" 
@@ -87,6 +112,7 @@ export default function Navbar() {
               <Link 
                 key={link.name} 
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.id, link.href)}
                 className="text-sm font-medium text-brand-text-secondary hover:text-brand-glow transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-glow rounded px-2 py-1"
               >
                 {link.name}
@@ -96,11 +122,13 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <Link href="#contact" className="focus:outline-none focus:ring-2 focus:ring-brand-glow rounded-full block">
-              <MagneticButton>
-                <span className="relative z-10 font-semibold tracking-wide text-sm px-4">Book a Call</span>
-              </MagneticButton>
-            </Link>
+            <MagneticButton 
+              as="a"
+              href="/#contact"
+              onClick={handleBookCallClick}
+            >
+              <span className="relative z-10 font-semibold tracking-wide text-sm px-4">Book a Call</span>
+            </MagneticButton>
           </div>
 
           {/* Mobile menu button */}
@@ -135,7 +163,7 @@ export default function Navbar() {
                 >
                   <Link 
                     href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => handleNavClick(e, link.id, link.href)}
                     className="text-3xl font-bold text-white hover:text-brand-glow transition-colors focus:outline-none focus:ring-2 focus:ring-brand-glow rounded px-4 py-2 block"
                   >
                     {navLinks[i].name}
@@ -149,7 +177,7 @@ export default function Navbar() {
                 transition={{ delay: 0.1 + navLinks.length * 0.05 }}
                 className="pt-8 w-full max-w-[200px]"
               >
-                <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block w-full focus:outline-none focus:ring-2 focus:ring-brand-glow rounded-full">
+                <Link href="/#contact" onClick={handleBookCallClick} className="block w-full focus:outline-none focus:ring-2 focus:ring-brand-glow rounded-full">
                   <div className="w-full py-4 rounded-full bg-brand-glow/10 border border-brand-glow/30 text-brand-glow text-center font-bold text-lg hover:bg-brand-glow hover:text-black transition-all">
                     Book a Call
                   </div>
