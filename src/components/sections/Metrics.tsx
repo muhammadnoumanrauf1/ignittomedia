@@ -3,43 +3,44 @@
 import { useEffect, useRef } from "react";
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { Video, Eye, ShieldCheck, Zap, Sparkles } from "lucide-react";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 const metrics = [
-  { 
-    value: 100, 
-    suffix: "+", 
-    label: "Projects Delivered", 
+  {
+    value: 100,
+    suffix: "+",
+    label: "Projects Delivered",
     detail: "High-retention social reels & long-form YouTube essays.",
     tag: "100% On-Time",
     icon: Video,
-    ssrValue: "100+" 
+    ssrValue: "100+"
   },
-  { 
-    value: 20, 
-    suffix: "M+", 
-    label: "Views Generated", 
+  {
+    value: 20,
+    suffix: "M+",
+    label: "Views Generated",
     detail: "Organic algorithmic impressions across TikTok, Reels, & Shorts.",
     tag: "Organic Growth",
     icon: Eye,
-    ssrValue: "20M+" 
+    ssrValue: "20M+"
   },
-  { 
-    value: 96, 
-    suffix: "%", 
-    label: "Client Retention", 
+  {
+    value: 96,
+    suffix: "%",
+    label: "Client Retention",
     detail: "Founders & brands retaining us long-term as core partners.",
     tag: "Top Tier Trust",
     icon: ShieldCheck,
-    ssrValue: "96%" 
+    ssrValue: "96%"
   },
-  { 
-    value: 48, 
-    suffix: "H", 
-    label: "Average Turnaround", 
+  {
+    value: 48,
+    suffix: "H",
+    label: "Average Turnaround",
     detail: "Rapid iteration pipeline without sacrificing visual quality.",
     tag: "Speed Guarantee",
     icon: Zap,
-    ssrValue: "48H" 
+    ssrValue: "48H"
   },
 ];
 
@@ -69,24 +70,26 @@ function CountUp({ to, suffix, ssrValue }: { to: number; suffix: string; ssrValu
 export default function Metrics() {
   return (
     <section className="relative bg-brand-bg-secondary py-28 md:py-36 px-4 md:px-8 border-y border-white/5 overflow-hidden" aria-label="Key metrics">
-      
+      <ProgressiveBlur position="top" backgroundColor="#006b75" height="120px" />
+      <ProgressiveBlur position="bottom" backgroundColor="#006b75" height="120px" />
+
       {/* Ambient background glow elements */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-glow/5 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-accent/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
-        
+
         {/* Section Header */}
-        <div className="text-center mb-16 md:mb-20">
+        <div className="flex flex-col items-center text-center mb-16 md:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-glow/30 bg-brand-glow/10 backdrop-blur-md mb-4"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/10 backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(0,223,162,0.15)]"
           >
-            <Sparkles size={14} className="text-brand-glow animate-pulse" />
-            <span className="text-xs font-bold tracking-[0.2em] text-brand-glow uppercase">
+            <Sparkles size={14} className="text-brand-accent animate-pulse" />
+            <span className="text-xs font-bold tracking-[0.2em] text-brand-accent uppercase">
               Proven Track Record
             </span>
           </motion.div>
@@ -130,7 +133,7 @@ export default function Metrics() {
                   </div>
 
                   {/* Big Counter Number */}
-                  <h3 className="text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-2 text-glow group-hover:text-brand-glow transition-colors duration-300">
+                  <h3 className="text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-2  group-hover:text-brand-glow transition-colors duration-300">
                     <CountUp to={metric.value} suffix={metric.suffix} ssrValue={metric.ssrValue} />
                   </h3>
 
@@ -140,13 +143,13 @@ export default function Metrics() {
                   </h4>
 
                   {/* Description Detail */}
-                  <p className="text-xs text-brand-text-muted font-light leading-relaxed">
+                  <p className="text-xs text-white font-light leading-relaxed">
                     {metric.detail}
                   </p>
                 </div>
 
                 {/* Bottom Interactive Accent Bar */}
-                <div className="h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-brand-glow to-brand-accent transition-all duration-500 mt-6 rounded-full" />
+                {/* <div className="h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-brand-glow to-brand-accent transition-all duration-500 mt-6 rounded-full" /> */}
               </motion.div>
             );
           })}

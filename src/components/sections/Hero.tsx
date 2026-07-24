@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import SplitText from "../ui/SplitText";
 import MagneticButton from "../ui/MagneticButton";
 import { Boxes } from "../ui/background-boxes";
+import { Sparkles } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -18,17 +19,20 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.2 }}
           className="mb-8"
         >
-          <span className="text-brand-glow text-sm font-semibold tracking-[0.2em] uppercase border border-brand-glow/30 px-4 py-1.5 rounded-full bg-brand-glow/5 inline-block">
-            Content that people remember
-          </span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/10 backdrop-blur-md shadow-[0_0_15px_rgba(0,223,162,0.15)]">
+            <Sparkles size={14} className="text-brand-accent animate-pulse" />
+            <span className="text-brand-accent text-xs font-bold tracking-[0.2em] uppercase">
+              Content that people remember
+            </span>
+          </div>
         </motion.div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 text-glow leading-tight">
           <span className="block">
-            <SplitText text="Every Second" type="words" delay={0.4} className="justify-center" />
+            <SplitText text="Every Second" type="words" delay={0.4} className="justify-center text-white" />
           </span>
           <span className="block">
-            <SplitText text="Earns Attention." type="words" delay={0.6} className="justify-center text-brand-text-secondary" />
+            <SplitText text="Earns Attention." type="words" delay={0.6} className="justify-center text-white" />
           </span>
         </h1>
 
@@ -38,11 +42,11 @@ export default function Hero() {
           transition={{ duration: 1, delay: 1.2 }}
           className="max-w-2xl mx-auto mb-12"
         >
-          <p className="text-xl md:text-2xl text-brand-text-muted mb-4 font-light">
+          <p className="text-xl md:text-2xl text-white mb-4 font-light">
             Not every video deserves to be watched. <br className="hidden md:block" />
-            <span className="text-brand-text">We make sure yours does.</span>
+            <span className="text-white font-medium">We make sure yours does.</span>
           </p>
-          <p className="text-base md:text-lg text-brand-text-muted">
+          <p className="text-base md:text-lg text-white">
             IgnittoMedia helps founders, creators, and businesses transform raw footage into content that builds authority, earns trust, and drives measurable growth.
           </p>
         </motion.div>
@@ -76,7 +80,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 2.2 }}
-          className="text-brand-text-muted/60 text-sm tracking-wide"
+          className="text-white/80 text-sm tracking-wide"
         >
           Trusted by creators, founders and growing brands.
         </motion.div>

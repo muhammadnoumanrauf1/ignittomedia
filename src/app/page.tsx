@@ -13,6 +13,7 @@ import Contact from "@/components/sections/Contact";
 import FinalCTA from "@/components/sections/FinalCTA";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import ScrollZoomHero from "@/components/kingkong/ScrollZoomHero";
+import HeroSection from "@/components/ui/glassmorphism-trust-hero";
 
 export default function Home() {
   return (
@@ -23,8 +24,9 @@ export default function Home() {
       <main className="relative z-10 w-full bg-brand-bg text-white border-b border-white/10 shadow-2xl rounded-b-[40px] md:rounded-b-[80px]">
         {/* <CinematicHeroDemo /> */}
         <ScrollZoomHero />
+        <HeroSection />
         <Story />
-        <Problem />
+        {/* <Problem /> */}
         <Metrics />
         <Services />
         <div className="hidden md:block">

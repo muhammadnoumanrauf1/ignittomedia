@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ClickSpark from "@/components/ui/ClickSpark";
-import Script from "next/script";
 
 const BASE_URL = "https://ignittomedia.com";
 
@@ -206,6 +205,7 @@ const servicesSchema = {
 };
 
 import Navbar from "@/components/sections/Navbar";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 export default function RootLayout({
   children,
@@ -218,27 +218,26 @@ export default function RootLayout({
       className="h-full antialiased bg-brand-bg text-brand-text"
     >
       <head>
-      </head>
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         {/* JSON-LD Structured Data */}
-        <Script
+        <script
           id="schema-organization"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-          strategy="beforeInteractive"
         />
-        <Script
+        <script
           id="schema-website"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-          strategy="beforeInteractive"
         />
-        <Script
+        <script
           id="schema-services"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
-          strategy="beforeInteractive"
         />
+      </head>
+      <body className="min-h-full flex flex-col relative" suppressHydrationWarning>
+        {/* Global Full-Website Top Progressive Viewport Blur Edge Mask */}
+        <ProgressiveBlur position="fixed-top" height="120px" blurAmount="24px" />
 
         <ClickSpark sparkColor="#00DFA2" sparkSize={12} sparkRadius={40} sparkCount={10} duration={500} />
         <Navbar />

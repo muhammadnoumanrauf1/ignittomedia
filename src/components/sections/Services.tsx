@@ -1,6 +1,8 @@
 "use client";
 
 import { DynamicFrameLayout } from "@/components/ui/dynamic-frame-layout";
+import { Sparkles } from "lucide-react";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 const demoFrames = [
   {
@@ -34,7 +36,7 @@ const demoFrames = [
     id: 4,
     title: "Podcast",
     description: "Multi-cam switching, color grading, and audio mastering for professional shows.",
-    video: "https://static.cdn-luma.com/files/58ab7363888153e3/Exported%20Web%20Video.mp4",
+    video: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6334ec847bbd8a64bfff42.mp4",
     defaultPos: { x: 0, y: 4, w: 4, h: 4 },
     mediaSize: 1,
     isHovered: false,
@@ -43,7 +45,7 @@ const demoFrames = [
     id: 5,
     title: "Motion Graphics",
     description: "Custom animations, UI mockups, and visual effects that explain complex ideas.",
-    video: "https://static.cdn-luma.com/files/58ab7363888153e3/Logo%20Exported.mp4",
+    video: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6313e6fb06386edec36468.mp4",
     defaultPos: { x: 4, y: 4, w: 4, h: 4 },
     mediaSize: 1,
     isHovered: false,
@@ -61,11 +63,23 @@ const demoFrames = [
 
 export default function Services() {
   return (
-    <section id="services" className="relative min-h-screen bg-brand-bg py-20 md:py-32 px-4 md:px-6 flex flex-col items-center">
+    <section id="services" className="relative min-h-screen bg-brand-bg py-20 md:py-32 px-4 md:px-6 flex flex-col items-center overflow-hidden">
+      <ProgressiveBlur position="top" backgroundColor="#031e41" height="120px" />
+      <ProgressiveBlur position="bottom" backgroundColor="#031e41" height="120px" />
       <div className="max-w-[1400px] w-full flex flex-col h-auto md:h-[100vh] min-h-[800px]">
-        <h2 className="text-3xl md:text-5xl font-extrabold tracking-wider mb-8 md:mb-12 text-center text-silver-matte">
-          Our Services
-        </h2>
+        
+        {/* Section Header */}
+        <div className="flex flex-col items-center text-center mb-8 md:mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/10 backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(0,223,162,0.15)]">
+            <Sparkles size={14} className="text-brand-accent animate-pulse" />
+            <span className="text-xs font-bold tracking-[0.2em] text-brand-accent uppercase">
+              Our Services
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-wider text-white">
+            High-Impact Production
+          </h2>
+        </div>
 
         <div className="flex-1 w-full bg-brand-bg/50 rounded-3xl overflow-hidden p-2 md:p-4 border border-white/5">
           {/* Desktop/Tablet View */}
@@ -94,7 +108,7 @@ export default function Services() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
                   <h3 className="text-white text-2xl font-bold mb-2">{frame.title}</h3>
-                  <p className="text-brand-text-muted text-sm leading-relaxed">{frame.description}</p>
+                  <p className="text-white text-sm leading-relaxed">{frame.description}</p>
                 </div>
               </div>
             ))}

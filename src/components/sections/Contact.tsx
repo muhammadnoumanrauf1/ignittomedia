@@ -2,37 +2,50 @@
 
 import { motion } from "framer-motion";
 import Script from "next/script";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 export default function Contact() {
   return (
     <section id="contact" className="relative min-h-screen bg-brand-bg-secondary flex flex-col items-center justify-center py-20 md:py-32 px-4 md:px-6 overflow-hidden border-t border-white/5">
+      <ProgressiveBlur position="top" backgroundColor="#006b75" height="120px" />
+      <ProgressiveBlur position="bottom" backgroundColor="#006b75" height="120px" />
       <Script src="https://link.ignitto.com/js/form_embed.js" strategy="afterInteractive" />
-      
+
       <div className="absolute inset-0 bg-gradient-to-b from-brand-bg-secondary to-brand-bg pointer-events-none" />
-      
-      <div className="max-w-6xl mx-auto w-full z-10 relative">
-        <motion.div 
+
+      <div className="max-w-6xl mx-auto w-full z-10 relative flex flex-col items-center text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/30 text-brand-accent backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(0,223,162,0.15)]"
+        >
+          <Sparkles size={14} className="text-brand-accent animate-pulse" />
+          <span className="text-xs font-bold tracking-[0.25em] uppercase text-brand-accent">
+            Let's Talk
+          </span>
+        </motion.div>
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-xs font-semibold tracking-[0.25em] uppercase mb-4 text-brand-glow">
-            Let's Talk
-          </p>
+
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-wide mb-6 text-white">
-            Ready to Engineer <span className="text-brand-glow text-glow font-black tracking-wider">Attention?</span>
+            Ready to Engineer <span className="text-brand-glow font-black tracking-wider">Attention?</span>
           </h2>
-          <p className="text-brand-text-muted max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+          <p className="text-white max-w-xl mx-auto text-sm md:text-base leading-relaxed">
             Reach out or book a call with us below to discuss how we can transform your content pipeline and scale your brand.
           </p>
         </motion.div>
 
         {/* Top Row: Info + Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full mb-12">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full mb-12 text-left">
+
           {/* Left: Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -43,18 +56,18 @@ export default function Contact() {
           >
             <div>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Get in Touch</h3>
-              <p className="text-brand-text-muted leading-relaxed">
+              <p className="text-white leading-relaxed">
                 Whether you have a question, want to start a project, or simply want to connect, our team is ready to help you dominate your market.
               </p>
             </div>
-            
+
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-brand-glow/10 border border-brand-glow/30 flex items-center justify-center">
                   <Mail className="w-5 h-5 text-brand-glow" />
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Email Us</p>
+                  <p className="text-xs text-white/80 uppercase tracking-wider mb-1">Email Us</p>
                   <a href="mailto:info@ignittomedia.com" className="text-white hover:text-brand-glow transition-colors font-medium">info@ignittomedia.com</a>
                 </div>
               </div>
@@ -64,7 +77,7 @@ export default function Contact() {
                   <MapPin className="w-5 h-5 text-brand-glow" />
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Headquarters</p>
+                  <p className="text-xs text-white/80 uppercase tracking-wider mb-1">Headquarters</p>
                   <p className="text-white font-medium">Global / Remote</p>
                 </div>
               </div>
@@ -84,7 +97,7 @@ export default function Contact() {
               <iframe
                 src="https://link.ignitto.com/widget/form/MKvVn4aJDIVwZBSgx0Ei"
                 style={{ width: '100%', height: '100%', minHeight: '600px', border: 'none', borderRadius: '8px' }}
-                id="inline-MKvVn4aJDIVwZBSgx0Ei" 
+                id="inline-MKvVn4aJDIVwZBSgx0Ei"
                 data-layout="{'id':'INLINE'}"
                 data-trigger-type="alwaysShow"
                 data-trigger-value=""
@@ -113,10 +126,10 @@ export default function Contact() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-accent/10 via-transparent to-transparent opacity-50 pointer-events-none" />
           <div className="relative w-full h-full z-10 pt-4 px-4 pb-4 overflow-hidden flex flex-col items-center">
             <div className="w-full h-full">
-              <iframe 
-                src="https://link.ignitto.com/widget/booking/PHPo59XlXcILHazsNUNp" 
-                style={{ width: '100%', height: '100%', border: 'none', overflow: 'hidden' }} 
-                scrolling="no" 
+              <iframe
+                src="https://link.ignitto.com/widget/booking/PHPo59XlXcILHazsNUNp"
+                style={{ width: '100%', height: '100%', border: 'none', overflow: 'hidden' }}
+                scrolling="no"
                 id="DogUPsjbSk7gsEqnoDqm_1784107343568"
                 title="Ignitto Media Booking"
               />

@@ -62,15 +62,15 @@ export default function Problem() {
       <div className="max-w-6xl mx-auto w-full z-10">
 
         {/* Section Header */}
-        <div className="text-center mb-16 md:mb-24">
+        <div className="flex flex-col items-center text-center mb-16 md:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/10 backdrop-blur-md mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/10 backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(0,223,162,0.15)]"
           >
-            <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
+            <Sparkles size={14} className="text-brand-accent animate-pulse" />
             <span className="text-xs font-bold tracking-[0.2em] text-brand-accent uppercase">
               The Content Bottleneck
             </span>
@@ -78,7 +78,7 @@ export default function Problem() {
 
           <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[1.1] mb-6">
             <SplitText text="Great Ideas" type="words" delay={0.1} className="justify-center font-extrabold tracking-wide text-white" />
-            <SplitText text="Die in Bad Editing." type="words" delay={0.3} className="justify-center font-light tracking-widest text-brand-text-muted mt-2" />
+            <SplitText text="Die in Bad Editing." type="words" delay={0.3} className="justify-center font-light tracking-widest text-white/90 mt-2" />
           </h2>
 
           <motion.p
@@ -86,7 +86,7 @@ export default function Problem() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-base sm:text-lg md:text-xl text-brand-text-secondary max-w-2xl mx-auto font-light leading-relaxed px-4"
+            className="text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto font-light leading-relaxed px-4"
           >
             The gap between raw recording and compounding attention is engineered in post-production.
           </motion.p>
@@ -137,7 +137,7 @@ export default function Problem() {
                       </div>
                       <div>
                         <h4 className="text-white font-medium text-base tracking-wide mb-0.5">{step.title}</h4>
-                        <p className="text-brand-text-muted text-xs leading-relaxed font-light">{step.desc}</p>
+                        <p className="text-white text-xs leading-relaxed font-light">{step.desc}</p>
                       </div>
                     </div>
                   );
@@ -195,7 +195,7 @@ export default function Problem() {
                         <h4 className="text-white font-semibold text-base mb-0.5">
                           {step.title}
                         </h4>
-                        <p className="text-brand-text-secondary text-xs leading-relaxed font-light">{step.desc}</p>
+                        <p className="text-white text-xs leading-relaxed font-light">{step.desc}</p>
                       </div>
                     </div>
                   );
@@ -227,13 +227,13 @@ export default function Problem() {
                   {card.badge}
                 </span>
                 <h4 className="text-xl font-bold text-white mb-3">{card.title}</h4>
-                <p className="text-brand-text-secondary text-sm leading-relaxed mb-6 font-light">
+                <p className="text-white text-sm leading-relaxed mb-6 font-light">
                   {card.desc}
                 </p>
               </div>
 
               <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs">
-                <span className="text-brand-text-muted font-medium">Impact</span>
+                <span className="text-white font-medium">Impact</span>
                 <span className="font-bold text-brand-glow">{card.stat}</span>
               </div>
             </motion.div>

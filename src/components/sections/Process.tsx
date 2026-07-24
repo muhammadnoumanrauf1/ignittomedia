@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { GlowCard } from "@/components/ui/spotlight-card";
+import { Sparkles } from "lucide-react";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 const steps = [
   {
@@ -48,6 +50,8 @@ const staggerContainer = {
 export default function Process() {
   return (
     <section id="process" className="relative bg-brand-bg py-32 px-6 overflow-hidden">
+      <ProgressiveBlur position="top" backgroundColor="#031e41" height="120px" />
+      <ProgressiveBlur position="bottom" backgroundColor="#031e41" height="120px" />
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
         <motion.div 
@@ -55,15 +59,18 @@ export default function Process() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp} 
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="flex flex-col items-center text-center max-w-2xl mx-auto mb-16"
         >
-          <p className="text-xs font-semibold tracking-[0.25em] uppercase mb-4 text-brand-glow">
-            Process
-          </p>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/10 backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(0,223,162,0.15)]">
+            <Sparkles size={14} className="text-brand-accent animate-pulse" />
+            <span className="text-xs font-bold tracking-[0.2em] text-brand-accent uppercase">
+              Our Process
+            </span>
+          </div>
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-wide leading-tight mb-4 text-white">
             How It Works
           </h2>
-          <p className="text-sm md:text-base leading-relaxed text-brand-text-secondary">
+          <p className="text-sm md:text-base leading-relaxed text-white">
             A structured 4-step framework engineered to scale your content pipeline effortlessly.
           </p>
         </motion.div>
@@ -94,7 +101,7 @@ export default function Process() {
                     {step.title}
                   </h3>
 
-                  <p className="text-sm leading-relaxed mb-6 text-brand-text-secondary">
+                  <p className="text-sm leading-relaxed mb-6 text-white">
                     {step.body}
                   </p>
                 </div>

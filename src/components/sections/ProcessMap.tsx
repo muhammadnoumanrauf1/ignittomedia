@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Play, Scissors, MessageSquareCheck, Rocket } from "lucide-react";
+import { Play, Scissors, MessageSquareCheck, Rocket, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { GlowCard } from "@/components/ui/spotlight-card";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 const steps = [
   {
@@ -49,18 +50,21 @@ export default function ProcessMap() {
 
   return (
     <section id="process" className="bg-brand-bg-secondary min-h-screen md:min-h-[120vh] relative overflow-hidden flex flex-col items-center py-20 md:py-32 px-4 md:px-6">
+      <ProgressiveBlur position="top" backgroundColor="#006b75" height="120px" />
+      <ProgressiveBlur position="bottom" backgroundColor="#006b75" height="120px" />
 
       {/* Top Header */}
       <div className="flex flex-col items-center text-center z-10 relative">
-        <div className="px-4 py-1.5 rounded-full border border-brand-glow/30 bg-brand-glow/10 mb-6">
-          <span className="text-xs font-semibold tracking-[0.2em] text-brand-glow uppercase">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/10 backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(0,223,162,0.15)]">
+          <Sparkles size={14} className="text-brand-accent animate-pulse" />
+          <span className="text-xs font-bold tracking-[0.2em] text-brand-accent uppercase">
             How It Works
           </span>
         </div>
         <h2 className="text-3xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-wide leading-[1.1] max-w-4xl mx-auto">
           From raw footage to content that scales in four steps.
         </h2>
-        <p className="mt-6 text-brand-text-secondary text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-6 text-white text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
           How does IgnittoMedia&apos;s video editing process work? You upload your raw footage, we engineer the narrative, refine with your feedback, and deliver platform-ready exports — all within 48 hours average turnaround.
         </p>
       </div>
@@ -135,7 +139,7 @@ export default function ProcessMap() {
                   <h3 className="text-xl font-bold text-white mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-brand-text-secondary">
+                  <p className="text-sm leading-relaxed text-white">
                     {step.desc}
                   </p>
                 </GlowCard>
@@ -180,7 +184,7 @@ export default function ProcessMap() {
                 <h3 className="text-lg font-bold text-white mb-2">
                   {step.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-brand-text-secondary">
+                <p className="text-sm leading-relaxed text-white">
                   {step.desc}
                 </p>
               </div>

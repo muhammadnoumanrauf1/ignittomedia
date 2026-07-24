@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import SplitText from "../ui/SplitText";
 import { GlowCard } from "@/components/ui/spotlight-card";
+import { Sparkles } from "lucide-react";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 export default function Story() {
   const pillars = [
@@ -14,6 +16,8 @@ export default function Story() {
 
   return (
     <section id="story" className="relative min-h-screen md:min-h-[120vh] bg-brand-bg py-20 md:py-32 px-6 overflow-hidden">
+      <ProgressiveBlur position="top" backgroundColor="#031e41" height="120px" />
+      <ProgressiveBlur position="bottom" backgroundColor="#031e41" height="120px" />
       {/* Background ambient glow */}
       <div className="absolute top-0 right-0 w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-brand-glow/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
@@ -26,17 +30,19 @@ export default function Story() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="flex items-center space-x-3 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/10 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(0,223,162,0.15)]"
           >
-            <span className="h-px w-12 bg-brand-glow block" />
-            <span className="text-brand-glow text-sm font-semibold tracking-widest uppercase">Our Philosophy</span>
+            <Sparkles size={14} className="text-brand-accent animate-pulse" />
+            <span className="text-xs font-bold tracking-[0.2em] text-brand-accent uppercase">
+              Our Philosophy
+            </span>
           </motion.div>
 
           <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[1.1]">
             <span className="text-white block font-extrabold tracking-wide mb-2">We Became</span>
-            <span className="text-brand-text-secondary block font-semibold tracking-normal mb-2">Editors Because</span>
-            <span className="text-brand-text-muted block font-light tracking-widest mb-4">We Were</span>
-            <span className="text-brand-glow inline-block font-black tracking-wider" style={{ textShadow: "0 0 30px rgba(1, 195, 255, 0.4)" }}>
+            <span className="text-white block font-semibold tracking-normal mb-2">Editors Because</span>
+            <span className=" font-light tracking-widest mb-4 text-white block ">We Were</span>
+            <span className="text-brand-glow inline-block font-black tracking-wider">
               Students of Attention.
             </span>
           </h2>
@@ -51,12 +57,12 @@ export default function Story() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8 }}
-            className="text-xl md:text-2xl text-brand-text-secondary font-light leading-relaxed border-l-2 border-white/10 pl-6 md:pl-10"
+            className="text-xl md:text-2xl text-white font-light leading-relaxed border-l-2 border-white/10 pl-6 md:pl-10"
           >
             <p className="mb-6">
               People don't remember videos because they have amazing transitions. They remember videos because they're <span className="text-white font-medium">impossible to stop watching</span>.
             </p>
-            <p className="text-brand-text-muted">That's what we study.</p>
+            <p className="text-white">That's what we study.</p>
           </motion.div>
 
           {/* Pillars Grid */}
@@ -75,7 +81,7 @@ export default function Story() {
                   className="group relative p-8 rounded-2xl bg-white/[0.02] border border-white/5 overflow-hidden h-full"
                 >
                   <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{pillar.title}.</h3>
-                  <p className="text-brand-text-muted text-sm relative z-10">{pillar.desc}</p>
+                  <p className="text-white text-sm relative z-10">{pillar.desc}</p>
                 </GlowCard>
               </motion.div>
             ))}
@@ -84,7 +90,7 @@ export default function Story() {
       </div>
 
       {/* Full Width Closing Manifesto */}
-      <div className="max-w-7xl mx-auto w-full relative z-10 mt-24 md:mt-32">
+      {/* <div className="max-w-7xl mx-auto w-full relative z-10 mt-24 md:mt-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -103,7 +109,7 @@ export default function Story() {
             </p>
           </div>
         </motion.div>
-      </div>
+      </div> */}
     </section>
   );
 }
