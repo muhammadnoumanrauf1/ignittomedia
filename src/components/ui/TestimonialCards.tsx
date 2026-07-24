@@ -23,7 +23,7 @@ export const testimonialsData: TestimonialItem[] = [
     quote: "IgnittoMedia brought a level of strategy and creativity that completely elevated our content. Their attention to storytelling, pacing, and visual detail helped us produce videos that not only looked premium but also performed exceptionally well. They feel like a true extension of our team rather than just an editing service.",
     name: "Lewis Maguire",
     role: "Brand Strategist & Producer",
-    avatar: "/lewis.jpg",
+    avatar: "/lewis.JPG",
     rating: 5,
     tag: "Featured Partner",
     featured: true
