@@ -236,8 +236,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col relative" suppressHydrationWarning>
-        {/* Global Full-Website Top Progressive Viewport Blur Edge Mask */}
+        {/* Global Full-Website Progressive Viewport Blur Edge Masks */}
         <ProgressiveBlur position="fixed-top" height="120px" blurAmount="24px" />
+        <ProgressiveBlur position="fixed-bottom" height="120px" blurAmount="24px" hideWhenVisible="#footer-reveal" />
 
         <ClickSpark sparkColor="#00DFA2" sparkSize={12} sparkRadius={40} sparkCount={10} duration={500} />
         <Navbar />

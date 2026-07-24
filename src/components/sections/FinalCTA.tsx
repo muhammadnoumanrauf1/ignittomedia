@@ -9,6 +9,7 @@ export default function FinalCTA() {
   return (
     <section className="relative min-h-screen bg-[#010B14] flex flex-col items-center justify-center py-32 px-6 overflow-hidden">
       <ProgressiveBlur position="top" backgroundColor="#010B14" height="120px" />
+      <ProgressiveBlur position="bottom" backgroundColor="#010B14" height="120px" />
       {/* Background becomes darker, only blue glows remain */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-brand-glow/10 rounded-full blur-[150px] pointer-events-none" />
 

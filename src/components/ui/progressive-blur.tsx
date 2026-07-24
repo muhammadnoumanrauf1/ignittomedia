@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type ProgressiveBlurProps = {
   className?: string;
@@ -8,6 +8,8 @@ type ProgressiveBlurProps = {
   position?: "top" | "bottom" | "fixed-top" | "fixed-bottom";
   height?: string;
   blurAmount?: string;
+  /** CSS selector for element that, when visible, hides this blur */
+  hideWhenVisible?: string;
 };
 
 const ProgressiveBlur = ({
@@ -16,9 +18,30 @@ const ProgressiveBlur = ({
   position = "top",
   height = "140px",
   blurAmount = "24px",
+  hideWhenVisible,
 }: ProgressiveBlurProps) => {
   const isFixed = position.startsWith("fixed");
   const isTop = position.endsWith("top") || position === "top";
+
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    if (!hideWhenVisible) return;
+
+    const target = document.querySelector(hideWhenVisible);
+    if (!target) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Hide blur when the target element enters the viewport
+        setVisible(!entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [hideWhenVisible]);
 
   return (
     <div
@@ -30,6 +53,8 @@ const ProgressiveBlur = ({
         height,
         WebkitUserSelect: "none",
         userSelect: "none",
+        opacity: visible ? 1 : 0,
+        transition: "opacity 0.4s ease",
       }}
     >
       {/* Primary Backdrop Blur Layer with Progressive Alpha Mask */}
@@ -93,3 +118,4 @@ const Skiper41 = () => {
 };
 
 export { ProgressiveBlur, Skiper41 };
+
