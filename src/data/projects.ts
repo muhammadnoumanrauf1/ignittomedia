@@ -25,7 +25,7 @@ export const projects: Project[] = [
   {
     id: "creator-x",
     title: "Creator X Shorts",
-    thumbnail: "https://images.unsplash.com/photo-1535016120720-40c746a51d8a?q=80&w=2940&auto=format&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop",
     videoUrl: "https://videos.pexels.com/video-files/5896379/5896379-uhd_2160_3840_24fps.mp4",
     aspectRatio: "9:16",
     category: "Short-Form",

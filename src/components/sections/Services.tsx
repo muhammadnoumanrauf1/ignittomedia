@@ -70,12 +70,9 @@ export default function Services() {
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-8 md:mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/10 backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(0,223,162,0.15)]">
-            <Sparkles size={14} className="text-brand-accent animate-pulse" />
-            <span className="text-xs font-bold tracking-[0.2em] text-brand-accent uppercase">
-              Our Services
-            </span>
-          </div>
+          <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-brand-accent uppercase mb-4">
+            Our Services
+          </span>
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-wider text-white">
             High-Impact Production
           </h2>

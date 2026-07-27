@@ -61,7 +61,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
+            className="absolute inset-0 bg-black/80 cursor-pointer"
           />
 
           {/* Modal Content */}
@@ -69,15 +69,15 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", duration: 0.5 }}
-            className="relative w-full max-w-5xl rounded-3xl overflow-y-auto overflow-x-hidden max-h-[90vh] shadow-2xl"
+            transition={{ type: "spring", duration: 0.4 }}
+            className="relative w-full max-w-5xl rounded-3xl overflow-y-auto overflow-x-hidden max-h-[90vh] shadow-[0_25px_80px_rgba(0,0,0,0.9)]"
           >
-            <GlowCard customSize={true} glowColor="theme" className="w-full min-h-min bg-[#0F1110]/90 backdrop-blur-xl border-white/10 !p-0">
+            <GlowCard customSize={true} glowColor="theme" className="w-full min-h-min bg-[#040D1A] border-white/15 !p-0">
               <div className="w-full h-full flex flex-col md:flex-row">
                 {/* Close Button */}
                 <button
                   onClick={onClose}
-                  className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/80 rounded-full text-white/70 hover:text-white transition-all backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-brand-glow"
+                  className="absolute top-4 right-4 z-20 p-2.5 bg-black/70 hover:bg-brand-glow hover:text-black rounded-full text-white transition-all focus:outline-none focus:ring-2 focus:ring-brand-glow"
                   aria-label="Close Project Modal"
                 >
                   <X size={20} />

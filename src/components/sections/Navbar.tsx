@@ -65,11 +65,16 @@ export default function Navbar() {
   };
 
   const handleBookCallClick = (e: React.MouseEvent) => {
-    const calendarEl = document.getElementById("DogUPsjbSk7gsEqnoDqm_1784107343568") || document.getElementById("contact");
-    if (calendarEl) {
-      e.preventDefault();
-      calendarEl.scrollIntoView({ behavior: "smooth" });
+    e.preventDefault();
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("open-booking-calendar"));
     }
+    setTimeout(() => {
+      const calendarEl = document.getElementById("booking-calendar-wrapper") || document.getElementById("DogUPsjbSk7gsEqnoDqm_1784107343568") || document.getElementById("contact");
+      if (calendarEl) {
+        calendarEl.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 50);
     setIsMobileMenuOpen(false);
   };
 

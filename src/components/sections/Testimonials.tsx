@@ -21,10 +21,9 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/30 text-brand-accent backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(0,223,162,0.15)]"
+          className="mb-4"
         >
-          <Sparkles size={14} className="text-brand-accent animate-pulse" />
-          <span className="text-xs font-bold tracking-[0.2em] text-brand-accent uppercase">
+          <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-brand-accent uppercase">
             Social Proof & Wall of Love
           </span>
         </motion.div>

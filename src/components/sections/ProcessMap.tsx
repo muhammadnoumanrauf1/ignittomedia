@@ -49,18 +49,15 @@ export default function ProcessMap() {
   const [activeStep, setActiveStep] = useState<string | null>("02");
 
   return (
-    <section id="process" className="bg-brand-bg-secondary min-h-screen md:min-h-[120vh] relative overflow-hidden flex flex-col items-center py-20 md:py-32 px-4 md:px-6">
+    <section id="process" className=" bg-brand-bg-secondary min-h-screen md:min-h-[120vh] relative overflow-hidden flex flex-col items-center py-20 md:py-32 px-4 md:px-6">
       <ProgressiveBlur position="top" backgroundColor="#006b75" height="120px" />
       <ProgressiveBlur position="bottom" backgroundColor="#006b75" height="120px" />
 
       {/* Top Header */}
       <div className="flex flex-col items-center text-center z-10 relative">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/10 backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(0,223,162,0.15)]">
-          <Sparkles size={14} className="text-brand-accent animate-pulse" />
-          <span className="text-xs font-bold tracking-[0.2em] text-brand-accent uppercase">
-            How It Works
-          </span>
-        </div>
+        <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-brand-accent uppercase mb-6">
+          How It Works
+        </span>
         <h2 className="text-3xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-wide leading-[1.1] max-w-4xl mx-auto">
           From raw footage to content that scales in four steps.
         </h2>

@@ -13,12 +13,16 @@ import ParticleWaves from "@/components/ui/threejs-particles-waves";
 import { GlowCard } from "@/components/ui/spotlight-card";
 import MagneticButton from "@/components/ui/MagneticButton";
 
-export default function ScrollZoomHero() {
+interface ScrollZoomHeroProps {
+  nextSection?: React.ReactNode;
+}
+
+export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [dimensions, setDimensions] = useState({
-    vw: 1200,
+    vw: 1500,
     vh: 800,
     cardWidth: 744,
     cardHeight: 418.5,
@@ -64,28 +68,23 @@ export default function ScrollZoomHero() {
 
   const easeInOut = cubicBezier(0.42, 0, 0.58, 1);
 
-  // CARD TRANSLATIONS
-  // x: Slides from peeking offset (startX) to center (0). p 0.4 -> 1: Remains centered (0).
-  const x = useTransform(springProgress, [0, 0.4, 1], [startX, 0, 0], { ease: [easeInOut, easeInOut] });
+  // CARD TRANSLATIONS & SCALE (0 -> 0.30 -> 0.65)
+  const x = useTransform(springProgress, [0, 0.3, 0.65], [startX, 0, 0], { ease: [easeInOut, easeInOut] });
+  const cardY = useTransform(springProgress, [0, 0.3, 0.65], [100, 0, 0], { ease: [easeInOut, easeInOut] });
+  const rotate = useTransform(springProgress, [0, 0.3, 0.65], [-10, 0, 0], { ease: [easeInOut, easeInOut] });
+  const scale = useTransform(springProgress, [0, 0.3, 0.65], [1, 1, endScale], { ease: [easeInOut, easeInOut] });
 
-  // y: Shunted down by 100px on load to clear the fixed top navigation bar. p 0.4 -> 1: Centers horizontally/vertically (0).
-  const cardY = useTransform(springProgress, [0, 0.4, 1], [100, 0, 0], { ease: [easeInOut, easeInOut] });
-
-  // CARD ROTATION
-  // p 0 -> 0.4: Eases rotation from -10deg to 0deg. p 0.4 -> 1: Remains straight (0deg).
-  const rotate = useTransform(springProgress, [0, 0.4, 1], [-10, 0, 0], { ease: [easeInOut, easeInOut] });
-
-  // CARD SCALE
-  // p 0 -> 0.4: Remains at 1. p 0.4 -> 1: Scales from 1 up to endScale.
-  const scale = useTransform(springProgress, [0, 0.4, 1], [1, 1, endScale], { ease: [easeInOut, easeInOut] });
+  // STAGE DISSOLVE & DRIFT OUT INTO NEXT SECTION (0.65 -> 0.95)
+  const stageOpacity = useTransform(springProgress, [0.65, 0.95], [1, 0], { ease: [easeInOut, easeInOut] });
+  const stageY = useTransform(springProgress, [0.65, 0.95], [0, -60], { ease: [easeInOut, easeInOut] });
 
   // CONSTANT VISUAL RADIUS (Dividing border radius by scale dynamically)
   const borderRadius = useTransform(scale, (s) => `${18 / s}px`);
 
-  // HERO CONTENT OPACITY & Y LIFTOFF (0 -> 0.35)
-  const heroOpacity = useTransform(springProgress, [0, 0.35, 1], [1, 0, 0], { ease: [easeInOut, easeInOut] });
-  const heroY = useTransform(springProgress, [0, 0.35, 1], [0, -60, -60], { ease: [easeInOut, easeInOut] });
-  const heroPointerEvents = useTransform(springProgress, (p) => p > 0.35 ? "none" : "auto");
+  // HERO CONTENT OPACITY & Y LIFTOFF (0 -> 0.30)
+  const heroOpacity = useTransform(springProgress, [0, 0.3, 0.65], [1, 0, 0], { ease: [easeInOut, easeInOut] });
+  const heroY = useTransform(springProgress, [0, 0.3, 0.65], [0, -60, -60], { ease: [easeInOut, easeInOut] });
+  const heroPointerEvents = useTransform(springProgress, (p) => p > 0.3 ? "none" : "auto");
 
   // Dynamically control play/pause state of the video
   useEffect(() => {
@@ -204,12 +203,17 @@ export default function ScrollZoomHero() {
 
   // Scroll to booking calendar widget
   const handleBookCall = () => {
-    const calendarEl = document.getElementById("DogUPsjbSk7gsEqnoDqm_1784107343568") || document.getElementById("contact");
-    if (calendarEl) {
-      calendarEl.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.location.href = "/#contact";
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("open-booking-calendar"));
     }
+    setTimeout(() => {
+      const calendarEl = document.getElementById("booking-calendar-wrapper") || document.getElementById("DogUPsjbSk7gsEqnoDqm_1784107343568") || document.getElementById("contact");
+      if (calendarEl) {
+        calendarEl.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.location.href = "/#contact";
+      }
+    }, 50);
   };
 
   // Play hero manifesto video with audio and zoom into video player
@@ -234,11 +238,11 @@ export default function ScrollZoomHero() {
           <div className="px-6 py-2 rounded-full border border-brand-glow/30 bg-brand-bg/40 backdrop-blur-sm text-brand-glow font-bold uppercase tracking-widest text-xs sm:text-sm shadow-[0_0_20px_rgba(1,195,255,0.15)]">
             Content That People Remember
           </div>
-          <h1 className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tight mt-6 leading-none select-none bg-gradient-to-b from-white via-white to-neutral-400 bg-clip-text text-transparent">
-            IgnittoMedia
+          <h1 className="text-4xl sm:text-5xl md:text-[150px] lg:text-[150px] font-['Special_Gothic_Expanded_One',sans-serif] font-bold tracking-tight mt-6 leading-[1.15] pb-4 pt-1 select-none bg-gradient-to-r from-[#00b3dd] via-[#00DFA2] to-[#00b3dd] bg-clip-text text-transparent drop-shadow-[0_10px_40px_rgba(0,223,162,0.25)]">
+            Ignitto Media
           </h1>
           <p className="text-brand-text-secondary mt-8 text-base sm:text-lg md:text-2xl max-w-3xl font-light leading-relaxed">
-            IgnittoMedia helps founders, creators, and businesses transform raw footage into content that builds authority, earns trust, and drives measurable growth.
+            We help founders, creators, and businesses transform raw footage into content that builds authority, earns trust, and drives measurable growth.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center">
             <MagneticButton
@@ -303,13 +307,15 @@ export default function ScrollZoomHero() {
     );
   }
 
-  const sceneHeight = dimensions.isMobile ? "340vh" : "380vh";
+  const sceneHeight = dimensions.isMobile ? "200vh" : "240vh";
 
   return (
     <section ref={containerRef} style={{ height: sceneHeight }} className="relative bg-brand-bg w-full">
       {/* Sticky Stage Container */}
-      <div className="sticky top-0 h-dvh w-full overflow-hidden flex items-center justify-center z-100">
-
+      <motion.div
+        style={{ opacity: stageOpacity, y: stageY }}
+        className="sticky top-0 h-dvh w-full overflow-hidden flex items-center justify-center z-100 will-change-[transform,opacity]"
+      >
         {/* Background WebGL Particle Waves */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
           <ParticleWaves
@@ -328,14 +334,15 @@ export default function ScrollZoomHero() {
           }}
           className="absolute inset-0 z-30 px-6 text-center flex flex-col items-center justify-center pt-24 sm:pt-28 md:pt-32"
         >
-          <div className="px-6 py-2 rounded-full border border-brand-glow/30 bg-brand-bg/40 backdrop-blur-sm text-brand-glow font-bold uppercase tracking-widest text-xs sm:text-sm shadow-[0_0_20px_rgba(1,195,255,0.15)]">
+          <span className="text-brand-glow font-bold uppercase tracking-[0.25em] text-xs sm:text-sm">
             Content That People Remember
-          </div>
-          <h1 className="text-5xl sm:text-7xl md:text-9xl font-black text-white tracking-tight mt-6 leading-none select-none bg-gradient-to-b from-white via-white to-neutral-400 bg-clip-text text-transparent">
-            IgnittoMedia
+          </span>
+          <h1 className="text-4xl sm:text-5xl md:text-[150px] lg:text-[150px] font-['Special_Gothic_Expanded_One',sans-serif] font-bold tracking-tight mt-6 leading-[1.15] pb-4 pt-1 select-none bg-gradient-to-r from-[#00b3dd] via-[#00DFA2] to-[#00b3dd] bg-clip-text text-transparent drop-shadow-[0_10px_40px_rgba(0,223,162,0.25)]">
+            Ignitto Media
           </h1>
+
           <p className="mt-8 text-base sm:text-lg md:text-2xl text-brand-text-secondary max-w-4xl font-light leading-relaxed px-4">
-            IgnittoMedia helps founders, creators, and businesses transform raw footage into content that builds authority, earns trust, and drives measurable growth.
+            We help founders, creators, and businesses transform raw footage into content that builds authority, earns trust, and drives measurable growth.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center">
             <MagneticButton
@@ -367,7 +374,7 @@ export default function ScrollZoomHero() {
             height: dimensions.cardHeight,
             willChange: "transform"
           }}
-          className="absolute z-20 bg-brand-bg flex items-center justify-center shadow-[0_30px_100px_rgba(0,0,0,0.8)] border border-white/10 overflow-hidden cursor-default rounded-2xl"
+          className="absolute z-40 bg-brand-bg flex items-center justify-center shadow-[0_30px_100px_rgba(0,0,0,0.8)] border border-white/10 overflow-hidden cursor-default rounded-2xl"
         >
           <GlowCard
             glowColor="theme"
@@ -410,8 +417,7 @@ export default function ScrollZoomHero() {
             </div>
           </GlowCard>
         </motion.div>
-
-      </div>
+      </motion.div>
     </section>
   );
 }

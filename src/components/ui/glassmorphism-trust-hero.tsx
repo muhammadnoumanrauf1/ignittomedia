@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { 
-  ArrowRight, 
-  Play, 
-  Target, 
-  Crown, 
+import {
+  ArrowRight,
+  Play,
+  Target,
+  Crown,
   Star,
   Sparkles,
   Hexagon,
@@ -71,8 +71,8 @@ export default function HeroSection() {
       `}</style>
 
       {/* Background Image with Ambient Glow Mask */}
-      <div 
-        className="absolute inset-0 z-0 bg-[url(https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2000&auto=format&fit=crop)] bg-cover bg-center opacity-20 pointer-events-none"
+      <div
+        className="absolute inset-0 z-0 bg-[url(https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2000&auto=format&fit=crop)] bg-cover bg-center opacity-10 pointer-events-none"
         style={{
           maskImage: "linear-gradient(180deg, transparent, black 20%, black 80%, transparent)",
           WebkitMaskImage: "linear-gradient(180deg, transparent, black 20%, black 80%, transparent)",
@@ -81,10 +81,10 @@ export default function HeroSection() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 md:pt-24 md:pb-20 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8 items-center">
-          
+
           {/* --- LEFT COLUMN --- */}
           <div className="lg:col-span-7 flex flex-col justify-center space-y-8">
-            
+
             {/* Badge */}
             <div className="animate-fade-in delay-100">
               <div className="inline-flex items-center gap-2 rounded-full border border-brand-accent/30 bg-brand-accent/10 px-4 py-1.5 backdrop-blur-md shadow-[0_0_15px_rgba(0,223,162,0.15)]">
@@ -110,18 +110,23 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="animate-fade-in delay-400 flex flex-col sm:flex-row gap-4 pt-2">
-              <button 
+              <button
                 onClick={() => {
-                  const el = document.getElementById("contact");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(new CustomEvent("open-booking-calendar"));
+                  }
+                  setTimeout(() => {
+                    const el = document.getElementById("booking-calendar-wrapper") || document.getElementById("contact");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }, 50);
                 }}
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#00b3dd] px-8 py-4 text-sm font-bold text-black transition-all hover:bg-[#00DFA2] hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_25px_rgba(0,179,221,0.35)]"
               >
                 Book a Strategy Call
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
-              
-              <button 
+
+              <button
                 onClick={() => {
                   window.scrollTo({
                     top: window.innerHeight * 0.9,
@@ -138,7 +143,7 @@ export default function HeroSection() {
 
           {/* --- RIGHT COLUMN: BENTO GLASS CARD --- */}
           <div className="lg:col-span-5 space-y-6">
-            
+
             {/* Stats Card */}
             <div className="animate-fade-in delay-500 relative overflow-hidden rounded-3xl border border-brand-glow/30 bg-[#031e41]/80 p-8 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,179,221,0.15)]">
               {/* Radial Glow */}
@@ -197,8 +202,8 @@ export default function HeroSection() {
             {/* Marquee Card */}
             <div className="animate-fade-in delay-500 relative overflow-hidden rounded-3xl border border-white/10 bg-[#031e41]/60 py-6 backdrop-blur-xl">
               <h3 className="mb-4 px-8 text-xs font-bold uppercase tracking-wider text-brand-accent">Trusted by High-Performing Partners</h3>
-              
-              <div 
+
+              <div
                 className="relative flex overflow-hidden"
                 style={{
                   maskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
@@ -207,7 +212,7 @@ export default function HeroSection() {
               >
                 <div className="animate-marquee flex gap-10 whitespace-nowrap px-4">
                   {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((client, i) => (
-                    <div 
+                    <div
                       key={i}
                       className="flex items-center gap-2 text-white/90 hover:text-brand-glow transition-all cursor-default"
                     >

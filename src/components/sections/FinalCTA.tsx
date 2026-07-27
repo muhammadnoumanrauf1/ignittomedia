@@ -40,8 +40,13 @@ export default function FinalCTA() {
           <MagneticButton
             variant="primary"
             onClick={() => {
-              const el = document.getElementById("contact");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
+              if (typeof window !== "undefined") {
+                window.dispatchEvent(new CustomEvent("open-booking-calendar"));
+              }
+              setTimeout(() => {
+                const el = document.getElementById("booking-calendar-wrapper") || document.getElementById("contact");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }, 50);
             }}
           >
             Book a Strategy Call

@@ -15,7 +15,7 @@ export default function Story() {
   ];
 
   return (
-    <section id="story" className="relative min-h-screen md:min-h-[120vh] bg-brand-bg py-20 md:py-32 px-6 overflow-hidden">
+    <section id="story" className="relative min-h-screen bg-brand-bg -mt-[100vh] pt-24 pb-20 md:pt-32 md:pb-28 px-6 overflow-hidden z-20">
       <ProgressiveBlur position="top" backgroundColor="#031e41" height="120px" />
       <ProgressiveBlur position="bottom" backgroundColor="#031e41" height="120px" />
       {/* Background ambient glow */}
@@ -30,10 +30,9 @@ export default function Story() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/10 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(0,223,162,0.15)]"
+            className="mb-8"
           >
-            <Sparkles size={14} className="text-brand-accent animate-pulse" />
-            <span className="text-xs font-bold tracking-[0.2em] text-brand-accent uppercase">
+            <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-brand-accent uppercase">
               Our Philosophy
             </span>
           </motion.div>
@@ -66,22 +65,31 @@ export default function Story() {
           </motion.div>
 
           {/* Pillars Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {pillars.map((pillar, i) => (
               <motion.div
                 key={pillar.title}
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                initial={{ opacity: 0, scale: 0.8, y: 35 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ scale: 1.07, y: -10 }}
+                whileTap={{ scale: 0.96 }}
+                viewport={{ amount: 0.1 }}
+                transition={{
+                  duration: 0.7,
+                  delay: i * 0.1,
+                  type: "spring",
+                  stiffness: 220,
+                  damping: 18
+                }}
+                className="cursor-pointer"
               >
                 <GlowCard
                   customSize={true}
                   glowColor="theme"
-                  className="group relative p-8 rounded-2xl bg-white/[0.02] border border-white/5 overflow-hidden h-full"
+                  className="group relative p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-brand-glow/40 hover:bg-white/[0.05] transition-all duration-300 overflow-hidden h-full shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_25px_50px_rgba(0,223,162,0.25)]"
                 >
-                  <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{pillar.title}.</h3>
-                  <p className="text-white text-sm relative z-10">{pillar.desc}</p>
+                  <h3 className="text-2xl font-bold text-white mb-3 relative z-10 group-hover:text-brand-glow transition-colors duration-300">{pillar.title}.</h3>
+                  <p className="text-white text-sm relative z-10 leading-relaxed font-light">{pillar.desc}</p>
                 </GlowCard>
               </motion.div>
             ))}

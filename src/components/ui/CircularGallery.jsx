@@ -1,5 +1,5 @@
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, Raycast } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import './CircularGallery.css';
 
@@ -314,7 +314,7 @@ class Media {
     this.plane.position.x = this.x - scroll.current - this.extra;
 
     const x = this.plane.position.x;
-    const H = this.viewport.width / 2;
+    const H = this.viewport.width * 0.55;
 
     if (this.bend === 0) {
       this.plane.position.y = 0;
@@ -322,15 +322,16 @@ class Media {
     } else {
       const B_abs = Math.abs(this.bend);
       const R = (H * H + B_abs * B_abs) / (2 * B_abs);
-      const effectiveX = Math.min(Math.abs(x), H);
+      const clampedX = Math.min(Math.abs(x), R * 0.98);
 
-      const arc = R - Math.sqrt(R * R - effectiveX * effectiveX);
+      const arc = R - Math.sqrt(R * R - clampedX * clampedX);
       if (this.bend > 0) {
+        // Curve smoothly from bottom-right corner up through center top down to bottom-left corner
         this.plane.position.y = -arc;
-        this.plane.rotation.z = -Math.sign(x) * Math.asin(effectiveX / R);
+        this.plane.rotation.z = -Math.sign(x) * Math.asin(clampedX / R);
       } else {
         this.plane.position.y = arc;
-        this.plane.rotation.z = Math.sign(x) * Math.asin(effectiveX / R);
+        this.plane.rotation.z = Math.sign(x) * Math.asin(clampedX / R);
       }
     }
 
@@ -360,8 +361,8 @@ class Media {
       }
     }
     this.scale = this.screen.height / 1500;
-    this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height;
-    this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width;
+    this.plane.scale.y = (this.viewport.height * (950 * this.scale)) / this.screen.height;
+    this.plane.scale.x = (this.viewport.width * (750 * this.scale)) / this.screen.width;
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
     this.padding = 2;
     this.width = this.plane.scale.x + this.padding;
@@ -420,6 +421,7 @@ class App {
   }
   createScene() {
     this.scene = new Transform();
+    this.scene.position.y = 0.85;
   }
   createGeometry() {
     this.planeGeometry = new Plane(this.gl, {
@@ -455,6 +457,11 @@ class App {
     this.scroll.position = this.scroll.current;
     this.start = e.touches ? e.touches[0].clientX : e.clientX;
     this.startY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    window.addEventListener('mousemove', this.boundOnTouchMove);
+    window.addEventListener('mouseup', this.boundOnTouchUp);
+    window.addEventListener('touchmove', this.boundOnTouchMove, { passive: true });
+    window.addEventListener('touchend', this.boundOnTouchUp);
   }
   onTouchMove(e) {
     if (!this.isDown) return;
@@ -463,16 +470,22 @@ class App {
     this.scroll.target = this.scroll.position + distance;
   }
   onTouchUp(e) {
+    if (!this.isDown) return;
     this.isDown = false;
+
+    window.removeEventListener('mousemove', this.boundOnTouchMove);
+    window.removeEventListener('mouseup', this.boundOnTouchUp);
+    window.removeEventListener('touchmove', this.boundOnTouchMove);
+    window.removeEventListener('touchend', this.boundOnTouchUp);
+
     this.onCheck();
-    
+
     if (this.onItemClick) {
       const x = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
       const y = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
       const diffX = Math.abs(x - this.start);
       const diffY = Math.abs(y - this.startY);
-      
-      // If it's a click and not a drag
+
       if (diffX < 10 && diffY < 10) {
         const bounds = this.container.getBoundingClientRect();
         this.mouse.x = 2.0 * (x - bounds.left) / bounds.width - 1.0;
@@ -481,7 +494,7 @@ class App {
         this.raycast.castMouse(this.camera, [this.mouse.x, this.mouse.y]);
         const meshes = this.medias.map(m => m.plane);
         const hits = this.raycast.intersectBounds(meshes);
-        
+
         if (hits.length > 0) {
           const hitPlane = hits[0];
           const media = this.medias.find(m => m.plane === hitPlane);
@@ -527,6 +540,7 @@ class App {
     this.scroll.target = this.scroll.target < 0 ? -item : item;
   }
   onResize() {
+    if (!this.container) return;
     this.screen = {
       width: this.container.clientWidth,
       height: this.container.clientHeight
@@ -545,7 +559,7 @@ class App {
   }
   update() {
     if (this.rafActive === false) return;
-    
+
     if (!this.isDown && this.autoScrollSpeed) {
       this.scroll.target += this.autoScrollSpeed;
     }
@@ -557,7 +571,7 @@ class App {
     }
     this.renderer.render({ scene: this.scene, camera: this.camera });
     this.scroll.last = this.scroll.current;
-    
+
     if (this.rafActive !== false) {
       this.raf = window.requestAnimationFrame(this.update.bind(this));
     }
@@ -571,41 +585,38 @@ class App {
     this.boundOnKeyDown = this.onKeyDown.bind(this);
 
     window.addEventListener('resize', this.boundOnResize);
-    window.addEventListener('mousewheel', this.boundOnWheel);
-    window.addEventListener('wheel', this.boundOnWheel);
-    window.addEventListener('mousedown', this.boundOnTouchDown);
-    window.addEventListener('mousemove', this.boundOnTouchMove);
-    window.addEventListener('mouseup', this.boundOnTouchUp);
-    window.addEventListener('touchstart', this.boundOnTouchDown);
-    window.addEventListener('touchmove', this.boundOnTouchMove);
-    window.addEventListener('touchend', this.boundOnTouchUp);
 
-    this.container?.addEventListener('keydown', this.boundOnKeyDown);
+    if (this.container) {
+      this.container.addEventListener('wheel', this.boundOnWheel, { passive: true });
+      this.container.addEventListener('mousedown', this.boundOnTouchDown);
+      this.container.addEventListener('touchstart', this.boundOnTouchDown, { passive: true });
+      this.container.addEventListener('keydown', this.boundOnKeyDown);
+    }
   }
   destroy() {
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener('resize', this.boundOnResize);
-    window.removeEventListener('mousewheel', this.boundOnWheel);
-    window.removeEventListener('wheel', this.boundOnWheel);
-    window.removeEventListener('mousedown', this.boundOnTouchDown);
     window.removeEventListener('mousemove', this.boundOnTouchMove);
     window.removeEventListener('mouseup', this.boundOnTouchUp);
-    window.removeEventListener('touchstart', this.boundOnTouchDown);
     window.removeEventListener('touchmove', this.boundOnTouchMove);
     window.removeEventListener('touchend', this.boundOnTouchUp);
-    if (this.renderer && this.renderer.gl && this.renderer.gl.canvas.parentNode) {
-      this.renderer.gl.canvas.parentNode.removeChild(this.renderer.gl.canvas);
-    }
 
     if (this.container) {
+      this.container.removeEventListener('wheel', this.boundOnWheel);
+      this.container.removeEventListener('mousedown', this.boundOnTouchDown);
+      this.container.removeEventListener('touchstart', this.boundOnTouchDown);
       this.container.removeEventListener('keydown', this.boundOnKeyDown);
+    }
+
+    if (this.renderer && this.renderer.gl && this.renderer.gl.canvas && this.renderer.gl.canvas.parentNode) {
+      this.renderer.gl.canvas.parentNode.removeChild(this.renderer.gl.canvas);
     }
   }
 }
 
 export default function CircularGallery({
   items,
-  bend = 3,
+  bend = 3.5,
   textColor = '#ffffff',
   borderRadius = 0.05,
   font = 'bold 30px Figtree',
@@ -616,27 +627,31 @@ export default function CircularGallery({
   onItemClick
 }) {
   const containerRef = useRef(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     if (!containerRef.current) return;
     let app;
-    let isMounted = true;
-    resolveFont(font, fontUrl).then(resolvedFont => {
-      if (!isMounted || !containerRef.current) return;
-      app = new App(containerRef.current, {
-        items,
-        bend,
-        textColor,
-        borderRadius,
-        font: resolvedFont,
-        scrollSpeed,
-        scrollEase,
-        autoScrollSpeed,
-        onItemClick
-      });
-      // Start paused until observer triggers
-      app.rafActive = false;
-      
-      const observer = new IntersectionObserver((entries) => {
+
+    // Instant synchronous app instantiation for fast, smooth loading
+    app = new App(containerRef.current, {
+      items,
+      bend,
+      textColor,
+      borderRadius,
+      font,
+      scrollSpeed,
+      scrollEase,
+      autoScrollSpeed,
+      onItemClick
+    });
+
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 80);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             if (!app.rafActive) {
@@ -648,28 +663,53 @@ export default function CircularGallery({
             window.cancelAnimationFrame(app.raf);
           }
         });
-      }, { threshold: 0 });
-      
-      observer.observe(containerRef.current);
-      
-      app.observer = observer;
-    });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(containerRef.current);
+    app.observer = observer;
+
+    // Asynchronously resolve custom font if specified without blocking initial mount
+    if (fontUrl) {
+      resolveFont(font, fontUrl).then(resolvedFont => {
+        if (app && app.medias) {
+          app.medias.forEach(media => {
+            if (media.title) {
+              media.font = resolvedFont;
+              media.title.font = resolvedFont;
+              media.title.createMesh();
+            }
+          });
+        }
+      });
+    }
 
     return () => {
-      isMounted = false;
+      clearTimeout(timer);
       if (app) {
         if (app.observer) app.observer.disconnect();
         app.destroy();
       }
     };
   }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase, autoScrollSpeed, onItemClick]);
+
   return (
-    <div
-      className="circular-gallery"
-      ref={containerRef}
-      tabIndex={0}
-      role="region"
-      aria-label="Circular image gallery. Use left and right arrow keys to navigate."
-    />
+    <div className="relative w-full h-full flex items-center justify-center">
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-brand-bg/40 backdrop-blur-sm z-20 transition-opacity duration-300">
+          <div className="w-8 h-8 border-2 border-brand-accent/30 border-t-brand-accent rounded-full animate-spin" />
+        </div>
+      )}
+      <div
+        className={`circular-gallery w-full h-full transition-opacity duration-500 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+        ref={containerRef}
+        tabIndex={0}
+        role="region"
+        aria-label="Circular image gallery. Use left and right arrow keys to navigate."
+      />
+    </div>
   );
 }
