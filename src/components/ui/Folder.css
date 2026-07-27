@@ -128,3 +128,25 @@
   outline-offset: 4px;
   border-radius: 10px;
 }
+
+/* Mobile responsive fan out adjustments */
+@media (max-width: 640px) {
+  .folder.open .paper:nth-child(1) {
+    transform: translate(-130%, -45%) rotateZ(-22deg);
+  }
+  .folder.open .paper:nth-child(2) {
+    transform: translate(-80%, -70%) rotateZ(-13deg);
+  }
+  .folder.open .paper:nth-child(3) {
+    transform: translate(-30%, -90%) rotateZ(-4deg);
+  }
+  .folder.open .paper:nth-child(4) {
+    transform: translate(20%, -90%) rotateZ(4deg);
+  }
+  .folder.open .paper:nth-child(5) {
+    transform: translate(70%, -70%) rotateZ(13deg);
+  }
+  .folder.open .paper:nth-child(6) {
+    transform: translate(120%, -45%) rotateZ(22deg);
+  }
+}
