@@ -337,7 +337,7 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
           <span className="text-brand-glow font-bold uppercase tracking-[0.25em] text-xs sm:text-sm">
             Content That People Remember
           </span>
-          <h1 className="text-4xl sm:text-5xl md:text-[150px] lg:text-[150px] font-['Special_Gothic_Expanded_One',sans-serif] font-bold tracking-tight mt-6 leading-[1.15] pb-4 pt-1 select-none bg-gradient-to-r from-[#00b3dd] via-[#00DFA2] to-[#00b3dd] bg-clip-text text-transparent drop-shadow-[0_10px_40px_rgba(0,223,162,0.25)]">
+          <h1 className="text-4xl sm:text-5xl md:text-[150px] lg:text-[150px] font-['Special_Gothic_Expanded_One',sans-serif] font-bold tracking-tight mt-6 leading-[1.15] pb-4 pt-1 select-none bg-gradient-to-r from-[#00b3dd]  to-[#00b3dd] bg-clip-text text-transparent drop-shadow-[0_10px_40px_rgba(0,223,162,0.25)]">
             Ignitto Media
           </h1>
 
