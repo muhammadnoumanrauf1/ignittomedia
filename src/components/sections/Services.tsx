@@ -1,13 +1,14 @@
 "use client";
 
-import { DynamicFrameLayout } from "@/components/ui/dynamic-frame-layout";
+import { DynamicFrameLayout, Frame } from "@/components/ui/dynamic-frame-layout";
 import { Sparkles } from "lucide-react";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
-const demoFrames = [
+const demoFrames: (Frame & { aspectRatio: "16:9" | "9:16" | "1:1" })[] = [
   {
     id: 1,
     title: "Long Form",
+    aspectRatio: "16:9",
     description: "Documentaries, YouTube essays, and deep-dive content that retains viewers for 20+ minutes.",
     video: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689cdc2cfe8da14c951bc7.mp4",
     defaultPos: { x: 0, y: 0, w: 4, h: 4 },
@@ -17,6 +18,7 @@ const demoFrames = [
   {
     id: 2,
     title: "Short Form",
+    aspectRatio: "9:16",
     description: "High-retention vertical content engineered for algorithmic growth on TikTok, Reels, and Shorts.",
     video: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689d29d1438d5c4eb3c208.mp4",
     defaultPos: { x: 4, y: 0, w: 4, h: 4 },
@@ -26,6 +28,7 @@ const demoFrames = [
   {
     id: 3,
     title: "Commercial",
+    aspectRatio: "9:16",
     description: "High-end brand narratives and advertising campaigns that convert.",
     video: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689d942cfe8da14c9581c9.mp4",
     defaultPos: { x: 8, y: 0, w: 4, h: 4 },
@@ -35,6 +38,7 @@ const demoFrames = [
   {
     id: 4,
     title: "Podcast",
+    aspectRatio: "16:9",
     description: "Multi-cam switching, color grading, and audio mastering for professional shows.",
     video: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6334ec847bbd8a64bfff42.mp4",
     defaultPos: { x: 0, y: 4, w: 4, h: 4 },
@@ -44,8 +48,9 @@ const demoFrames = [
   {
     id: 5,
     title: "Motion Graphics",
+    aspectRatio: "16:9",
     description: "Custom animations, UI mockups, and visual effects that explain complex ideas.",
-    video: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6313e6fb06386edec36468.mp4",
+    video: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a68a186b4176d3727edfc67.mp4",
     defaultPos: { x: 4, y: 4, w: 4, h: 4 },
     mediaSize: 1,
     isHovered: false,
@@ -53,8 +58,9 @@ const demoFrames = [
   {
     id: 6,
     title: "Creative Direction",
+    aspectRatio: "9:16",
     description: "Thumbnails, hooks, and complete visual strategy designed to maximize CTR.",
-    video: "https://static.cdn-luma.com/files/58ab7363888153e3/Animation%20Exported%20(4).mp4",
+    video: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a68a2b818a264df535662e7.mp4",
     defaultPos: { x: 8, y: 4, w: 4, h: 4 },
     mediaSize: 1,
     isHovered: false,
@@ -67,7 +73,7 @@ export default function Services() {
       <ProgressiveBlur position="top" backgroundColor="#031e41" height="120px" />
       <ProgressiveBlur position="bottom" backgroundColor="#031e41" height="120px" />
       <div className="max-w-[1400px] w-full flex flex-col h-auto md:h-[100vh] min-h-[800px]">
-        
+
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-8 md:mb-12">
           <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-brand-accent uppercase mb-4">
@@ -89,26 +95,37 @@ export default function Services() {
             />
           </div>
 
-          {/* Mobile View — first video autoPlays, rest are lazy-loaded on intersection */}
-          <div className="md:hidden flex flex-col gap-4 w-full">
-            {demoFrames.map((frame, index) => (
-              <div key={frame.id} className="relative aspect-square sm:aspect-video rounded-xl overflow-hidden border border-white/10 group bg-black">
-                <video
-                  src={frame.video}
-                  autoPlay={index === 0}
-                  preload={index === 0 ? "auto" : "none"}
-                  loop
-                  muted
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover opacity-80"
-                  aria-label={`${frame.title} video reel`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
-                  <h3 className="text-white text-2xl font-bold mb-2">{frame.title}</h3>
-                  <p className="text-white text-sm leading-relaxed">{frame.description}</p>
+          {/* Mobile View — respects 9:16 vertical vs 16:9 landscape aspect ratios */}
+          <div className="md:hidden flex flex-col gap-6 w-full">
+            {demoFrames.map((frame, index) => {
+              const isVertical = frame.aspectRatio === "9:16";
+              return (
+                <div
+                  key={frame.id}
+                  className={`relative w-full rounded-2xl overflow-hidden border border-white/10 group bg-black shadow-xl ${isVertical ? "aspect-[9/16] max-h-[560px]" : "aspect-video"
+                    }`}
+                >
+                  <video
+                    src={frame.video}
+                    autoPlay={index === 0}
+                    preload={index === 0 ? "auto" : "none"}
+                    loop
+                    muted
+                    playsInline
+                    className={`absolute inset-0 w-full h-full ${isVertical ? 'object-cover sm:object-contain' : 'object-cover'} opacity-90`}
+                    aria-label={`${frame.title} video reel`}
+                  />
+                  {/* Aspect Badge */}
+                  <div className="absolute top-4 right-4 z-20 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[11px] font-mono font-bold text-brand-glow">
+                    {frame.aspectRatio}
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent p-6 flex flex-col justify-end z-10">
+                    <h3 className="text-white text-2xl font-bold mb-2">{frame.title}</h3>
+                    <p className="text-brand-text-secondary text-sm leading-relaxed">{frame.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

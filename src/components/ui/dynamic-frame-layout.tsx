@@ -8,6 +8,7 @@ export interface Frame {
   video: string
   title?: string
   description?: string
+  aspectRatio?: "16:9" | "9:16" | "1:1"
   defaultPos: { x: number; y: number; w: number; h: number }
   corner?: string
   edgeHorizontal?: string
@@ -22,6 +23,7 @@ interface FrameComponentProps {
   video: string
   title?: string
   description?: string
+  aspectRatio?: "16:9" | "9:16" | "1:1"
   width: number | string
   height: number | string
   className?: string
@@ -39,6 +41,7 @@ function FrameComponent({
   video,
   title,
   description,
+  aspectRatio = "16:9",
   width,
   height,
   className = "",
@@ -84,7 +87,7 @@ function FrameComponent({
           }}
         >
           <div
-            className="w-full h-full overflow-hidden"
+            className="w-full h-full overflow-hidden relative"
             style={{
               transform: `scale(${mediaSize})`,
               transformOrigin: "center",
@@ -92,7 +95,7 @@ function FrameComponent({
             }}
           >
             <video
-              className="w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+              className={`w-full h-full ${aspectRatio === "9:16" ? "object-contain bg-black/80" : "object-cover"} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
               src={video}
               loop
               muted
@@ -101,9 +104,14 @@ function FrameComponent({
             />
           </div>
           
+          {/* Aspect Ratio Badge Tag */}
+          <div className="absolute top-4 right-4 z-20 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[11px] font-mono font-bold text-brand-glow pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
+            {aspectRatio}
+          </div>
+
           {/* Text Overlay */}
           {(title || description) && (
-            <div className={`absolute inset-0 p-6 flex flex-col items-center justify-center pointer-events-none transition-colors duration-500 ${isHovered ? 'bg-brand-bg/70' : 'bg-brand-bg-secondary'}`}>
+            <div className={`absolute inset-0 p-6 flex flex-col items-center justify-center pointer-events-none transition-colors duration-500 ${isHovered ? 'bg-brand-bg/80' : 'bg-brand-bg-secondary'}`}>
               {title && (
                 <h3 
                   className={`text-2xl md:text-3xl lg:text-4xl text-brand-text italic tracking-wide transition-all duration-500 ${isHovered ? '-translate-y-4 opacity-0 scale-95' : 'translate-y-0 opacity-100 scale-100'}`}
@@ -258,6 +266,7 @@ export function DynamicFrameLayout({
               video={frame.video}
               title={frame.title}
               description={frame.description}
+              aspectRatio={frame.aspectRatio}
               width="100%"
               height="100%"
               className="absolute inset-0 rounded-xl overflow-hidden"
