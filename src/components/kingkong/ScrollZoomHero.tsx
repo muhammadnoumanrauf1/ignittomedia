@@ -280,7 +280,7 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
               className="w-full h-full object-cover"
             >
               <source
-                src="https://www.youtube.com/watch?v=Y7yvLkNdf40"
+                src="https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689c7c2cfe8da14c94a020.mp4"
                 type="video/mp4"
               />
             </video>
@@ -391,7 +391,7 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
                 className="w-full h-full object-cover pointer-events-none"
               >
                 <source
-                  src="https://www.youtube.com/watch?v=Y7yvLkNdf40"
+                  src="https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689c7c2cfe8da14c94a020.mp4"
                   type="video/mp4"
                 />
                 Your browser does not support the video tag.
