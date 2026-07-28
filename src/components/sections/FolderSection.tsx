@@ -5,7 +5,7 @@ import Folder from "@/components/ui/Folder";
 import ProjectModal from "@/components/ui/ProjectModal";
 import { projects, Project } from "@/data/projects";
 import { FileVideo, FileText, FileImage, MousePointerClick, Touchpad } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion"; 
 
 export default function FolderSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
