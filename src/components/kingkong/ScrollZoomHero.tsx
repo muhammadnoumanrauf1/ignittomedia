@@ -280,7 +280,7 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
               className="w-full h-full object-cover"
             >
               <source
-                src="https://assets.cdn.filesafe.space/Wwll2ZKRP6bvPK3K5ByU/media/6977499529dcf506c27a2ec8.mp4"
+                src="https://www.youtube.com/watch?v=Y7yvLkNdf40"
                 type="video/mp4"
               />
             </video>
@@ -337,7 +337,7 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
           <span className="text-brand-glow font-bold uppercase tracking-[0.25em] text-xs sm:text-sm">
             Content That People Remember
           </span>
-          <h1 className="text-4xl sm:text-5xl md:text-[150px] lg:text-[150px] font-['Special_Gothic_Expanded_One',sans-serif] font-bold tracking-tight mt-6 leading-[1.15] pb-4 pt-1 select-none bg-gradient-to-r from-[#00b3dd] to-[#00DFA2] bg-clip-text text-transparent drop-shadow-[0_10px_40px_rgba(0,223,162,0.25)]">
+          <h1 className="text-4xl sm:text-5xl md:text-[150px] lg:text-[150px] font-['Special_Gothic_Expanded_One',sans-serif] font-bold tracking-tight mt-6 leading-[1.15] pb-4 pt-1 select-none bg-gradient-to-r from-[#00b3dd] to-[#00DFA2] bg-clip-text text-transparent ">
             Ignitto Media
           </h1>
 
@@ -391,7 +391,7 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
                 className="w-full h-full object-cover pointer-events-none"
               >
                 <source
-                  src="https://assets.cdn.filesafe.space/Wwll2ZKRP6bvPK3K5ByU/media/6977499529dcf506c27a2ec8.mp4"
+                  src="https://www.youtube.com/watch?v=Y7yvLkNdf40"
                   type="video/mp4"
                 />
                 Your browser does not support the video tag.
