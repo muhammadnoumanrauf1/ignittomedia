@@ -43,23 +43,16 @@ const GlowCard: React.FC<GlowCardProps> = ({
   const innerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef);
 
-  useEffect(() => {
-    if (!isInView) return;
-
-    const syncPointer = (e: PointerEvent) => {
-      const { clientX: x, clientY: y } = e;
-      
-      if (cardRef.current) {
-        cardRef.current.style.setProperty('--x', x.toFixed(2));
-        cardRef.current.style.setProperty('--xp', (x / window.innerWidth).toFixed(2));
-        cardRef.current.style.setProperty('--y', y.toFixed(2));
-        cardRef.current.style.setProperty('--yp', (y / window.innerHeight).toFixed(2));
-      }
-    };
-
-    document.addEventListener('pointermove', syncPointer);
-    return () => document.removeEventListener('pointermove', syncPointer);
-  }, [isInView]);
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    cardRef.current.style.setProperty('--x', x.toFixed(2));
+    cardRef.current.style.setProperty('--xp', (e.clientX / window.innerWidth).toFixed(2));
+    cardRef.current.style.setProperty('--y', y.toFixed(2));
+    cardRef.current.style.setProperty('--yp', (e.clientY / window.innerHeight).toFixed(2));
+  };
 
   const { base, spread } = glowColorMap[glowColor];
 
@@ -172,6 +165,7 @@ const GlowCard: React.FC<GlowCardProps> = ({
       <div
         ref={cardRef}
         data-glow
+        onPointerMove={handlePointerMove}
         style={getInlineStyles()}
         className={`
           ${getSizeClasses()}

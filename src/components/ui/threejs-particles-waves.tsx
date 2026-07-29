@@ -40,25 +40,25 @@ const ParticleWaves = ({
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setDensity(window.innerWidth < 768 ? 15 : 45); // 225 particles on mobile vs 2025 on desktop
+      setDensity(window.innerWidth < 768 ? 12 : 26); // Efficient 676 particles desktop / 144 mobile
     }
   }, []);
-  
+
   const countRef = useRef(0);
   const mouseRef = useRef({ x: 0, y: 0 });
   const windowHalfRef = useRef({ x: typeof window !== 'undefined' ? window.innerWidth / 2 : 0, y: typeof window !== 'undefined' ? window.innerHeight / 2 : 0 });
 
   const createParticleMaterial = (color: string) => {
     const canvas = document.createElement('canvas');
-    canvas.width = 32;
-    canvas.height = 32;
+    canvas.width = 16;
+    canvas.height = 16;
     const context = canvas.getContext('2d');
     
     if (context) {
-      context.clearRect(0, 0, 32, 32);
+      context.clearRect(0, 0, 16, 16);
       context.fillStyle = color;
       context.beginPath();
-      context.arc(16, 16, 12, 0, Math.PI * 2, true);
+      context.arc(8, 8, 6, 0, Math.PI * 2, true);
       context.fill();
     }
     
@@ -104,7 +104,6 @@ const ParticleWaves = ({
 
   const handleTouchMove = (event: TouchEvent) => {
     if (event.touches.length === 1) {
-      // event.preventDefault(); // Sometimes causes scrolling issues
       mouseRef.current.x = event.touches[0].pageX - windowHalfRef.current.x;
       mouseRef.current.y = event.touches[0].pageY - windowHalfRef.current.y;
     }
@@ -132,8 +131,8 @@ const ParticleWaves = ({
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(new THREE.Color(bgColor), 1);
     rendererRef.current = renderer;

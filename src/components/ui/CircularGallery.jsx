@@ -219,7 +219,6 @@ class Media {
     this.font = font;
     this.createShader();
     this.createMesh();
-    this.createTitle();
     this.onResize();
   }
   createShader() {
@@ -289,80 +288,133 @@ class Media {
       transparent: true
     });
 
-    const createFallbackCanvas = () => {
+    const createGeneralizedThumbnailCanvas = (titleText) => {
       const canvas = document.createElement('canvas');
       canvas.width = 800;
       canvas.height = 600;
       const ctx = canvas.getContext('2d');
 
+      // Studio dark navy gradient background
       const bgGrad = ctx.createLinearGradient(0, 0, 800, 600);
       bgGrad.addColorStop(0, '#040D1A');
-      bgGrad.addColorStop(0.5, '#081F3E');
-      bgGrad.addColorStop(1, '#020914');
+      bgGrad.addColorStop(0.5, '#071C35');
+      bgGrad.addColorStop(1, '#020813');
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, 800, 600);
 
-      const glowGrad = ctx.createRadialGradient(400, 270, 30, 400, 270, 350);
-      glowGrad.addColorStop(0, 'rgba(0, 223, 162, 0.35)');
-      glowGrad.addColorStop(0.5, 'rgba(0, 179, 221, 0.15)');
+      // Cyan spotlight radial glow in center
+      const glowGrad = ctx.createRadialGradient(400, 250, 20, 400, 250, 360);
+      glowGrad.addColorStop(0, 'rgba(0, 223, 162, 0.38)');
+      glowGrad.addColorStop(0.4, 'rgba(0, 179, 221, 0.18)');
       glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = glowGrad;
       ctx.fillRect(0, 0, 800, 600);
 
-      ctx.strokeStyle = 'rgba(0, 223, 162, 0.3)';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(30, 30, 740, 540);
+      // Subtle tech grid lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      ctx.lineWidth = 1;
+      for (let x = 80; x < 800; x += 80) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 600);
+        ctx.stroke();
+      }
+      for (let y = 60; y < 600; y += 60) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(800, y);
+        ctx.stroke();
+      }
 
+      // Outer Frame Border
+      ctx.strokeStyle = 'rgba(0, 223, 162, 0.25)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(36, 36, 728, 528);
+
+      // Four Glowing Tech Corners
+      ctx.strokeStyle = '#00DFA2';
+      ctx.lineWidth = 4;
+      const bracket = 24;
+      // Top-Left
+      ctx.beginPath(); ctx.moveTo(36, 36 + bracket); ctx.lineTo(36, 36); ctx.lineTo(36 + bracket, 36); ctx.stroke();
+      // Top-Right
+      ctx.beginPath(); ctx.moveTo(764 - bracket, 36); ctx.lineTo(764, 36); ctx.lineTo(764, 36 + bracket); ctx.stroke();
+      // Bottom-Left
+      ctx.beginPath(); ctx.moveTo(36, 564 - bracket); ctx.lineTo(36, 564); ctx.lineTo(36 + bracket, 564); ctx.stroke();
+      // Bottom-Right
+      ctx.beginPath(); ctx.moveTo(764 - bracket, 564); ctx.lineTo(764, 564); ctx.lineTo(764, 564 - bracket); ctx.stroke();
+
+      // Top Tag: IGNITTO MEDIA • CASE STUDY
+      ctx.font = 'bold 16px sans-serif';
+      ctx.fillStyle = '#00DFA2';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('IGNITTO MEDIA  •  CASE STUDY', 400, 84);
+
+      // Center Play Emblem
       const cx = 400;
-      const cy = 260;
-      ctx.fillStyle = 'rgba(0, 223, 162, 0.9)';
+      const cy = 245;
+      
+      // Outer glow circle
+      ctx.fillStyle = 'rgba(0, 223, 162, 0.15)';
       ctx.beginPath();
-      ctx.arc(cx, cy, 45, 0, Math.PI * 2);
+      ctx.arc(cx, cy, 60, 0, Math.PI * 2);
       ctx.fill();
 
+      // Main cyan circle
+      ctx.fillStyle = '#00DFA2';
+      ctx.beginPath();
+      ctx.arc(cx, cy, 44, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Play Icon Triangle
       ctx.fillStyle = '#040D1A';
       ctx.beginPath();
-      ctx.moveTo(cx - 10, cy - 20);
+      ctx.moveTo(cx - 10, cy - 18);
       ctx.lineTo(cx + 20, cy);
-      ctx.lineTo(cx - 10, cy + 20);
+      ctx.lineTo(cx - 10, cy + 18);
       ctx.closePath();
       ctx.fill();
 
-      ctx.font = 'bold 36px sans-serif';
+      // Project Title at bottom (with text wrapping)
+      ctx.font = 'extrabold 38px sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(this.text || 'Project Preview', 400, 460);
+
+      const title = titleText || this.text || 'Project Preview';
+      const words = title.split(' ');
+      let line = '';
+      const lines = [];
+      const maxWidth = 640;
+
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth && n > 0) {
+          lines.push(line);
+          line = words[n] + ' ';
+        } else {
+          line = testLine;
+        }
+      }
+      lines.push(line);
+
+      const startY = lines.length > 1 ? 430 : 445;
+      for (let i = 0; i < lines.length; i++) {
+        ctx.fillText(lines[i].trim(), 400, startY + (i * 46));
+      }
+
+      // Bottom Hint: TAP TO WATCH PREVIEW
+      ctx.font = '600 14px sans-serif';
+      ctx.fillStyle = 'rgba(200, 213, 224, 0.7)';
+      ctx.fillText('CLICK TO PLAY FULL VIDEO', 400, 525);
 
       texture.image = canvas;
       this.program.uniforms.uImageSizes.value = [800, 600];
     };
 
-    if (this.video) {
-      const vid = document.createElement('video');
-      vid.src = this.video;
-      vid.crossOrigin = 'anonymous';
-      vid.loop = false;
-      vid.muted = true;
-      vid.playsInline = true;
-      vid.autoplay = false;
-      vid.preload = 'metadata';
-      vid.currentTime = 0.5;
-      vid.onloadeddata = () => {
-        try {
-          vid.currentTime = 0.5;
-        } catch (e) {}
-      };
-      vid.onseeked = () => {
-        texture.image = vid;
-        this.texture.needsUpdate = true;
-        if (vid.videoWidth) {
-          this.program.uniforms.uImageSizes.value = [vid.videoWidth, vid.videoHeight];
-        }
-      };
-      this.videoElement = vid;
-      texture.image = vid;
-    } else if (this.image) {
+    if (this.image) {
       const img = new Image();
       img.crossOrigin = 'anonymous';
       img.src = this.image;
@@ -371,10 +423,10 @@ class Media {
         this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight];
       };
       img.onerror = () => {
-        createFallbackCanvas();
+        createGeneralizedThumbnailCanvas(this.text);
       };
     } else {
-      createFallbackCanvas();
+      createGeneralizedThumbnailCanvas(this.text);
     }
   }
   createMesh() {
@@ -499,8 +551,8 @@ class App {
   createRenderer() {
     this.renderer = new Renderer({
       alpha: true,
-      antialias: true,
-      dpr: Math.min(window.devicePixelRatio || 1, 2)
+      antialias: false,
+      dpr: Math.min(window.devicePixelRatio || 1, 1.25)
     });
     this.gl = this.renderer.gl;
     this.gl.clearColor(0, 0, 0, 0);
@@ -517,8 +569,8 @@ class App {
   }
   createGeometry() {
     this.planeGeometry = new Plane(this.gl, {
-      heightSegments: 50,
-      widthSegments: 100
+      heightSegments: 10,
+      widthSegments: 20
     });
   }
   createMedias(items, bend = 1, textColor, borderRadius, font) {

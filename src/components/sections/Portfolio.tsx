@@ -12,8 +12,7 @@ export default function Portfolio() {
 
   const galleryItems = projects.map(p => ({
     text: p.title,
-    image: p.thumbnail,
-    video: p.videoUrl
+    image: p.thumbnail
   }));
 
   const handleItemClick = (index: number) => {
@@ -44,7 +43,7 @@ export default function Portfolio() {
             fontUrl="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
             font="bold 28px Inter"
             scrollSpeed={2}
-            autoScrollSpeed={0.05}
+            autoScrollSpeed={0}
             onItemClick={handleItemClick}
           />
           {/* Bottom Blur Overlay for Gallery */}

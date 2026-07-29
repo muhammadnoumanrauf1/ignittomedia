@@ -69,11 +69,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon.png", type: "image/png" },
     ],
-    shortcut: "/icon.png",
+    shortcut: "/favicon.png",
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/favicon.png", type: "image/png" },
     ],
   },
 };
@@ -206,6 +206,7 @@ const servicesSchema = {
 
 import Navbar from "@/components/sections/Navbar";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
+import DynamicPageTitle from "@/components/ui/DynamicPageTitle";
 
 export default function RootLayout({
   children,
@@ -236,6 +237,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col relative" suppressHydrationWarning>
+        <DynamicPageTitle />
         {/* Global Full-Website Progressive Viewport Blur Edge Masks */}
         <ProgressiveBlur position="fixed-top" height="120px" blurAmount="24px" />
         <ProgressiveBlur position="fixed-bottom" height="120px" blurAmount="24px" hideWhenVisible="#footer-reveal" />

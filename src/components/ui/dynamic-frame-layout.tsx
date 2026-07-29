@@ -97,6 +97,7 @@ function FrameComponent({
             <video
               className={`w-full h-full ${aspectRatio === "9:16" ? "object-contain bg-black/80" : "object-cover"} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
               src={video}
+              preload="none"
               loop
               muted
               playsInline

@@ -275,7 +275,7 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
             <video
               autoPlay
               loop
-              preload="auto"
+              preload="metadata"
               playsInline
               className="w-full h-full object-cover"
             >

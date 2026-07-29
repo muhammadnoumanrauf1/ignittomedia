@@ -82,13 +82,15 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationId: number;
+    let animationId: number | null = null;
 
     const draw = (timestamp: number) => {
-      if (!startTimeRef.current) {
-        startTimeRef.current = timestamp;
-      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (sparksRef.current.length === 0) {
+        animationId = null;
+        return;
+      }
 
       sparksRef.current = sparksRef.current.filter((spark) => {
         const elapsed = timestamp - spark.startTime;
@@ -117,17 +119,13 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
         return true;
       });
 
-      animationId = requestAnimationFrame(draw);
+      if (sparksRef.current.length > 0) {
+        animationId = requestAnimationFrame(draw);
+      } else {
+        animationId = null;
+      }
     };
 
-    animationId = requestAnimationFrame(draw);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-    };
-  }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
-
-  useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const now = performance.now();
       const newSparks = Array.from({ length: sparkCount }, (_, i) => ({
@@ -137,11 +135,18 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
         startTime: now
       }));
       sparksRef.current.push(...newSparks);
+      if (!animationId) {
+        animationId = requestAnimationFrame(draw);
+      }
     };
 
     window.addEventListener('click', handleClick);
-    return () => window.removeEventListener('click', handleClick);
-  }, [sparkCount]);
+
+    return () => {
+      window.removeEventListener('click', handleClick);
+      if (animationId) cancelAnimationFrame(animationId);
+    };
+  }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
 
   return (
     <canvas
