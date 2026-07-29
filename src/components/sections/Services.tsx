@@ -40,7 +40,7 @@ const demoFrames: (Frame & { aspectRatio: "16:9" | "9:16" | "1:1" })[] = [
     title: "Podcast",
     aspectRatio: "16:9",
     description: "Multi-cam switching, color grading, and audio mastering for professional shows.",
-    video: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6334ec847bbd8a64bfff42.mp4",
+    video: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a68a2f918a264df5356746d.mp4",
     defaultPos: { x: 0, y: 4, w: 4, h: 4 },
     mediaSize: 1,
     isHovered: false,
@@ -107,8 +107,8 @@ export default function Services() {
                 >
                   <video
                     src={frame.video}
-                    autoPlay={index === 0}
-                    preload={index === 0 ? "auto" : "none"}
+                    autoPlay={false}
+                    preload="metadata"
                     loop
                     muted
                     playsInline

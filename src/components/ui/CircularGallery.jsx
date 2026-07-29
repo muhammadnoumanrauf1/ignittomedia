@@ -186,6 +186,7 @@ class Media {
     geometry,
     gl,
     image,
+    video,
     index,
     length,
     renderer,
@@ -203,6 +204,7 @@ class Media {
     this.geometry = geometry;
     this.gl = gl;
     this.image = image;
+    this.video = video;
     this.index = index;
     this.originalIndex = originalIndex;
     this.length = length;
@@ -222,8 +224,9 @@ class Media {
   }
   createShader() {
     const texture = new Texture(this.gl, {
-      generateMipmaps: true
+      generateMipmaps: false
     });
+    this.texture = texture;
     this.program = new Program(this.gl, {
       depthTest: false,
       depthWrite: false,
@@ -278,20 +281,101 @@ class Media {
       uniforms: {
         tMap: { value: texture },
         uPlaneSizes: { value: [0, 0] },
-        uImageSizes: { value: [0, 0] },
+        uImageSizes: { value: [800, 600] },
         uSpeed: { value: 0 },
         uTime: { value: 100 * Math.random() },
         uBorderRadius: { value: this.borderRadius }
       },
       transparent: true
     });
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.src = this.image;
-    img.onload = () => {
-      texture.image = img;
-      this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight];
+
+    const createFallbackCanvas = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 800;
+      canvas.height = 600;
+      const ctx = canvas.getContext('2d');
+
+      const bgGrad = ctx.createLinearGradient(0, 0, 800, 600);
+      bgGrad.addColorStop(0, '#040D1A');
+      bgGrad.addColorStop(0.5, '#081F3E');
+      bgGrad.addColorStop(1, '#020914');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, 800, 600);
+
+      const glowGrad = ctx.createRadialGradient(400, 270, 30, 400, 270, 350);
+      glowGrad.addColorStop(0, 'rgba(0, 223, 162, 0.35)');
+      glowGrad.addColorStop(0.5, 'rgba(0, 179, 221, 0.15)');
+      glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = glowGrad;
+      ctx.fillRect(0, 0, 800, 600);
+
+      ctx.strokeStyle = 'rgba(0, 223, 162, 0.3)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(30, 30, 740, 540);
+
+      const cx = 400;
+      const cy = 260;
+      ctx.fillStyle = 'rgba(0, 223, 162, 0.9)';
+      ctx.beginPath();
+      ctx.arc(cx, cy, 45, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#040D1A';
+      ctx.beginPath();
+      ctx.moveTo(cx - 10, cy - 20);
+      ctx.lineTo(cx + 20, cy);
+      ctx.lineTo(cx - 10, cy + 20);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.font = 'bold 36px sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(this.text || 'Project Preview', 400, 460);
+
+      texture.image = canvas;
+      this.program.uniforms.uImageSizes.value = [800, 600];
     };
+
+    if (this.video) {
+      const vid = document.createElement('video');
+      vid.src = this.video;
+      vid.crossOrigin = 'anonymous';
+      vid.loop = false;
+      vid.muted = true;
+      vid.playsInline = true;
+      vid.autoplay = false;
+      vid.preload = 'metadata';
+      vid.currentTime = 0.5;
+      vid.onloadeddata = () => {
+        try {
+          vid.currentTime = 0.5;
+        } catch (e) {}
+      };
+      vid.onseeked = () => {
+        texture.image = vid;
+        this.texture.needsUpdate = true;
+        if (vid.videoWidth) {
+          this.program.uniforms.uImageSizes.value = [vid.videoWidth, vid.videoHeight];
+        }
+      };
+      this.videoElement = vid;
+      texture.image = vid;
+    } else if (this.image) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = this.image;
+      img.onload = () => {
+        texture.image = img;
+        this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight];
+      };
+      img.onerror = () => {
+        createFallbackCanvas();
+      };
+    } else {
+      createFallbackCanvas();
+    }
   }
   createMesh() {
     this.plane = new Mesh(this.gl, {
@@ -332,6 +416,14 @@ class Media {
       } else {
         this.plane.position.y = arc;
         this.plane.rotation.z = Math.sign(x) * Math.asin(clampedX / R);
+      }
+    }
+
+    if (this.videoElement && this.videoElement.readyState >= 2) {
+      this.texture.needsUpdate = true;
+      if (!this.videoDimensionsSet && this.videoElement.videoWidth) {
+        this.program.uniforms.uImageSizes.value = [this.videoElement.videoWidth, this.videoElement.videoHeight];
+        this.videoDimensionsSet = true;
       }
     }
 
@@ -437,6 +529,7 @@ class App {
         geometry: this.planeGeometry,
         gl: this.gl,
         image: data.image,
+        video: data.video,
         index,
         originalIndex: index % galleryItems.length,
         length: this.mediasImages.length,

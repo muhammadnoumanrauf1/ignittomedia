@@ -12,7 +12,8 @@ export default function Portfolio() {
 
   const galleryItems = projects.map(p => ({
     text: p.title,
-    image: p.thumbnail
+    image: p.thumbnail,
+    video: p.videoUrl
   }));
 
   const handleItemClick = (index: number) => {

@@ -58,7 +58,7 @@ function FrameComponent({
 
   useEffect(() => {
     if (isHovered) {
-      videoRef.current?.play().catch(() => {})
+      videoRef.current?.play().catch(() => { })
     } else {
       videoRef.current?.pause()
     }
@@ -103,17 +103,17 @@ function FrameComponent({
               ref={videoRef}
             />
           </div>
-          
-          {/* Aspect Ratio Badge Tag */}
+
+          {/* Aspect Ratio Badge Tag 
           <div className="absolute top-4 right-4 z-20 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[11px] font-mono font-bold text-brand-glow pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
             {aspectRatio}
           </div>
-
+*/}
           {/* Text Overlay */}
           {(title || description) && (
             <div className={`absolute inset-0 p-6 flex flex-col items-center justify-center pointer-events-none transition-colors duration-500 ${isHovered ? 'bg-brand-bg/80' : 'bg-brand-bg-secondary'}`}>
               {title && (
-                <h3 
+                <h3
                   className={`text-2xl md:text-3xl lg:text-4xl text-brand-text italic tracking-wide transition-all duration-500 ${isHovered ? '-translate-y-4 opacity-0 scale-95' : 'translate-y-0 opacity-100 scale-100'}`}
                   style={{ fontFamily: "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif" }}
                 >
@@ -197,8 +197,8 @@ interface DynamicFrameLayoutProps {
   gapSize?: number
 }
 
-export function DynamicFrameLayout({ 
-  frames: initialFrames, 
+export function DynamicFrameLayout({
+  frames: initialFrames,
   className,
   showFrames = false,
   hoverSize = 6,
