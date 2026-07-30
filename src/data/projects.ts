@@ -54,7 +54,7 @@ export const projects: Project[] = [{
 {
   id: "snappy-real-estate-edit",
   title: "Snappy Real Estate Edit",
-  thumbnail: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2940&auto=format&fit=crop",
+  thumbnail: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b35f2497cd89d245bda17.jpg",
   videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689d942cfe8da14c9581c9.mp4",
   aspectRatio: "9:16",
   category: "Real Estate",
