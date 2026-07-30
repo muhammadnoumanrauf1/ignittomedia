@@ -29,5 +29,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.3,
     },
+    {
+      url: `${baseUrl}/_not-found`,
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.1,
+    },
   ]
 }

@@ -9,10 +9,24 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/_next/'],
       },
       {
-        userAgent: ['GPTBot', 'ChatGPT-User', 'ClaudeBot', 'PerplexityBot', 'Google-Extended', 'Amazonbot'],
+        // Full AI Search Engine Crawlers (AEO / GEO / AISEO)
+        userAgent: [
+          'GPTBot',
+          'ChatGPT-User',
+          'ClaudeBot',
+          'PerplexityBot',
+          'Google-Extended',
+          'Applebot-Extended',
+          'Amazonbot',
+          'Bytespider',
+          'CCBot',
+          'cohere-ai',
+          'Diffbot',
+        ],
         allow: '/',
       },
     ],
     sitemap: 'https://ignittomedia.com/sitemap.xml',
+    host: 'https://ignittomedia.com',
   };
 }

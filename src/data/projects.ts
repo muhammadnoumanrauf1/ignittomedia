@@ -64,7 +64,7 @@ export const projects: Project[] = [{
 {
   id: "premium-instagram-reels",
   title: "Premium Instagram Reels",
-  thumbnail: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2940&auto=format&fit=crop",
+  thumbnail: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b38c0497cd89d245f719a.jpg",
   videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689d29d1438d5c4eb3c208.mp4",
   aspectRatio: "4:5",
   category: "Premium Social Content",

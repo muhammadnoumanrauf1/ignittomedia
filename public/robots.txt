@@ -1,17 +1,37 @@
+# IgnittoMedia — Video Production & Attention Engineering Agency
+# Website: https://ignittomedia.com
+
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
-# Block AI crawlers from private paths (none currently, all content is public)
+# AI Search Engines & Generative Engine Optimization (GEO / AEO / AISEO)
 User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: PerplexityBot
+Allow: /
+
 User-agent: Google-Extended
 Allow: /
 
-User-agent: PerplexityBot
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://ignittomedia.com/sitemap.xml

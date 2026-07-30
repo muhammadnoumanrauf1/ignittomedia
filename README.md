@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IgnittoMedia — We Don't Edit Videos. We Engineer Attention.
 
-## Getting Started
+[![Website](https://img.shields.io/badge/Website-ignittomedia.com-00DFA2?style=for-the-badge&logo=google-chrome&logoColor=black)](https://ignittomedia.com)
+[![Portfolio](https://img.shields.io/badge/3D%20Portfolio-Explore-00b3dd?style=for-the-badge&logo=playstation&logoColor=white)](https://ignittomedia.com/#portfolio)
+[![Book Call](https://img.shields.io/badge/Book%20a%20Call-Discovery-00DFA2?style=for-the-badge&logo=calendly&logoColor=black)](https://ignittomedia.com/#contact)
 
-First, run the development server:
+---
+
+## 🚀 About IgnittoMedia
+
+**IgnittoMedia** is a premier video production and creative engineering agency helping founders, creators, B2B SaaS companies, and brands transform raw footage into high-retention, revenue-generating video assets.
+
+We combine front-loaded cold open hooks, rapid pattern interrupts, kinetic typography, motion graphics, and storytelling architecture to engineer viewer retention and build domain authority.
+
+### 📊 Key Performance Metrics
+- 🏆 **100+** Projects Delivered Worldwide
+- 👁️ **20M+** Organic Views Generated
+- 🔄 **96%** Client Retention Rate
+
+---
+
+## 🛠️ Core Services
+
+| Service | Description | Platform Focus |
+| :--- | :--- | :--- |
+| **Short Form Retention Editing** | High-retention vertical edits engineered for viral algorithmic growth. | TikTok, Reels, Shorts |
+| **Long Form Video Editing** | YouTube essays, documentaries, and authority-building talking head content. | YouTube, Vimeo |
+| **Commercial Video Production** | High-converting brand narrative spots, product launch videos, and ads. | Web, Paid Ads |
+| **Podcast Video Editing** | Multi-cam switching, color grading, audio mastering, and short clips extraction. | Spotify, YouTube |
+| **Motion Graphics & Animation** | Custom 2D/3D kinetic typography, product mockups, and UI animations. | All Platforms |
+| **Creative Direction** | Visual strategy, thumbnail design, title hooks, and content architecture. | Complete Strategy |
+
+---
+
+## 💻 Tech Stack & Architecture
+
+- **Core**: Next.js 16 (App Router) + React 19 + TypeScript
+- **Styling**: Tailwind CSS + Custom Vanilla CSS + Framer Motion
+- **3D & WebGL Canvas**: OGL (`CircularGallery.jsx`) + Three.js (`threejs-particles-waves.tsx`)
+- **SEO & AI Search (AEO / GEO / AISEO)**:
+  - JSON-LD Schemas: `Organization`, `WebSite`, `Services`, `FAQPage`, `BreadcrumbList`
+  - Indexing & Crawlers: `sitemap.ts`, `robots.ts`, `llms.txt`, OpenGraph, Twitter Cards
+  - Custom High-Converting 404 Page (`src/app/not-found.tsx`)
+
+---
+
+## ⚡ Getting Started Locally
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or 
-pnpm dev
-# or
-bun dev
+
+# Build production bundle
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 Connect With IgnittoMedia
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Official Website**: [https://ignittomedia.com](https://ignittomedia.com)
+- **3D Interactive Portfolio**: [https://ignittomedia.com/#portfolio](https://ignittomedia.com/#portfolio)
+- **Client Vault**: [https://ignittomedia.com/#deliverables](https://ignittomedia.com/#deliverables)
+- **Book a Discovery Call**: [https://ignittomedia.com/#contact](https://ignittomedia.com/#contact)
