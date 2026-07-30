@@ -45,9 +45,9 @@ export default function Portfolio() {
             >
               <ChevronLeft size={20} />
             </button>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-[#031e41]/80 backdrop-blur-md text-xs font-mono font-bold text-brand-accent shadow-md">
-              <Sparkles size={13} className="text-brand-glow animate-pulse" />
-              <span>SWIPE OR USE ARROWS</span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 backdrop-blur-md text-xs font-mono font-bold text-brand-accent shadow-md">
+              {/* <Sparkles size={13} className="text-brand-glow animate-pulse" /> */}
+              <span>View all projects</span>
             </div>
             <button
               onClick={handleNext}

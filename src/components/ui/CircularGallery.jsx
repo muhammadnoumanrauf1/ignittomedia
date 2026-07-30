@@ -312,11 +312,10 @@ class Media {
         }
         ctx.drawImage(bgImgElement, offsetX, offsetY, renderW, renderH);
 
-        // Dark studio overlay gradient over image
+        // Very subtle dark studio overlay gradient over image
         const darkOverlay = ctx.createLinearGradient(0, 0, 0, 600);
-        darkOverlay.addColorStop(0, 'rgba(4, 13, 26, 0.70)');
-        darkOverlay.addColorStop(0.5, 'rgba(4, 13, 26, 0.55)');
-        darkOverlay.addColorStop(1, 'rgba(4, 13, 26, 0.85)');
+        darkOverlay.addColorStop(0, 'rgba(4, 13, 26, 0.20)');
+        darkOverlay.addColorStop(1, 'rgba(4, 13, 26, 0.40)');
         ctx.fillStyle = darkOverlay;
         ctx.fillRect(0, 0, 800, 600);
       } else {
@@ -328,14 +327,6 @@ class Media {
         ctx.fillStyle = bgGrad;
         ctx.fillRect(0, 0, 800, 600);
       }
-
-      // Cyan spotlight radial glow in center
-      const glowGrad = ctx.createRadialGradient(400, 250, 20, 400, 250, 360);
-      glowGrad.addColorStop(0, 'rgba(0, 223, 162, 0.35)');
-      glowGrad.addColorStop(0.4, 'rgba(0, 179, 221, 0.18)');
-      glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = glowGrad;
-      ctx.fillRect(0, 0, 800, 600);
 
       // Four Glowing Tech Corner Brackets ONLY
       ctx.strokeStyle = '#00DFA2';
@@ -350,27 +341,32 @@ class Media {
       // Bottom-Right
       ctx.beginPath(); ctx.moveTo(764 - bracket, 564); ctx.lineTo(764, 564); ctx.lineTo(764, 564 - bracket); ctx.stroke();
 
-      // White Play Button Emblem in exact center
+      // White Play Button Emblem in exact center with soft drop shadow
       const cx = 400;
       const cy = 300;
       
-      // Outer glow circle
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
-      ctx.beginPath();
-      ctx.arc(cx, cy, 64, 0, Math.PI * 2);
-      ctx.fill();
+      // Soft natural dark drop shadow to make play button pop
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.45)';
+      ctx.shadowBlur = 24;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 6;
 
       // Main WHITE circle
       ctx.fillStyle = '#FFFFFF';
       ctx.beginPath();
-      ctx.arc(cx, cy, 46, 0, Math.PI * 2);
+      ctx.arc(cx, cy, 48, 0, Math.PI * 2);
       ctx.fill();
+
+      // Reset shadow for triangle
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
 
       // Dark Play Icon Triangle
       ctx.fillStyle = '#040D1A';
       ctx.beginPath();
       ctx.moveTo(cx - 10, cy - 18);
-      ctx.lineTo(cx + 20, cy);
+      ctx.lineTo(cx + 22, cy);
       ctx.lineTo(cx - 10, cy + 18);
       ctx.closePath();
       ctx.fill();

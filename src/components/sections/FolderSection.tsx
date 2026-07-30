@@ -32,11 +32,8 @@ export default function FolderSection() {
           />
         )}
 
-        {/* Dark Studio Overlay Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#040D1A]/75 via-[#040D1A]/60 to-[#040D1A]/90 z-10" />
-
-        {/* Glowing Cyan Radial Spotlight */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,223,162,0.35),transparent_70%)] z-10 pointer-events-none" />
+        {/* Subtle Dark Studio Overlay Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#040D1A]/30 to-[#040D1A]/50 z-10" />
 
         {/* Tech Corner Brackets ONLY */}
         <div className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 border-[#00DFA2] z-20" />
@@ -44,9 +41,9 @@ export default function FolderSection() {
         <div className="absolute bottom-1.5 left-1.5 w-3 h-3 border-b-2 border-l-2 border-[#00DFA2] z-20" />
         <div className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 border-[#00DFA2] z-20" />
 
-        {/* Center WHITE Play Emblem */}
+        {/* Center WHITE Play Emblem with Soft Drop Shadow */}
         <div className="relative z-20 flex items-center justify-center">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.7)] group-hover:scale-115 transition-transform">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white flex items-center justify-center shadow-[0_6px_18px_rgba(0,0,0,0.45)] group-hover:scale-115 transition-transform">
             <div className="w-0 h-0 border-y-[6px] border-y-transparent border-l-[10px] border-l-[#040D1A] ml-0.5" />
           </div>
         </div>

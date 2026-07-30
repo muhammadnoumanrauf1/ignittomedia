@@ -14,8 +14,8 @@ export interface Project {
 export const projects: Project[] = [{
   id: "hook-driven-concept",
   title: "Hook-Driven Concept",
-  thumbnail: 'https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b202dac1586969821d8ea.png',
-  videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689cdc2cfe8da14c951bc7.mp4",
+  thumbnail: '',
+  videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b2e13cf81b06f054b1852.jpg",
   aspectRatio: "16:9",
   category: "CREATOR & BUSINESS",
   tags: ["Talking Head", "Pattern Interrupt", "Retention Edit"],
@@ -24,7 +24,7 @@ export const projects: Project[] = [{
 {
   id: "youtube-longform-content",
   title: "Youtube Long form Content",
-  // thumbnail: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop",
+  thumbnail: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b2a6ecdfcf049563bd4d5.png",
   videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689cdc2cfe8da14c951bc2.mp4",
   aspectRatio: "16:9",
   category: "LONG FORM",
