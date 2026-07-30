@@ -14,7 +14,7 @@ export interface Project {
 export const projects: Project[] = [{
   id: "hook-driven-concept",
   title: "Hook-Driven Concept",
-  thumbnail: 'https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b202dac1586969821d8ea.png',
+  thumbnail: 'https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b2e13cf81b06f054b1852.jpg',
   videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689cdc2cfe8da14c951bc7.mp4",
   aspectRatio: "16:9",
   category: "CREATOR & BUSINESS",
@@ -44,7 +44,7 @@ export const projects: Project[] = [{
 {
   id: "social-media-motion-graphics",
   title: "Social Media Motion Graphics",
-  thumbnail: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&auto=format&fit=crop",
+  thumbnail: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b3105f982994d15830c7f.jpg",
   videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a68a186b7fe5a8e318c2f92.mp4",
   aspectRatio: "9:16",
   category: "Motion Graphics & Animation",
