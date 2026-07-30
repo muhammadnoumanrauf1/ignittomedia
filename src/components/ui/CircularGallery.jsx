@@ -1,5 +1,5 @@
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, Raycast } from 'ogl';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
 
 import './CircularGallery.css';
 
@@ -350,27 +350,20 @@ class Media {
       // Bottom-Right
       ctx.beginPath(); ctx.moveTo(764 - bracket, 564); ctx.lineTo(764, 564); ctx.lineTo(764, 564 - bracket); ctx.stroke();
 
-      // Top Tag: IGNITTO MEDIA • CASE STUDY
-      ctx.font = 'bold 16px sans-serif';
-      ctx.fillStyle = '#00DFA2';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('IGNITTO MEDIA  •  CASE STUDY', 400, 84);
-
-      // White Play Button Emblem
+      // White Play Button Emblem in exact center
       const cx = 400;
-      const cy = 245;
+      const cy = 300;
       
       // Outer glow circle
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.22)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
       ctx.beginPath();
-      ctx.arc(cx, cy, 60, 0, Math.PI * 2);
+      ctx.arc(cx, cy, 64, 0, Math.PI * 2);
       ctx.fill();
 
       // Main WHITE circle
       ctx.fillStyle = '#FFFFFF';
       ctx.beginPath();
-      ctx.arc(cx, cy, 44, 0, Math.PI * 2);
+      ctx.arc(cx, cy, 46, 0, Math.PI * 2);
       ctx.fill();
 
       // Dark Play Icon Triangle
@@ -381,40 +374,6 @@ class Media {
       ctx.lineTo(cx - 10, cy + 18);
       ctx.closePath();
       ctx.fill();
-
-      // Project Title at bottom (with text wrapping)
-      ctx.font = 'extrabold 38px sans-serif';
-      ctx.fillStyle = '#FFFFFF';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-
-      const title = titleText || this.text || 'Project Preview';
-      const words = title.split(' ');
-      let line = '';
-      const lines = [];
-      const maxWidth = 640;
-
-      for (let n = 0; n < words.length; n++) {
-        const testLine = line + words[n] + ' ';
-        const metrics = ctx.measureText(testLine);
-        if (metrics.width > maxWidth && n > 0) {
-          lines.push(line);
-          line = words[n] + ' ';
-        } else {
-          line = testLine;
-        }
-      }
-      lines.push(line);
-
-      const startY = lines.length > 1 ? 430 : 445;
-      for (let i = 0; i < lines.length; i++) {
-        ctx.fillText(lines[i].trim(), 400, startY + (i * 46));
-      }
-
-      // Bottom Hint: CLICK TO PLAY FULL VIDEO
-      ctx.font = '600 14px sans-serif';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-      ctx.fillText('CLICK TO PLAY FULL VIDEO', 400, 525);
 
       texture.image = canvas;
       this.program.uniforms.uImageSizes.value = [800, 600];
@@ -681,7 +640,18 @@ class App {
         break;
     }
   }
-
+  next() {
+    if (!this.medias || !this.medias[0]) return;
+    const width = this.medias[0].width;
+    this.scroll.target += width;
+    this.onCheckDebounce();
+  }
+  prev() {
+    if (!this.medias || !this.medias[0]) return;
+    const width = this.medias[0].width;
+    this.scroll.target -= width;
+    this.onCheckDebounce();
+  }
   onCheck() {
     if (!this.medias || !this.medias[0]) return;
     const width = this.medias[0].width;
@@ -764,7 +734,7 @@ class App {
   }
 }
 
-export default function CircularGallery({
+const CircularGallery = forwardRef(({
   items,
   bend = 3.5,
   textColor = '#ffffff',
@@ -775,9 +745,15 @@ export default function CircularGallery({
   scrollEase = 0.05,
   autoScrollSpeed = 1,
   onItemClick
-}) {
+}, ref) => {
   const containerRef = useRef(null);
+  const appRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    next: () => appRef.current?.next(),
+    prev: () => appRef.current?.prev()
+  }));
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -795,6 +771,7 @@ export default function CircularGallery({
       autoScrollSpeed,
       onItemClick
     });
+    appRef.current = app;
 
     const timer = setTimeout(() => {
       setIsLoaded(true);
@@ -862,4 +839,6 @@ export default function CircularGallery({
       />
     </div>
   );
-}
+});
+
+export default CircularGallery;

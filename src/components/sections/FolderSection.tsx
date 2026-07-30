@@ -17,7 +17,7 @@ export default function FolderSection() {
     return (
       <div 
         key={project.id} 
-        className="group relative w-full h-full rounded-xl overflow-hidden cursor-pointer border border-[#00DFA2]/40 bg-[#040D1A] shadow-2xl transition-all hover:scale-105 active:scale-95 flex flex-col justify-between p-2 select-none"
+        className="group relative w-full h-full rounded-xl overflow-hidden cursor-pointer border border-[#00DFA2]/40 bg-[#040D1A] shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center p-2 select-none"
         onClick={(e) => {
           e.stopPropagation();
           setSelectedProject(project);
@@ -36,7 +36,7 @@ export default function FolderSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#040D1A]/75 via-[#040D1A]/60 to-[#040D1A]/90 z-10" />
 
         {/* Glowing Cyan Radial Spotlight */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(0,223,162,0.30),transparent_70%)] z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,223,162,0.35),transparent_70%)] z-10 pointer-events-none" />
 
         {/* Tech Corner Brackets ONLY */}
         <div className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 border-[#00DFA2] z-20" />
@@ -44,28 +44,11 @@ export default function FolderSection() {
         <div className="absolute bottom-1.5 left-1.5 w-3 h-3 border-b-2 border-l-2 border-[#00DFA2] z-20" />
         <div className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 border-[#00DFA2] z-20" />
 
-        {/* Top Tag: IGNITTO MEDIA */}
-        <div className="relative z-20 w-full flex items-center justify-center pt-0.5">
-          <span className="text-[7px] sm:text-[9px] font-bold text-[#00DFA2] tracking-wider uppercase text-center">
-            IGNITTO MEDIA • CASE STUDY
-          </span>
-        </div>
-
         {/* Center WHITE Play Emblem */}
-        <div className="relative z-20 my-auto flex items-center justify-center">
-          <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.6)] group-hover:scale-110 transition-transform">
-            <div className="w-0 h-0 border-y-[5px] border-y-transparent border-l-[9px] border-l-[#040D1A] ml-0.5" />
+        <div className="relative z-20 flex items-center justify-center">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.7)] group-hover:scale-115 transition-transform">
+            <div className="w-0 h-0 border-y-[6px] border-y-transparent border-l-[10px] border-l-[#040D1A] ml-0.5" />
           </div>
-        </div>
-
-        {/* Bottom Title & CTA Hint */}
-        <div className="relative z-20 w-full text-center pb-0.5">
-          <h4 className="text-[9px] sm:text-[11px] font-extrabold text-white leading-tight truncate px-1 drop-shadow-md">
-            {project.title}
-          </h4>
-          <span className="text-[6px] sm:text-[8px] font-bold text-[#00b3dd] uppercase tracking-wider block mt-0.5">
-            CLICK TO PLAY
-          </span>
         </div>
       </div>
     );
@@ -119,7 +102,7 @@ export default function FolderSection() {
           </div>
 
           {/* Folder Graphic Container with Mobile Scaling */}
-          <div className="transform scale-[0.85] sm:scale-110 md:scale-135 lg:scale-150 transition-all duration-300">
+          <div className="transform scale-[0.95] sm:scale-115 md:scale-135 lg:scale-150 transition-all duration-300">
             <Folder 
               color="#00DFA2" 
               size={1} 

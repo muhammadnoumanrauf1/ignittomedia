@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import CircularGallery from "@/components/ui/CircularGallery";
 import ProjectModal from "@/components/ui/ProjectModal";
 import { projects, Project } from "@/data/projects";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const galleryRef = useRef<{ next: () => void; prev: () => void } | null>(null);
 
   const galleryItems = projects.map(p => ({
     text: p.title,
@@ -19,6 +20,9 @@ export default function Portfolio() {
     setSelectedProject(projects[index]);
   };
 
+  const handleNext = () => galleryRef.current?.next();
+  const handlePrev = () => galleryRef.current?.prev();
+
   return (
     <section id="portfolio" className="relative bg-brand-bg pt-16 pb-4 md:pt-24 md:pb-6 px-4 md:px-6 overflow-hidden flex flex-col items-center justify-center">
       <ProgressiveBlur position="top" backgroundColor="#031e41" height="120px" />
@@ -28,13 +32,36 @@ export default function Portfolio() {
           <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-brand-accent uppercase mb-3">
             Portfolio
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-center text-white z-10 pointer-events-none">
+          <h2 className="text-3xl md:text-5xl font-bold text-center text-white z-10 pointer-events-none mb-4">
             Selected Works
           </h2>
+
+          {/* Navigation Controls Bar */}
+          <div className="flex items-center gap-3 sm:gap-4 z-20 mt-2">
+            <button
+              onClick={handlePrev}
+              aria-label="Previous Project"
+              className="w-11 h-11 rounded-full border border-white/10 bg-[#031e41]/80 backdrop-blur-md flex items-center justify-center text-white hover:text-brand-glow hover:border-brand-glow/50 hover:bg-brand-bg active:scale-95 transition-all shadow-lg cursor-pointer"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-[#031e41]/80 backdrop-blur-md text-xs font-mono font-bold text-brand-accent shadow-md">
+              <Sparkles size={13} className="text-brand-glow animate-pulse" />
+              <span>SWIPE OR USE ARROWS</span>
+            </div>
+            <button
+              onClick={handleNext}
+              aria-label="Next Project"
+              className="w-11 h-11 rounded-full border border-brand-glow/40 bg-brand-glow/10 backdrop-blur-md flex items-center justify-center text-brand-glow hover:text-black hover:bg-brand-glow active:scale-95 transition-all shadow-[0_0_20px_rgba(0,223,162,0.25)] cursor-pointer"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
         </div>
 
         <div className="relative w-full h-[460px] md:h-[540px] rounded-3xl overflow-hidden interactive">
           <CircularGallery
+            ref={galleryRef}
             items={galleryItems}
             bend={3.5}
             textColor="#ffffff"
@@ -46,8 +73,6 @@ export default function Portfolio() {
             autoScrollSpeed={0}
             onItemClick={handleItemClick}
           />
-          {/* Bottom Blur Overlay for Gallery */}
-          {/* <div className="absolute bottom-0 left-0 right-0 h-28 md:h-36 bg-gradient-to-t from-brand-bg via-brand-bg/80 to-transparent backdrop-blur-md pointer-events-none z-20" /> */}
         </div>
       </div>
 

@@ -219,7 +219,7 @@ export default function TestimonialCards() {
       </div>
 
       {/* Movable Spotlight Testimonial Card */}
-      <div className="w-full max-w-2xl min-h-[340px] sm:min-h-[380px] flex items-center justify-center relative z-20">
+      <div className="w-full max-w-2xl min-h-0 sm:min-h-[380px] flex items-center justify-center relative z-20">
         <AnimatePresence custom={direction} mode="popLayout">
           <motion.div
             key={currentIndex}
@@ -243,7 +243,7 @@ export default function TestimonialCards() {
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="group relative w-full rounded-3xl border border-[#00b3dd]/35 bg-[#031e41]/95 backdrop-blur-2xl p-6 sm:p-10 shadow-[0_25px_60px_rgba(3,30,65,0.95)] hover:shadow-[0_30px_70px_rgba(0,179,221,0.3)] transition-all duration-500 cursor-grab active:cursor-grabbing overflow-hidden flex flex-col justify-between"
+            className="group relative w-full rounded-2xl sm:rounded-3xl border border-[#00b3dd]/35 bg-[#031e41]/95 backdrop-blur-2xl p-4 sm:p-8 md:p-10 shadow-[0_25px_60px_rgba(3,30,65,0.95)] hover:shadow-[0_30px_70px_rgba(0,179,221,0.3)] transition-all duration-500 cursor-grab active:cursor-grabbing overflow-hidden flex flex-col justify-between"
           >
             {/* Interactive Dynamic Cursor Spotlight Glow */}
             <div
@@ -257,27 +257,27 @@ export default function TestimonialCards() {
 
             <div>
               {/* Card Header: Rating + Tag */}
-              <div className="flex items-center justify-between mb-6 relative z-20">
+              <div className="flex items-center justify-between mb-4 sm:mb-6 relative z-20">
                 <div className="flex items-center gap-1 text-amber-400">
                   {Array.from({ length: currentItem.rating || 5 }).map((_, i) => (
-                    <Star key={i} size={18} className="fill-amber-400 text-amber-400" />
+                    <Star key={i} size={15} className="sm:w-4 sm:h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
 
                 {currentItem.tag && (
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#00DFA2] px-3 py-1 rounded-full bg-[#00DFA2]/10 border border-[#00DFA2]/20">
+                  <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#00DFA2] px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-[#00DFA2]/10 border border-[#00DFA2]/20">
                     {currentItem.tag}
                   </span>
                 )}
               </div>
 
               {/* Quote Mark */}
-              <div className="mb-4 relative z-20 text-[#00b3dd]/40">
-                <Quote size={40} className="rotate-180" />
+              <div className="mb-2 sm:mb-4 relative z-20 text-[#00b3dd]/40">
+                <Quote size={28} className="sm:w-10 sm:h-10 rotate-180" />
               </div>
 
               {/* Quote Body Text */}
-              <p className="text-white text-base sm:text-lg md:text-xl leading-relaxed font-light mb-8 relative z-20">
+              <p className="text-white text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-light mb-4 sm:mb-8 relative z-20">
                 "{currentItem.quote}"
               </p>
             </div>

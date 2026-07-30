@@ -38,9 +38,15 @@ const ParticleWaves = ({
     setBgColor(initialBgColor);
   }, [initialBgColor]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setDensity(window.innerWidth < 768 ? 12 : 26); // Efficient 676 particles desktop / 144 mobile
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+        return;
+      }
+      setDensity(26);
     }
   }, []);
 
@@ -231,6 +237,8 @@ const ParticleWaves = ({
   useEffect(() => {
     recreateParticles();
   }, [density, separation]);
+
+  if (isMobile) return null;
 
   return (
     <div style={{ backgroundColor: bgColor }} className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
