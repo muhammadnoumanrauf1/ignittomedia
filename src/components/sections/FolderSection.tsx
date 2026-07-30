@@ -33,19 +33,16 @@ export default function FolderSection() {
         )}
 
         {/* Dark Studio Overlay Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#040D1A]/85 via-[#040D1A]/75 to-[#040D1A]/95 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#040D1A]/75 via-[#040D1A]/60 to-[#040D1A]/90 z-10" />
 
         {/* Glowing Cyan Radial Spotlight */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(0,223,162,0.35),transparent_70%)] z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(0,223,162,0.30),transparent_70%)] z-10 pointer-events-none" />
 
-        {/* Subtle Tech Grid Lines */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:16px_16px] z-10 pointer-events-none" />
-
-        {/* Tech Corner Brackets */}
-        <div className="absolute top-1 left-1 w-2.5 h-2.5 border-t-2 border-l-2 border-[#00DFA2] z-20" />
-        <div className="absolute top-1 right-1 w-2.5 h-2.5 border-t-2 border-r-2 border-[#00DFA2] z-20" />
-        <div className="absolute bottom-1 left-1 w-2.5 h-2.5 border-b-2 border-l-2 border-[#00DFA2] z-20" />
-        <div className="absolute bottom-1 right-1 w-2.5 h-2.5 border-b-2 border-r-2 border-[#00DFA2] z-20" />
+        {/* Tech Corner Brackets ONLY */}
+        <div className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 border-[#00DFA2] z-20" />
+        <div className="absolute top-1.5 right-1.5 w-3 h-3 border-t-2 border-r-2 border-[#00DFA2] z-20" />
+        <div className="absolute bottom-1.5 left-1.5 w-3 h-3 border-b-2 border-l-2 border-[#00DFA2] z-20" />
+        <div className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 border-[#00DFA2] z-20" />
 
         {/* Top Tag: IGNITTO MEDIA */}
         <div className="relative z-20 w-full flex items-center justify-center pt-0.5">
@@ -54,9 +51,9 @@ export default function FolderSection() {
           </span>
         </div>
 
-        {/* Center Play Emblem */}
+        {/* Center WHITE Play Emblem */}
         <div className="relative z-20 my-auto flex items-center justify-center">
-          <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-[#00DFA2] flex items-center justify-center shadow-[0_0_15px_rgba(0,223,162,0.6)] group-hover:scale-110 transition-transform">
+          <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.6)] group-hover:scale-110 transition-transform">
             <div className="w-0 h-0 border-y-[5px] border-y-transparent border-l-[9px] border-l-[#040D1A] ml-0.5" />
           </div>
         </div>

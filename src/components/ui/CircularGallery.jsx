@@ -295,13 +295,14 @@ class Media {
       const ctx = canvas.getContext('2d');
 
       if (bgImgElement && bgImgElement.complete && bgImgElement.naturalWidth > 0) {
-        // Draw the background thumbnail image covering the canvas
+        // Draw the background thumbnail image with centered object-cover scaling (4:3 aspect ratio)
         const imgRatio = bgImgElement.naturalWidth / bgImgElement.naturalHeight;
         const canvasRatio = 800 / 600;
         let renderW = 800;
         let renderH = 600;
         let offsetX = 0;
         let offsetY = 0;
+
         if (imgRatio > canvasRatio) {
           renderW = 600 * imgRatio;
           offsetX = (800 - renderW) / 2;
@@ -313,9 +314,9 @@ class Media {
 
         // Dark studio overlay gradient over image
         const darkOverlay = ctx.createLinearGradient(0, 0, 0, 600);
-        darkOverlay.addColorStop(0, 'rgba(4, 13, 26, 0.75)');
-        darkOverlay.addColorStop(0.5, 'rgba(4, 13, 26, 0.65)');
-        darkOverlay.addColorStop(1, 'rgba(4, 13, 26, 0.90)');
+        darkOverlay.addColorStop(0, 'rgba(4, 13, 26, 0.70)');
+        darkOverlay.addColorStop(0.5, 'rgba(4, 13, 26, 0.55)');
+        darkOverlay.addColorStop(1, 'rgba(4, 13, 26, 0.85)');
         ctx.fillStyle = darkOverlay;
         ctx.fillRect(0, 0, 800, 600);
       } else {
@@ -330,37 +331,16 @@ class Media {
 
       // Cyan spotlight radial glow in center
       const glowGrad = ctx.createRadialGradient(400, 250, 20, 400, 250, 360);
-      glowGrad.addColorStop(0, 'rgba(0, 223, 162, 0.38)');
+      glowGrad.addColorStop(0, 'rgba(0, 223, 162, 0.35)');
       glowGrad.addColorStop(0.4, 'rgba(0, 179, 221, 0.18)');
       glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = glowGrad;
       ctx.fillRect(0, 0, 800, 600);
 
-      // Subtle tech grid lines
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-      ctx.lineWidth = 1;
-      for (let x = 80; x < 800; x += 80) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, 600);
-        ctx.stroke();
-      }
-      for (let y = 60; y < 600; y += 60) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(800, y);
-        ctx.stroke();
-      }
-
-      // Outer Frame Border
-      ctx.strokeStyle = 'rgba(0, 223, 162, 0.35)';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(36, 36, 728, 528);
-
-      // Four Glowing Tech Corners
+      // Four Glowing Tech Corner Brackets ONLY
       ctx.strokeStyle = '#00DFA2';
       ctx.lineWidth = 4;
-      const bracket = 24;
+      const bracket = 28;
       // Top-Left
       ctx.beginPath(); ctx.moveTo(36, 36 + bracket); ctx.lineTo(36, 36); ctx.lineTo(36 + bracket, 36); ctx.stroke();
       // Top-Right
@@ -377,23 +357,23 @@ class Media {
       ctx.textBaseline = 'middle';
       ctx.fillText('IGNITTO MEDIA  •  CASE STUDY', 400, 84);
 
-      // Center Play Emblem
+      // White Play Button Emblem
       const cx = 400;
       const cy = 245;
       
       // Outer glow circle
-      ctx.fillStyle = 'rgba(0, 223, 162, 0.2)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.22)';
       ctx.beginPath();
       ctx.arc(cx, cy, 60, 0, Math.PI * 2);
       ctx.fill();
 
-      // Main cyan circle
-      ctx.fillStyle = '#00DFA2';
+      // Main WHITE circle
+      ctx.fillStyle = '#FFFFFF';
       ctx.beginPath();
       ctx.arc(cx, cy, 44, 0, Math.PI * 2);
       ctx.fill();
 
-      // Play Icon Triangle
+      // Dark Play Icon Triangle
       ctx.fillStyle = '#040D1A';
       ctx.beginPath();
       ctx.moveTo(cx - 10, cy - 18);
@@ -431,9 +411,9 @@ class Media {
         ctx.fillText(lines[i].trim(), 400, startY + (i * 46));
       }
 
-      // Bottom Hint: TAP TO WATCH PREVIEW
+      // Bottom Hint: CLICK TO PLAY FULL VIDEO
       ctx.font = '600 14px sans-serif';
-      ctx.fillStyle = 'rgba(200, 213, 224, 0.85)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
       ctx.fillText('CLICK TO PLAY FULL VIDEO', 400, 525);
 
       texture.image = canvas;
