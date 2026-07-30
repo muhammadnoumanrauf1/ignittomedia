@@ -34,7 +34,7 @@ export const projects: Project[] = [{
 {
   id: "intention-system",
   title: "Intention System",
-  thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2942&auto=format&fit=crop",
+  thumbnail: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b3105f982994d15830c7f.jpg",
   videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a68a186b4176d3727edfc67.mp4",
   aspectRatio: "16:9",
   category: "MOTION GRAPHICS",
