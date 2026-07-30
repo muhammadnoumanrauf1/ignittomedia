@@ -44,7 +44,7 @@ export const projects: Project[] = [{
 {
   id: "social-media-motion-graphics",
   title: "Social Media Motion Graphics",
-  thumbnail: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b3105f982994d15830c7f.jpg",
+  thumbnail: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b3444a4c8a1a2c3919c55.jpg",
   videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a68a186b7fe5a8e318c2f92.mp4",
   aspectRatio: "9:16",
   category: "Motion Graphics & Animation",
