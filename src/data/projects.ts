@@ -9,7 +9,7 @@ export interface Project {
   category: string;
   tags: string[];
   description: string;
-}
+} 
 
 export const projects: Project[] = [{
   id: "hook-driven-concept",
