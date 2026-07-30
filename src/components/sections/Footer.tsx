@@ -57,6 +57,30 @@ export default function Footer() {
       </div>
       <div className="max-w-7xl mx-auto w-full mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-brand-text-muted">
         <p>&copy; {new Date().getFullYear()} IgnittoMedia. All rights reserved.</p>
+        
+        {/* Developer Credit */}
+        <div className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity duration-300">
+          <span className="text-slate-400">Developed by</span>
+          <a
+            href="https://www.linkedin.com/in/muhammad-umer-farooq-69450a294/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-semibold text-slate-200 hover:text-brand-glow transition-colors group"
+          >
+            <img
+              src="https://unavatar.io/linkedin/muhammad-umer-farooq"
+              alt="Muhammad Umer Farooq"
+              className="w-5 h-5 rounded-full object-cover border border-white/20 group-hover:border-brand-glow transition-colors"
+              onError={(e) => {
+                // If unavatar image fails, fallback gracefully
+                (e.currentTarget as HTMLImageElement).style.display = 'none';
+              }}
+            />
+            <span className="underline underline-offset-4 decoration-white/20 group-hover:decoration-brand-glow">
+              Muhammad Umer Farooq
+            </span>
+          </a>
+        </div>
       </div>
     </footer>
   );

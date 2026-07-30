@@ -287,15 +287,23 @@ export default function RootLayout({
       className="h-full antialiased bg-brand-bg text-brand-text"
     >
       <head>
-        {/* <!-- Google tag (gtag.js) --> */}
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7YHE98KXLX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        {/* Google Analytics Tag (gtag.js) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-7YHE98KXLX"
+        />
+        <script
+          id="google-analytics"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-7YHE98KXLX');
+            `,
+          }}
+        />
 
-  gtag('config', 'G-7YHE98KXLX');
-</script>
         {/* JSON-LD Structured Data */}
         <script
           id="schema-organization"
