@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
     default: "IgnittoMedia | We don't edit videos. We engineer attention.",
-    template: "%s | IgnittoMedia",
+    template: "%s | IgnittoMedia", 
   },
   description:
     "IgnittoMedia helps founders, creators, and businesses transform raw footage into content that builds authority, earns trust, and drives measurable growth. 100+ projects. 20M+ views. 96% client retention.",
