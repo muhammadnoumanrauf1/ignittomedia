@@ -32,8 +32,8 @@ export const projects: Project[] = [{
   description: "A YouTube edit structured around Iman Gadzhi's front loaded hook a punchy cold open and rapid pattern interrupt cuts in the first 10, 15 seconds that state the payoff before the talking head settles into normal pace."
 },
 {
-  id: "intention-system",
-  title: "Intention System",
+  id: "motion-branding",
+  title: "Motion Branding",
   thumbnail: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b3105f982994d15830c7f.jpg",
   videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a68a186b4176d3727edfc67.mp4",
   aspectRatio: "16:9",
