@@ -13,63 +13,63 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "tech-vision",
-    title: "TechVision Concept",
+    id: "hook-driven-concept",
+    title: "Hook-Driven Concept",
     // thumbnail: '',
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689cdc2cfe8da14c951bc7.mp4",
     aspectRatio: "16:9",
-    category: "Tech & Corporate",
-    tags: ["Motion Graphics", "Promo", "B-roll"],
-    description: "A fast-paced promotional video for a tech startup, showcasing dynamic transitions and sound design."
+    category: "CREATOR & BUSINESS",
+    tags: ["Talking Headt", "Pattern Interrupt", "Retention Edi"],
+    description: "A YouTube edit structured around Iman Gadzhi's front loaded hook a punchy cold open and rapid pattern interrupt cuts in the first 10–15 seconds that state the payoff before the talking head settles into normal pace."
   },
   {
-    id: "creator-x",
-    title: "Creator X Shorts",
+    id: "youtube-longform-content",
+    title: "Youtube Longform Content",
     // thumbnail: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop",
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689cdc2cfe8da14c951bc2.mp4",
     aspectRatio: "9:16",
-    category: "Short-Form",
-    tags: ["TikTok", "Reels", "Captions"],
-    description: "High-retention vertical edits designed specifically for Instagram Reels and TikTok algorithms."
+    category: "LONG FORM",
+    tags: ["YT Content", "Motion Graphics", "Fast Pacing"],
+    description: "A YouTube edit structured around Iman Gadzhi's front loaded hook a punchy cold open and rapid pattern interrupt cuts in the first 10–15 seconds that state the payoff before the talking head settles into normal pace."
   },
   {
-    id: "velocity-brands",
-    title: "Velocity Brands",
+    id: "intention-system",
+    title: "Intention System",
     thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2942&auto=format&fit=crop",
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a68a186b4176d3727edfc67.mp4",
     aspectRatio: "16:9",
-    category: "Commercial",
-    tags: ["Automotive", "Color Grading", "Cinematic"],
-    description: "A premium automotive commercial edit featuring aggressive color grading and intense pacing."
+    category: "MOTION GRAPHICS",
+    tags: ["Brand Identity", "Kinetic Type", "Mockup Reveal"],
+    description: "A from-scratch motion graphics piece, not an edit; kinetic typography animated through packaging, UI, and color-story mockups to visualize a brand system."
   },
   {
-    id: "studio-focus",
-    title: "Studio Focus",
+    id: "social-media-integration-motion-graphics",
+    title: "Social Media Integration Motion Graphics",
     thumbnail: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&auto=format&fit=crop",
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a68a186b7fe5a8e318c2f92.mp4",
     aspectRatio: "9:16",
-    category: "Podcast",
-    tags: ["Interview", "Multicam", "Shorts"],
-    description: "Multi-cam podcast editing with seamless angle switching and punch-in emphasis."
+    category: "Motion Graphics & Animation",
+    tags: ["Motion Graphics", "Social Media", " UI Animation"],
+    description: "this is a sample of the custom motion graphics and dynamic visual assets we create for our clients' websites and brand pages. It demonstrates our capability to design eye-catching, professional animations."
   },
   {
     id: "creative-labs",
     title: "Creative Labs",
     thumbnail: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2940&auto=format&fit=crop",
-    videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689c7c2cfe8da14c94a020.mp4",
+    videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689d942cfe8da14c9581c9.mp4",
     aspectRatio: "1:1",
     category: "Social Ad",
     tags: ["Facebook Ads", "Direct Response", "VFX"],
     description: "A conversion-optimized video ad formatted 1:1 for perfect display on Facebook and Instagram feeds."
   },
   {
-    id: "nextgen-media",
-    title: "NextGen Media",
+    id: "premium-instagram-reels",
+    title: "Premium Instagram Reels",
     thumbnail: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2940&auto=format&fit=crop",
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689d29d1438d5c4eb3c208.mp4",
     aspectRatio: "4:5",
-    category: "Event Highlight",
-    tags: ["Event", "Music Sync", "Dynamic"],
-    description: "A high-energy recap of a major conference, perfectly synced to the beat of an upbeat electronic track."
+    category: "Premium Social Content",
+    tags: ["Instagram Reels", "Scroll Stop Hook", "Viral Pacing"],
+    description: "A premium short form edit bold kinetic typography over a direct-to-camera hook, graded and paced to feel high-production despite the vertical format."
   }
 ];
