@@ -1,36 +1,24 @@
 # IgnittoMedia
-> Video production studio helping founders, creators, and businesses engineer attention through world-class video editing.
+> We don't edit videos. We engineer attention.
 
-IgnittoMedia transforms raw footage into content that builds authority, earns trust, and drives measurable growth. We don't edit videos. We engineer attention.
+IgnittoMedia is a high-end video production and creative engineering studio helping founders, creators, B2B SaaS companies, and brands transform raw footage into high-retention, revenue-generating video assets.
 
-## Services
+## Core Capabilities & Services
+- **Short Form Video Editing**: High-retention vertical edits for TikTok, Instagram Reels, and YouTube Shorts. Cold open hooks, dynamic motion typography, fast-pacing, and retention engineering.
+- **Long Form Video Editing**: YouTube essays, documentaries, and deep-dive talking head videos with pattern interrupts and storytelling arcs.
+- **Commercial Video Production**: Brand narrative spots, product launch videos, and high-converting ad creative.
+- **Podcast Video Editing**: Multi-camera switching, audio mastering, dynamic lower thirds, and short clips extraction.
+- **Motion Graphics & Animation**: 2D/3D kinetic typography, product mockups, UI animations, and explanatory graphics.
+- **Creative Direction**: Visual strategy, thumbnail design, title hooks, and content architecture.
 
-- **Short Form Video Editing** — High-retention vertical content engineered for algorithmic growth on TikTok, Reels, and Shorts.
-- **Long Form Video Editing** — Documentaries, YouTube essays, and deep-dive content that retains viewers for 20+ minutes.
-- **Commercial Video Production** — High-end brand narratives and advertising campaigns that convert.
-- **Podcast Production** — Multi-cam switching, color grading, and audio mastering for professional shows.
-- **Motion Graphics** — Custom animations, UI mockups, and visual effects that explain complex ideas.
-- **Creative Direction** — Thumbnails, hooks, and complete visual strategy designed to maximize CTR.
-
-## Process
-
-1. Upload & Ideation — You drop raw footage into our portal; we strategize the optimal narrative hook and pacing.
-2. Editorial Engineering — Frame-by-frame cuts, color grading, sound design, and motion graphics.
-3. Review & Refinement — Collaborative rounds with precise, fast revisions.
-4. Delivery & Scale — Final exports in all required formats, ready to publish.
-
-## Why IgnittoMedia
-
+## Performance Highlights & Case Metrics
 - 100+ projects delivered
-- 20M+ views generated across client channels
+- 20M+ organic views generated
 - 96% client retention rate
-- 48-hour average turnaround
 
-## Contact
-
-Book a strategy call: https://calendly.com/ahmar-nawab/new-meeting
-Website: https://ignittomedia.com
-
-## Optional
-
-llms-full.txt: https://ignittomedia.com/llms-full.txt
+## Canonical Links & Resources
+- Official Website: https://ignittomedia.com
+- Services Overview: https://ignittomedia.com/#services
+- 3D Portfolio Gallery: https://ignittomedia.com/#portfolio
+- Client Deliverables Vault: https://ignittomedia.com/#deliverables
+- Book a Discovery Call: https://ignittomedia.com/#contact

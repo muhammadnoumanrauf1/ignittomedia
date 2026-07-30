@@ -204,6 +204,74 @@ const servicesSchema = {
   ],
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What video editing services does IgnittoMedia offer?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "IgnittoMedia offers short form video editing (Reels, TikTok, Shorts), long form YouTube video production, commercial & brand ad editing, podcast video editing, motion graphics, and full creative direction.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How does IgnittoMedia engineer video retention?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "We combine front-loaded cold open hooks, rapid pattern interrupt cuts, kinetic typography, motion graphics, beat-synced pacing, and sound design to keep viewers engaged from the first second.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is IgnittoMedia's turn-around time for video edits?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Short-form edits are typically delivered within 24-48 hours. Long-form and commercial projects are delivered according to agreed milestone schedules.",
+      },
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: BASE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: `${BASE_URL}/#services`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Portfolio",
+      item: `${BASE_URL}/#portfolio`,
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      name: "Deliverables Vault",
+      item: `${BASE_URL}/#deliverables`,
+    },
+    {
+      "@type": "ListItem",
+      position: 5,
+      name: "Testimonials",
+      item: `${BASE_URL}/#testimonials`,
+    },
+  ],
+};
+
 import Navbar from "@/components/sections/Navbar";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import DynamicPageTitle from "@/components/ui/DynamicPageTitle";
@@ -235,6 +303,16 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
         />
+        <script
+          id="schema-faq"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+        <script
+          id="schema-breadcrumb"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
       </head>
       <body className="min-h-full flex flex-col relative" suppressHydrationWarning>
         <DynamicPageTitle />
@@ -245,6 +323,12 @@ export default function RootLayout({
         <ClickSpark sparkColor="#00DFA2" sparkSize={12} sparkRadius={40} sparkCount={10} duration={500} />
         <Navbar />
         {children}
+
+        {/* Ignitto External Tracking Script */}
+        <script
+          src="https://link.ignitto.com/js/external-tracking.js"
+          data-tracking-id="tk_e587a8609db741368adf911c7423e5bb"
+        />
       </body>
     </html>
   );
