@@ -27,7 +27,7 @@ export const projects: Project[] = [
     title: "Youtube Longform Content",
     // thumbnail: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop",
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689cdc2cfe8da14c951bc2.mp4",
-    aspectRatio: "9:16",
+    aspectRatio: "16:9",
     category: "LONG FORM",
     tags: ["YT Content", "Motion Graphics", "Fast Pacing"],
     description: "A YouTube edit structured around Iman Gadzhi's front loaded hook a punchy cold open and rapid pattern interrupt cuts in the first 10–15 seconds that state the payoff before the talking head settles into normal pace."
@@ -53,14 +53,14 @@ export const projects: Project[] = [
     description: "this is a sample of the custom motion graphics and dynamic visual assets we create for our clients' websites and brand pages. It demonstrates our capability to design eye-catching, professional animations."
   },
   {
-    id: "creative-labs",
-    title: "Creative Labs",
+    id: "snappy-real-estate-edit",
+    title: "Snappy Real Estate Edit",
     thumbnail: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2940&auto=format&fit=crop",
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689d942cfe8da14c9581c9.mp4",
     aspectRatio: "1:1",
-    category: "Social Ad",
-    tags: ["Facebook Ads", "Direct Response", "VFX"],
-    description: "A conversion-optimized video ad formatted 1:1 for perfect display on Facebook and Instagram feeds."
+    category: "Real Estate",
+    tags: ["High Retention Editing", "SpeedRamping", "VideoPacing","VFX"],
+    description: "A fast-paced real estate editing style uses rapid cuts, precise speed ramping, and rhythmic beat syncs instead of slow pans to maximize viewer retention and maintain visual momentum from the first second."
   },
   {
     id: "premium-instagram-reels",
