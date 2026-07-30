@@ -57,7 +57,7 @@ export const projects: Project[] = [
     title: "Snappy Real Estate Edit",
     thumbnail: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2940&auto=format&fit=crop",
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689d942cfe8da14c9581c9.mp4",
-    aspectRatio: "1:1",
+    aspectRatio: "9:16",
     category: "Real Estate",
     tags: ["High Retention Editing", "SpeedRamping", "VideoPacing","VFX"],
     description: "A fast-paced real estate editing style uses rapid cuts, precise speed ramping, and rhythmic beat syncs instead of slow pans to maximize viewer retention and maintain visual momentum from the first second."
