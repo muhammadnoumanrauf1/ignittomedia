@@ -293,7 +293,7 @@ export default function TestimonialCards() {
               </div>
 
               <div>
-                <h4 className="font-extrabold text-white text-base sm:text-lg tracking-wide">
+                <h4 className="font-bold text-white text-base sm:text-lg tracking-wide">
                   {currentItem.name}
                 </h4>
                 <p className="text-[#C8D5E0] text-xs sm:text-sm font-semibold">

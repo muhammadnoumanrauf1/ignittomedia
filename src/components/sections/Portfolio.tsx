@@ -60,6 +60,7 @@ export default function Portfolio() {
         </div>
 
         <div className="relative w-full h-[460px] md:h-[540px] rounded-3xl overflow-hidden interactive">
+          {/* @ts-ignore */}
           <CircularGallery
             ref={galleryRef}
             items={galleryItems}
