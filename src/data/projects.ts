@@ -15,7 +15,7 @@ export const projects: Project[] = [
   {
     id: "tech-vision",
     title: "TechVision Concept",
-    // thumbnail: '',
+    thumbnail: 'https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b202dac1586969821d8ea.png',
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689cdc2cfe8da14c951bc7.mp4",
     aspectRatio: "16:9",
     category: "Tech & Corporate",

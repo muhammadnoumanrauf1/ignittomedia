@@ -13,23 +13,63 @@ export default function FolderSection() {
 
   const icons = [FileVideo, FileImage, FileText];
 
-  const folderItems = projects.map((project, index) => {
-    const Icon = icons[index % icons.length];
+  const folderItems = projects.map((project) => {
     return (
       <div 
         key={project.id} 
-        className="w-full h-full p-1.5 sm:p-2.5 flex flex-col items-center justify-center text-[#040D1A] cursor-pointer hover:bg-black/10 active:scale-95 rounded-lg transition-all"
+        className="group relative w-full h-full rounded-xl overflow-hidden cursor-pointer border border-[#00DFA2]/40 bg-[#040D1A] shadow-2xl transition-all hover:scale-105 active:scale-95 flex flex-col justify-between p-2 select-none"
         onClick={(e) => {
           e.stopPropagation();
           setSelectedProject(project);
         }}
       >
-        <div className="p-1.5 rounded-md bg-brand-glow/20 text-[#00b3dd] mb-1 group-hover:scale-110 transition-transform">
-          <Icon size={20} strokeWidth={2} className="sm:w-6 sm:h-6" />
+        {/* Background Thumbnail Image if available */}
+        {project.thumbnail && (
+          <img 
+            src={project.thumbnail} 
+            alt={project.title}
+            className="absolute inset-0 w-full h-full object-cover" 
+          />
+        )}
+
+        {/* Dark Studio Overlay Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#040D1A]/85 via-[#040D1A]/75 to-[#040D1A]/95 z-10" />
+
+        {/* Glowing Cyan Radial Spotlight */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(0,223,162,0.35),transparent_70%)] z-10 pointer-events-none" />
+
+        {/* Subtle Tech Grid Lines */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:16px_16px] z-10 pointer-events-none" />
+
+        {/* Tech Corner Brackets */}
+        <div className="absolute top-1 left-1 w-2.5 h-2.5 border-t-2 border-l-2 border-[#00DFA2] z-20" />
+        <div className="absolute top-1 right-1 w-2.5 h-2.5 border-t-2 border-r-2 border-[#00DFA2] z-20" />
+        <div className="absolute bottom-1 left-1 w-2.5 h-2.5 border-b-2 border-l-2 border-[#00DFA2] z-20" />
+        <div className="absolute bottom-1 right-1 w-2.5 h-2.5 border-b-2 border-r-2 border-[#00DFA2] z-20" />
+
+        {/* Top Tag: IGNITTO MEDIA */}
+        <div className="relative z-20 w-full flex items-center justify-center pt-0.5">
+          <span className="text-[7px] sm:text-[9px] font-bold text-[#00DFA2] tracking-wider uppercase text-center">
+            IGNITTO MEDIA • CASE STUDY
+          </span>
         </div>
-        <span className="text-[10px] sm:text-xs font-bold text-center leading-tight truncate max-w-full px-1 text-slate-800">
-          {project.title.split(' ')[0]}.mp4
-        </span>
+
+        {/* Center Play Emblem */}
+        <div className="relative z-20 my-auto flex items-center justify-center">
+          <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-[#00DFA2] flex items-center justify-center shadow-[0_0_15px_rgba(0,223,162,0.6)] group-hover:scale-110 transition-transform">
+            <div className="w-0 h-0 border-y-[5px] border-y-transparent border-l-[9px] border-l-[#040D1A] ml-0.5" />
+          </div>
+        </div>
+
+        {/* Bottom Title & CTA Hint */}
+        <div className="relative z-20 w-full text-center pb-0.5">
+          <h4 className="text-[9px] sm:text-[11px] font-extrabold text-white leading-tight truncate px-1 drop-shadow-md">
+            {project.title}
+          </h4>
+          <span className="text-[6px] sm:text-[8px] font-bold text-[#00b3dd] uppercase tracking-wider block mt-0.5">
+            CLICK TO PLAY
+          </span>
+        </div>
       </div>
     );
   });

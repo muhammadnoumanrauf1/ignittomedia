@@ -288,19 +288,45 @@ class Media {
       transparent: true
     });
 
-    const createGeneralizedThumbnailCanvas = (titleText) => {
+    const createGeneralizedThumbnailCanvas = (titleText, bgImgElement = null) => {
       const canvas = document.createElement('canvas');
       canvas.width = 800;
       canvas.height = 600;
       const ctx = canvas.getContext('2d');
 
-      // Studio dark navy gradient background
-      const bgGrad = ctx.createLinearGradient(0, 0, 800, 600);
-      bgGrad.addColorStop(0, '#040D1A');
-      bgGrad.addColorStop(0.5, '#071C35');
-      bgGrad.addColorStop(1, '#020813');
-      ctx.fillStyle = bgGrad;
-      ctx.fillRect(0, 0, 800, 600);
+      if (bgImgElement && bgImgElement.complete && bgImgElement.naturalWidth > 0) {
+        // Draw the background thumbnail image covering the canvas
+        const imgRatio = bgImgElement.naturalWidth / bgImgElement.naturalHeight;
+        const canvasRatio = 800 / 600;
+        let renderW = 800;
+        let renderH = 600;
+        let offsetX = 0;
+        let offsetY = 0;
+        if (imgRatio > canvasRatio) {
+          renderW = 600 * imgRatio;
+          offsetX = (800 - renderW) / 2;
+        } else {
+          renderH = 800 / imgRatio;
+          offsetY = (600 - renderH) / 2;
+        }
+        ctx.drawImage(bgImgElement, offsetX, offsetY, renderW, renderH);
+
+        // Dark studio overlay gradient over image
+        const darkOverlay = ctx.createLinearGradient(0, 0, 0, 600);
+        darkOverlay.addColorStop(0, 'rgba(4, 13, 26, 0.75)');
+        darkOverlay.addColorStop(0.5, 'rgba(4, 13, 26, 0.65)');
+        darkOverlay.addColorStop(1, 'rgba(4, 13, 26, 0.90)');
+        ctx.fillStyle = darkOverlay;
+        ctx.fillRect(0, 0, 800, 600);
+      } else {
+        // Default Studio dark navy gradient background
+        const bgGrad = ctx.createLinearGradient(0, 0, 800, 600);
+        bgGrad.addColorStop(0, '#040D1A');
+        bgGrad.addColorStop(0.5, '#071C35');
+        bgGrad.addColorStop(1, '#020813');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, 800, 600);
+      }
 
       // Cyan spotlight radial glow in center
       const glowGrad = ctx.createRadialGradient(400, 250, 20, 400, 250, 360);
@@ -311,7 +337,7 @@ class Media {
       ctx.fillRect(0, 0, 800, 600);
 
       // Subtle tech grid lines
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
       ctx.lineWidth = 1;
       for (let x = 80; x < 800; x += 80) {
         ctx.beginPath();
@@ -327,7 +353,7 @@ class Media {
       }
 
       // Outer Frame Border
-      ctx.strokeStyle = 'rgba(0, 223, 162, 0.25)';
+      ctx.strokeStyle = 'rgba(0, 223, 162, 0.35)';
       ctx.lineWidth = 2;
       ctx.strokeRect(36, 36, 728, 528);
 
@@ -356,7 +382,7 @@ class Media {
       const cy = 245;
       
       // Outer glow circle
-      ctx.fillStyle = 'rgba(0, 223, 162, 0.15)';
+      ctx.fillStyle = 'rgba(0, 223, 162, 0.2)';
       ctx.beginPath();
       ctx.arc(cx, cy, 60, 0, Math.PI * 2);
       ctx.fill();
@@ -407,7 +433,7 @@ class Media {
 
       // Bottom Hint: TAP TO WATCH PREVIEW
       ctx.font = '600 14px sans-serif';
-      ctx.fillStyle = 'rgba(200, 213, 224, 0.7)';
+      ctx.fillStyle = 'rgba(200, 213, 224, 0.85)';
       ctx.fillText('CLICK TO PLAY FULL VIDEO', 400, 525);
 
       texture.image = canvas;
@@ -419,8 +445,7 @@ class Media {
       img.crossOrigin = 'anonymous';
       img.src = this.image;
       img.onload = () => {
-        texture.image = img;
-        this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight];
+        createGeneralizedThumbnailCanvas(this.text, img);
       };
       img.onerror = () => {
         createGeneralizedThumbnailCanvas(this.text);
