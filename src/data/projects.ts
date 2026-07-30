@@ -14,7 +14,7 @@ export interface Project {
 export const projects: Project[] = [{
   id: "hook-driven-concept",
   title: "Hook-Driven Concept",
-  thumbnail: 'https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b202dac1586969821d8ea.png',
+  thumbnail: 'https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a6b2a6ecdfcf049563bd4d5.png',
   videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689cdc2cfe8da14c951bc7.mp4",
   aspectRatio: "16:9",
   category: "CREATOR & BUSINESS",
