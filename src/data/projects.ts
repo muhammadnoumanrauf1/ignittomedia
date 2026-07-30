@@ -19,18 +19,18 @@ export const projects: Project[] = [
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689cdc2cfe8da14c951bc7.mp4",
     aspectRatio: "16:9",
     category: "CREATOR & BUSINESS",
-    tags: ["Talking Headt", "Pattern Interrupt", "Retention Edi"],
+    tags: ["Talking Head", "Pattern Interrupt", "Retention Edit"],
     description: "A YouTube edit structured around Iman Gadzhi's front loaded hook a punchy cold open and rapid pattern interrupt cuts in the first 10–15 seconds that state the payoff before the talking head settles into normal pace."
   },
   {
     id: "youtube-longform-content",
-    title: "Youtube Longform Content",
+    title: "Youtube Long form Content",
     // thumbnail: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop",
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689cdc2cfe8da14c951bc2.mp4",
     aspectRatio: "16:9",
     category: "LONG FORM",
     tags: ["YT Content", "Motion Graphics", "Fast Pacing"],
-    description: "A YouTube edit structured around Iman Gadzhi's front loaded hook a punchy cold open and rapid pattern interrupt cuts in the first 10–15 seconds that state the payoff before the talking head settles into normal pace."
+    description: "A YouTube edit structured around Iman Gadzhi's front loaded hook a punchy cold open and rapid pattern interrupt cuts in the first 10, 15 seconds that state the payoff before the talking head settles into normal pace."
   },
   {
     id: "intention-system",
@@ -43,14 +43,14 @@ export const projects: Project[] = [
     description: "A from-scratch motion graphics piece, not an edit; kinetic typography animated through packaging, UI, and color-story mockups to visualize a brand system."
   },
   {
-    id: "social-media-integration-motion-graphics",
-    title: "Social Media Integration Motion Graphics",
+    id: "social-media-motion-graphics",
+    title: "Social Media Motion Graphics",
     thumbnail: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&auto=format&fit=crop",
     videoUrl: "https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a68a186b7fe5a8e318c2f92.mp4",
     aspectRatio: "9:16",
     category: "Motion Graphics & Animation",
     tags: ["Motion Graphics", "Social Media", " UI Animation"],
-    description: "this is a sample of the custom motion graphics and dynamic visual assets we create for our clients' websites and brand pages. It demonstrates our capability to design eye-catching, professional animations."
+    description: "This is a sample of the custom motion graphics and dynamic visual assets we create for our clients' websites and brand pages. It demonstrates our capability to design eye-catching, professional animations."
   },
   {
     id: "snappy-real-estate-edit",
