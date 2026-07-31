@@ -38,9 +38,9 @@ export default function Story() {
           </motion.div>
 
           <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[1.1]">
-            <span className="text-white block font-extrabold tracking-wide mb-2">We Became</span>
-            <span className="text-white block font-semibold tracking-normal mb-2">Editors Because</span>
-            <span className=" font-light tracking-widest mb-4 text-white block ">We are</span>
+            <span className="text-white block font-medium tracking-wide mb-2">We Became</span>
+            <span className="text-white block font-medium tracking-normal mb-2">Editors Because</span>
+            {/* <span className=" font-light tracking-widest mb-4 text-white block ">We are</span> */}
             <span className="text-brand-glow inline-block font-black tracking-wider">
               We are<br />Students of Attention.
             </span>

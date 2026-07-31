@@ -134,7 +134,7 @@ const STYLES = `
 // -------------------------------------------------------------------------
 // 2. MAGNETIC BUTTON PRIMITIVE (Zero Dependency)
 // -------------------------------------------------------------------------
-export type MagneticButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & 
+export type MagneticButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   React.AnchorHTMLAttributes<HTMLAnchorElement> & {
     as?: React.ElementType;
   };
@@ -189,7 +189,7 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
       }, element);
 
       return () => ctx.revert();
-    },[]);
+    }, []);
 
     const Comp = Component as any;
     return (
@@ -272,7 +272,7 @@ export function CinematicFooter() {
     }, wrapperRef);
 
     return () => ctx.revert();
-  },[]);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -281,7 +281,7 @@ export function CinematicFooter() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
-      
+
       {/* 
         The "Curtain Reveal" Wrapper:
         It sits in standard flow. Because it has clip-path, its contents
@@ -295,7 +295,7 @@ export function CinematicFooter() {
       >
         {/* The actual footer stays fixed to the viewport underneath everything */}
         <footer className="fixed bottom-0 left-0 flex h-[100dvh] w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper">
-          
+
           {/* Ambient Light & Grid Background */}
           <div className="footer-aurora absolute left-1/2 top-1/2 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px] pointer-events-none z-0" />
           <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none" />
@@ -329,8 +329,8 @@ export function CinematicFooter() {
             <div ref={linksRef} className="flex flex-col items-center gap-8 w-full">
               {/* Action Links */}
               <div className="flex flex-wrap justify-center gap-4 w-full">
-                <MagneticButton 
-                  as="button" 
+                <MagneticButton
+                  as="button"
                   onClick={() => {
                     const cal = document.getElementById("DogUPsjbSk7gsEqnoDqm_1784107343568") || document.getElementById("contact");
                     if (cal) {
@@ -338,7 +338,7 @@ export function CinematicFooter() {
                     } else {
                       window.location.href = "/#contact";
                     }
-                  }} 
+                  }}
                   className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group text-white"
                 >
                   <svg className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
@@ -357,9 +357,9 @@ export function CinematicFooter() {
                   { name: "Testimonials", id: "testimonials" },
                   { name: "Contact", id: "contact" },
                 ].map((link) => (
-                  <MagneticButton 
-                    key={link.name} 
-                    as="button" 
+                  <MagneticButton
+                    key={link.name}
+                    as="button"
                     onClick={() => {
                       const el = document.getElementById(link.id);
                       if (el) {
@@ -367,7 +367,7 @@ export function CinematicFooter() {
                       } else {
                         window.location.href = `/#${link.id}`;
                       }
-                    }} 
+                    }}
                     className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-white hover:border-brand-glow/30 transition-all"
                   >
                     {link.name}
@@ -383,24 +383,24 @@ export function CinematicFooter() {
                 <MagneticButton as="a" href="/terms" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-white hover:border-brand-glow/30 transition-all">
                   Terms of Service
                 </MagneticButton>
-                <MagneticButton as="a" href="/refund" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-white hover:border-brand-glow/30 transition-all">
+                {/* <MagneticButton as="a" href="/refund" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-white hover:border-brand-glow/30 transition-all">
                   Refund Policy
-                </MagneticButton>
+                </MagneticButton> */}
               </div>
             </div>
           </div>
 
           {/* 3. Bottom Bar / Credits */}
           <div className="relative z-20 w-full pb-8 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
-            
+
             {/* Copyright and Logo */}
             <div className="flex flex-col md:flex-row items-center gap-4 order-2 md:order-1">
               <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                <Image 
-                  src="/ignitto-media-logo.png" 
-                  alt="Ignitto Media" 
-                  width={140} 
-                  height={35} 
+                <Image
+                  src="/ignitto-media-logo.png"
+                  alt="Ignitto Media"
+                  width={140}
+                  height={35}
                   className="h-8 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
                 />
               </Link>
@@ -411,25 +411,25 @@ export function CinematicFooter() {
 
             {/* Developer Credit */}
             <div className="flex items-center gap-2 text-xs z-30 py-1 order-3 md:order-2">
-              <span className="text-slate-400 font-medium">Developed by</span>
               <a
-                href="https://www.linkedin.com/in/muhammad-umer-farooq-69450a294/"
+                href="https://www.linkedin.com/in/umer-ai-agents/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 hover:border-brand-glow/60 hover:bg-brand-glow/15 text-white hover:text-brand-glow transition-all shadow-md group"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full  text-white hover:text-brand-glow transition-all  group"
               >
-                <div className="w-5 h-5 rounded-full bg-brand-glow/20 border border-brand-glow/50 flex items-center justify-center overflow-hidden shrink-0 group-hover:border-brand-glow transition-colors">
+                <span className="text-slate-400 font-medium">Developed by</span>
+                <div className="w-5 h-5 rounded-full  flex items-center justify-center overflow-hidden shrink-0 group-hover:border-brand-glow transition-colors">
                   <img
-                    src="https://unavatar.io/linkedin/muhammad-umer-farooq"
+                    src="/dp 2.jpg"
                     alt="Muhammad Umer Farooq"
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).style.display = 'none';
                     }}
                   />
-                  <span className="text-[9px] font-extrabold text-brand-glow">UF</span>
+
                 </div>
-                <span className="font-bold text-slate-100 group-hover:text-white transition-colors">
+                <span className="font-bold text-slate-100 text-slate-400 group-hover:text-white transition-colors">
                   Muhammad Umer Farooq
                 </span>
               </a>

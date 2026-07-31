@@ -59,15 +59,15 @@ export default function Footer() {
         <p>&copy; {new Date().getFullYear()} IgnittoMedia. All rights reserved.</p>
 
         {/* Developer Credit */}
-        <div className="flex items-center gap-2 text-xs py-1 z-20">
+        <div className="flex items-center gap-2 text-xs py-1 z-20 opacity-60">
           <a
             href="https://www.linkedin.com/in/muhammad-umer-farooq-69450a294/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3 py-1.5 opacity-60 rounded-full bg-white/10 border border-white/15 hover:border-brand-glow/60 hover:bg-brand-glow/15 text-white hover:text-brand-glow transition-all shadow-md group"
+            className="inline-flex items-center gap-2 px-3 py-1.5  rounded-full  text-white hover:text-brand-glow transition-all shadow-md group"
           >
             <span className="text-slate-400 font-medium">Developed by</span>
-            <div className="w-5 h-5 rounded-full bg-brand-glow/20 border border-brand-glow/50 flex items-center justify-center overflow-hidden shrink-0 group-hover:border-brand-glow transition-colors">
+            <div className="w-5 h-5 rounded-full flex items-center justify-center overflow-hidden shrink-0 transition-colors">
               <img
                 src="https://unavatar.io/linkedin/muhammad-umer-farooq"
                 alt="Muhammad Umer Farooq"
