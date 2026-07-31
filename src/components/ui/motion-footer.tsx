@@ -409,6 +409,32 @@ export function CinematicFooter() {
               </div>
             </div>
 
+            {/* Developer Credit */}
+            <div className="flex items-center gap-2 text-xs z-30 py-1 order-3 md:order-2">
+              <span className="text-slate-400 font-medium">Developed by</span>
+              <a
+                href="https://www.linkedin.com/in/muhammad-umer-farooq-69450a294/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 hover:border-brand-glow/60 hover:bg-brand-glow/15 text-white hover:text-brand-glow transition-all shadow-md group"
+              >
+                <div className="w-5 h-5 rounded-full bg-brand-glow/20 border border-brand-glow/50 flex items-center justify-center overflow-hidden shrink-0 group-hover:border-brand-glow transition-colors">
+                  <img
+                    src="https://unavatar.io/linkedin/muhammad-umer-farooq"
+                    alt="Muhammad Umer Farooq"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
+                  <span className="text-[9px] font-extrabold text-brand-glow">UF</span>
+                </div>
+                <span className="font-bold text-slate-100 group-hover:text-white transition-colors">
+                  Muhammad Umer Farooq
+                </span>
+              </a>
+            </div>
+
             {/* Social Links */}
             <div className="flex items-center gap-3 order-1 md:order-2">
               <MagneticButton as="a" href="mailto:info@ignittomedia.com" aria-label="Email" className="w-10 h-10 rounded-full footer-glass-pill flex items-center justify-center text-muted-foreground hover:text-white hover:bg-[#EA4335] hover:border-transparent transition-all duration-300">

@@ -59,24 +59,26 @@ export default function Footer() {
         <p>&copy; {new Date().getFullYear()} IgnittoMedia. All rights reserved.</p>
         
         {/* Developer Credit */}
-        <div className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity duration-300">
-          <span className="text-slate-400">Developed by</span>
+        <div className="flex items-center gap-2 text-xs py-1 z-20">
+          <span className="text-slate-400 font-medium">Developed by</span>
           <a
             href="https://www.linkedin.com/in/muhammad-umer-farooq-69450a294/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-semibold text-slate-200 hover:text-brand-glow transition-colors group"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 hover:border-brand-glow/60 hover:bg-brand-glow/15 text-white hover:text-brand-glow transition-all shadow-md group"
           >
-            <img
-              src="https://unavatar.io/linkedin/muhammad-umer-farooq"
-              alt="Muhammad Umer Farooq"
-              className="w-5 h-5 rounded-full object-cover border border-white/20 group-hover:border-brand-glow transition-colors"
-              onError={(e) => {
-                // If unavatar image fails, fallback gracefully
-                (e.currentTarget as HTMLImageElement).style.display = 'none';
-              }}
-            />
-            <span className="underline underline-offset-4 decoration-white/20 group-hover:decoration-brand-glow">
+            <div className="w-5 h-5 rounded-full bg-brand-glow/20 border border-brand-glow/50 flex items-center justify-center overflow-hidden shrink-0 group-hover:border-brand-glow transition-colors">
+              <img
+                src="https://unavatar.io/linkedin/muhammad-umer-farooq"
+                alt="Muhammad Umer Farooq"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).style.display = 'none';
+                }}
+              />
+              <span className="text-[9px] font-extrabold text-brand-glow">UF</span>
+            </div>
+            <span className="font-bold text-slate-100 group-hover:text-white transition-colors">
               Muhammad Umer Farooq
             </span>
           </a>

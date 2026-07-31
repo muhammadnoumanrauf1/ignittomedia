@@ -275,7 +275,8 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
             <video
               autoPlay
               loop
-              preload="metadata"
+              preload="none"
+              poster="/og-image.png"
               playsInline
               className="w-full h-full object-cover"
             >
@@ -386,7 +387,8 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
               <video
                 ref={videoRef}
                 loop
-                preload="auto"
+                preload="none"
+                poster="/og-image.png"
                 playsInline
                 className="w-full h-full object-cover pointer-events-none"
               >

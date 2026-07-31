@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
     default: "IgnittoMedia | We don't edit videos. We engineer attention.",
-    template: "%s | IgnittoMedia", 
+    template: "%s | IgnittoMedia",
   },
   description:
     "IgnittoMedia helps founders, creators, and businesses transform raw footage into content that builds authority, earns trust, and drives measurable growth. 100+ projects. 20M+ views. 96% client retention.",
@@ -43,14 +43,12 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "IgnittoMedia — We engineer attention through video.",
+        alt: "IgnittoMedia | We engineer attention through video.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@ignittomedia",
-    creator: "@ignittomedia",
     title: "IgnittoMedia | We engineer attention.",
     description:
       "Transform raw footage into content that builds authority, earns trust, and drives measurable growth.",
@@ -87,7 +85,11 @@ const organizationSchema = {
   logo: `${BASE_URL}/ignitto-media-logo.png`,
   description:
     "Video production studio helping founders, creators, and businesses build authority through engineered video content. Specializing in short form, long form, commercial, podcast, motion graphics, and creative direction.",
-  sameAs: [],
+  sameAs: [
+    "https://www.instagram.com/ignittomedia/",
+    "https://www.facebook.com/ignittomedia",
+    "https://www.linkedin.com/company/ignitto-media"
+  ],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "Customer Service",
