@@ -979,15 +979,14 @@ const CircularGallery = forwardRef(({
   }
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
+    <div className="relative w-full h-full">
       {!isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-brand-bg/40 backdrop-blur-sm z-20 transition-opacity duration-300">
           <div className="w-8 h-8 border-2 border-brand-accent/30 border-t-brand-accent rounded-full animate-spin" />
         </div>
       )}
       <div
-        className={`circular-gallery w-full h-full transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+        className={`circular-gallery absolute inset-0 w-full h-full transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         ref={containerRef}
         tabIndex={0}
         role="region"

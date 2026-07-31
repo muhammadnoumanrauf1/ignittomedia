@@ -35,14 +35,9 @@ export default function Portfolio() {
           <h2 className="text-3xl md:text-5xl font-bold text-center text-white z-10 pointer-events-none mb-4">
             Selected Works
           </h2>
-
-          {/* Subtitle Badge */}
-          {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-accent/20 bg-brand-accent/5 backdrop-blur-md text-xs font-mono font-bold text-brand-accent shadow-sm mt-1">
-            <span>Drag or click projects to explore</span>
-          </div> */}
         </div>
 
-        <div className="relative w-full min-h-[640px] md:min-h-[700px] rounded-3xl overflow-visible interactive flex items-center justify-center">
+        <div className="relative w-full h-[580px] sm:h-[640px] md:h-[700px] rounded-3xl overflow-visible interactive">
           {/* @ts-ignore */}
           <CircularGallery
             ref={galleryRef}
