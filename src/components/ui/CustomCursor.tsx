@@ -13,8 +13,11 @@ export default function CustomCursor() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    // Disable on touch devices
-    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+    // Disable on touch devices or if reduced motion is requested
+    if (
+      typeof window !== "undefined" &&
+      (window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+    ) {
       return;
     }
 
