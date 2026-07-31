@@ -30,34 +30,6 @@ We combine front-loaded cold open hooks, rapid pattern interrupts, kinetic typog
 | **Motion Graphics & Animation** | Custom 2D/3D kinetic typography, product mockups, and UI animations. | All Platforms |
 | **Creative Direction** | Visual strategy, thumbnail design, title hooks, and content architecture. | Complete Strategy |
 
----
-
-## 💻 Tech Stack & Architecture
-
-- **Core**: Next.js 16 (App Router) + React 19 + TypeScript
-- **Styling**: Tailwind CSS + Custom Vanilla CSS + Framer Motion
-- **3D & WebGL Canvas**: OGL (`CircularGallery.jsx`) + Three.js (`threejs-particles-waves.tsx`)
-- **SEO & AI Search (AEO / GEO / AISEO)**:
-  - JSON-LD Schemas: `Organization`, `WebSite`, `Services`, `FAQPage`, `BreadcrumbList`
-  - Indexing & Crawlers: `sitemap.ts`, `robots.ts`, `llms.txt`, OpenGraph, Twitter Cards
-  - Custom High-Converting 404 Page (`src/app/not-found.tsx`)
-
----
-
-## ⚡ Getting Started Locally
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build production bundle
-npm run build
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ---
 
