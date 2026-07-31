@@ -98,7 +98,7 @@ export default function Metrics() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-wide text-white leading-tight"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-wide text-white leading-tight"
           >
             Engineering Attention at Scale
           </motion.h2>
@@ -132,7 +132,7 @@ export default function Metrics() {
                   </div>
 
                   {/* Big Counter Number */}
-                  <h3 className="text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-2  group-hover:text-brand-glow transition-colors duration-300">
+                  <h3 className="text-5xl lg:text-6xl font-bold tracking-tight text-white mb-2  group-hover:text-brand-glow transition-colors duration-300">
                     <CountUp to={metric.value} suffix={metric.suffix} ssrValue={metric.ssrValue} />
                   </h3>
 

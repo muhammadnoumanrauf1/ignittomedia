@@ -344,7 +344,7 @@ class Media {
       // White Play Button Emblem in exact center with soft drop shadow
       const cx = 400;
       const cy = 300;
-      
+
       // Soft natural dark drop shadow to make play button pop
       ctx.shadowColor = 'rgba(0, 0, 0, 0.45)';
       ctx.shadowBlur = 24;
@@ -509,14 +509,28 @@ class App {
     this.mouse = { x: 0, y: 0 };
   }
   createRenderer() {
-    this.renderer = new Renderer({
-      alpha: true,
-      antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 1.25)
-    });
-    this.gl = this.renderer.gl;
-    this.gl.clearColor(0, 0, 0, 0);
-    this.container.appendChild(this.gl.canvas);
+    const options = [
+      { alpha: true, antialias: false, dpr: Math.min(window.devicePixelRatio || 1, 1.25) },
+      { alpha: true, antialias: false, webgl: 1, dpr: 1 },
+      { alpha: true, powerPreference: 'low-power', dpr: 1 },
+      { alpha: true, powerPreference: 'default', dpr: 1 }
+    ];
+
+    for (const opt of options) {
+      try {
+        const r = new Renderer(opt);
+        if (r && r.gl) {
+          this.renderer = r;
+          this.gl = r.gl;
+          this.gl.clearColor(0, 0, 0, 0);
+          this.container.appendChild(this.gl.canvas);
+          return;
+        }
+      } catch (err) {
+        // Try next fallback option
+      }
+    }
+    this.webGLError = true;
   }
   createCamera() {
     this.camera = new Camera(this.gl);
@@ -751,71 +765,218 @@ const CircularGallery = forwardRef(({
     prev: () => appRef.current?.prev()
   }));
 
+  const [hasWebGLError, setHasWebGLError] = useState(false);
+
   useEffect(() => {
+    let isMounted = true;
     if (!containerRef.current) return;
     let app;
 
-    // Instant synchronous app instantiation for fast, smooth loading
-    app = new App(containerRef.current, {
-      items,
-      bend,
-      textColor,
-      borderRadius,
-      font,
-      scrollSpeed,
-      scrollEase,
-      autoScrollSpeed,
-      onItemClick
-    });
-    appRef.current = app;
+    try {
+      // Instant synchronous app instantiation for fast, smooth loading
+      app = new App(containerRef.current, {
+        items,
+        bend,
+        textColor,
+        borderRadius,
+        font,
+        scrollSpeed,
+        scrollEase,
+        autoScrollSpeed,
+        onItemClick
+      });
 
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 80);
+      if (app.webGLError) {
+        if (isMounted) setHasWebGLError(true);
+        return;
+      }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            if (!app.rafActive) {
-              app.rafActive = true;
-              app.update();
-            }
-          } else {
-            app.rafActive = false;
-            window.cancelAnimationFrame(app.raf);
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
+      appRef.current = app;
 
-    observer.observe(containerRef.current);
-    app.observer = observer;
+      const timer = setTimeout(() => {
+        if (isMounted) setIsLoaded(true);
+      }, 80);
 
-    // Asynchronously resolve custom font if specified without blocking initial mount
-    if (fontUrl) {
-      resolveFont(font, fontUrl).then(resolvedFont => {
-        if (app && app.medias) {
-          app.medias.forEach(media => {
-            if (media.title) {
-              media.font = resolvedFont;
-              media.title.font = resolvedFont;
-              media.title.createMesh();
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              if (app && !app.rafActive) {
+                app.rafActive = true;
+                app.update();
+              }
+            } else if (app) {
+              app.rafActive = false;
+              window.cancelAnimationFrame(app.raf);
             }
           });
-        }
-      });
-    }
+        },
+        { threshold: 0.05 }
+      );
 
-    return () => {
-      clearTimeout(timer);
-      if (app) {
-        if (app.observer) app.observer.disconnect();
-        app.destroy();
+      observer.observe(containerRef.current);
+      app.observer = observer;
+
+      // Asynchronously resolve custom font if specified without blocking initial mount
+      if (fontUrl) {
+        resolveFont(font, fontUrl).then(resolvedFont => {
+          if (isMounted && app && app.medias) {
+            app.medias.forEach(media => {
+              if (media.title) {
+                media.font = resolvedFont;
+                media.title.font = resolvedFont;
+                media.title.createMesh();
+              }
+            });
+          }
+        });
       }
-    };
+
+      return () => {
+        isMounted = false;
+        clearTimeout(timer);
+        if (app) {
+          if (app.observer) app.observer.disconnect();
+          app.destroy();
+        }
+      };
+    } catch (err) {
+      console.warn("CircularGallery initialization error:", err);
+      if (isMounted) setHasWebGLError(true);
+    }
   }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase, autoScrollSpeed, onItemClick]);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const dragStartX = useRef(null);
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % items.length);
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
+  };
+
+  const handlePointerDown = (e) => {
+    dragStartX.current = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : null);
+  };
+
+  const handlePointerUp = (e) => {
+    if (dragStartX.current === null) return;
+    const endX = e.clientX || (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : null);
+    if (endX !== null) {
+      const diff = dragStartX.current - endX;
+      if (diff > 40) {
+        handleNext();
+      } else if (diff < -40) {
+        handlePrev();
+      }
+    }
+    dragStartX.current = null;
+  };
+
+  if (hasWebGLError) {
+    return (
+      <div 
+        className="relative w-full h-full min-h-[640px] flex flex-col items-center justify-center overflow-visible py-10 select-none"
+        onMouseDown={handlePointerDown}
+        onMouseUp={handlePointerUp}
+        onTouchStart={handlePointerDown}
+        onTouchEnd={handlePointerUp}
+      >
+        {/* 3D Perspective Inward Curved Cards Ring */}
+        <div className="relative w-full max-w-6xl h-[500px] flex items-center justify-center [perspective:1200px] overflow-visible pt-10 pb-6">
+          {items.map((item, index) => {
+            const offset = (index - activeIndex + items.length) % items.length;
+            const normalizedOffset = offset > items.length / 2 ? offset - items.length : offset;
+            const isCenter = normalizedOffset === 0;
+            const absOffset = Math.abs(normalizedOffset);
+
+            const isMobile = typeof window !== "undefined" ? window.innerWidth < 640 : false;
+            const rotateY = -normalizedOffset * (isMobile ? 18 : 20);
+            const translateZ = (isMobile ? 140 : 220) - absOffset * (isMobile ? 50 : 70);
+            const translateX = normalizedOffset * (isMobile ? 90 : 160);
+            const opacity = Math.max(0.15, 1 - absOffset * (isMobile ? 0.35 : 0.22));
+            const scale = Math.max(0.7, 1 - absOffset * 0.1);
+
+            return (
+              <div
+                key={index}
+                onClick={() => {
+                  if (isCenter && onItemClick) {
+                    onItemClick(index);
+                  } else {
+                    setActiveIndex(index);
+                  }
+                }}
+                style={{
+                  transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
+                  opacity: opacity,
+                  zIndex: 30 - absOffset,
+                }}
+                className={`absolute w-[240px] xs:w-[260px] sm:w-[320px] h-[330px] sm:h-[360px] rounded-3xl p-3 sm:p-4 bg-[#040D1A] border ${
+                  isCenter
+                    ? "border-[#00DFA2] shadow-[0_0_50px_rgba(0,223,162,0.35)] cursor-pointer"
+                    : "border-white/10 hover:border-white/30 cursor-pointer"
+                } transition-all duration-500 ease-out backdrop-blur-xl flex flex-col justify-between overflow-hidden group`}
+              >
+                <div className="relative w-full h-[230px] rounded-2xl overflow-hidden mb-3">
+                  <img
+                    src={item.image}
+                    alt={item.text}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-[#00DFA2] text-[#031e41] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <svg className="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-left px-1 pb-1">
+                  <span className="text-[10px] font-mono font-bold text-[#00DFA2] uppercase tracking-wider block mb-1">
+                    Featured Work
+                  </span>
+                  <h4 className="text-white font-bold text-lg leading-snug line-clamp-2 group-hover:text-[#00DFA2] transition-colors">
+                    {item.text}
+                  </h4>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom Ring Controls */}
+        <div className="flex items-center gap-4 mt-8 z-30">
+          <button
+            onClick={handlePrev}
+            aria-label="Previous Project"
+            className="w-11 h-11 rounded-full border border-white/15 bg-white/5 hover:bg-[#00DFA2] hover:text-[#031e41] text-white flex items-center justify-center backdrop-blur-md transition-all active:scale-95 shadow-lg cursor-pointer"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <span className="text-xs font-mono text-slate-400 font-bold px-3">
+            {activeIndex + 1} / {items.length}
+          </span>
+
+          <button
+            onClick={handleNext}
+            aria-label="Next Project"
+            className="w-11 h-11 rounded-full border border-white/15 bg-white/5 hover:bg-[#00DFA2] hover:text-[#031e41] text-white flex items-center justify-center backdrop-blur-md transition-all active:scale-95 shadow-lg cursor-pointer"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
@@ -825,9 +986,8 @@ const CircularGallery = forwardRef(({
         </div>
       )}
       <div
-        className={`circular-gallery w-full h-full transition-opacity duration-500 ${
-          isLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
+        className={`circular-gallery w-full h-full transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
         ref={containerRef}
         tabIndex={0}
         role="region"

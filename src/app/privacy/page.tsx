@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
       <Navbar />
       
       <main className="relative z-10 w-full max-w-4xl mx-auto px-6 pt-40 pb-32 bg-brand-bg text-white border-b border-white/10 shadow-2xl rounded-b-[40px] md:rounded-b-[80px] text-left">
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-wide mb-8 text-white text-glow">Privacy Policy</h1>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-wide mb-8 text-white">Privacy Policy</h1>
         
         <div className="space-y-6 text-brand-text-secondary leading-relaxed font-light">
           <p>Last updated: {new Date().toLocaleDateString()}</p>

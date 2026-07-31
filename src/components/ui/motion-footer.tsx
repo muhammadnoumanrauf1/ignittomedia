@@ -17,7 +17,7 @@ if (typeof window !== "undefined") {
 // 1. THEME-ADAPTIVE INLINE STYLES
 // -------------------------------------------------------------------------
 const STYLES = `
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 .cinematic-footer-wrapper {
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -121,13 +121,12 @@ const STYLES = `
   background-clip: text;
 }
 
-/* Metallic Text Glow */
+/* Metallic Text */
 .footer-text-glow {
   background: linear-gradient(180deg, var(--foreground) 0%, color-mix(in oklch, var(--foreground) 40%, transparent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0px 0px 20px color-mix(in oklch, var(--foreground) 15%, transparent));
 }
 `;
 
@@ -224,55 +223,6 @@ const MarqueeItem = () => (
 
 export function CinematicFooter() {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const giantTextRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const linksRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!wrapperRef.current) return;
-
-    // React strict mode compatible GSAP context cleanup
-    const ctx = gsap.context(() => {
-      // Background Parallax
-      gsap.fromTo(
-        giantTextRef.current,
-        { y: "10vh", scale: 0.8, opacity: 0 },
-        {
-          y: "0vh",
-          scale: 1,
-          opacity: 1,
-          ease: "power1.out",
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            start: "top 80%",
-            end: "bottom bottom",
-            scrub: 1,
-          },
-        }
-      );
-
-      // Staggered Content Reveal
-      gsap.fromTo(
-        [headingRef.current, linksRef.current],
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            start: "top 40%",
-            end: "bottom bottom",
-            scrub: 1,
-          },
-        }
-      );
-    }, wrapperRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -302,7 +252,6 @@ export function CinematicFooter() {
 
           {/* Giant background text */}
           <div
-            ref={giantTextRef}
             className="footer-giant-bg-text absolute -bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none text-white/5"
           >
             IGNITTO
@@ -319,14 +268,13 @@ export function CinematicFooter() {
           {/* 2. Main Center Content */}
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 mt-20 w-full max-w-5xl mx-auto">
             <h2
-              ref={headingRef}
-              className="text-5xl md:text-8xl font-black footer-text-glow tracking-tighter mb-12 text-center text-white"
+              className="text-5xl md:text-8xl font-bold footer-text-glow tracking-tighter mb-12 text-center text-white"
             >
               Ready to grow?
             </h2>
 
             {/* Interactive Magnetic Pills Layout */}
-            <div ref={linksRef} className="flex flex-col items-center gap-8 w-full">
+            <div className="flex flex-col items-center gap-8 w-full">
               {/* Action Links */}
               <div className="flex flex-wrap justify-center gap-4 w-full">
                 <MagneticButton
@@ -407,36 +355,17 @@ export function CinematicFooter() {
               <div className="text-brand-text-secondary text-xs md:text-sm font-semibold tracking-wider uppercase text-center md:text-left">
                 © {new Date().getFullYear()} IgnittoMedia. All rights reserved.
               </div>
-            </div>
-
-            {/* Developer Credit */}
-            <div className="flex items-center gap-2 text-xs opacity-40 z-30 py-1 order-3 md:order-2">
-              <a
-                href="https://www.linkedin.com/in/umer-ai-agents/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full  text-white hover:text-brand-glow transition-all  group"
-              >
-                <span className="text-slate-400 font-medium">Developed by</span>
-                <div className="w-5 h-5 rounded-full  flex items-center justify-center overflow-hidden shrink-0 group-hover:border-brand-glow transition-colors">
-                  <img
-                    src="https://res.cloudinary.com/dopziapjw/image/upload/v1785481262/DP_2_vb6ikt.jpg"
-                    alt="Muhammad Umer Farooq"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
-
-                </div>
-                <span className="font-bold text-slate-100 text-slate-400 group-hover:text-white transition-colors">
-                  Muhammad Umer Farooq
+              {/* Brand Credit */}
+              <div className="flex items-center gap-2 text-xs opacity-70 z-30 py-1 order-3 md:order-2">
+                <span className="text-slate-400 font-medium tracking-wide">Engineered by</span>
+                <span className="font-bold text-brand-glow tracking-wider uppercase">
+                  Ignitto
                 </span>
-              </a>
+              </div>
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center gap-3 order-1 md:order-2">
+            <div className="flex items-center gap-3 order-1 md:order-2 mr-16 md:mr-20">
               <MagneticButton as="a" href="mailto:info@ignittomedia.com" aria-label="Email" className="w-10 h-10 rounded-full footer-glass-pill flex items-center justify-center text-muted-foreground hover:text-white hover:bg-[#EA4335] hover:border-transparent transition-all duration-300">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -463,17 +392,6 @@ export function CinematicFooter() {
                 </svg>
               </MagneticButton>
             </div>
-
-            {/* Back to top */}
-            <MagneticButton
-              as="button"
-              onClick={scrollToTop}
-              className="w-12 h-12 rounded-full footer-glass-pill flex items-center justify-center text-muted-foreground hover:text-foreground group order-3"
-            >
-              <svg className="w-5 h-5 transform group-hover:-translate-y-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-              </svg>
-            </MagneticButton>
 
           </div>
         </footer>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import ClickSpark from "@/components/ui/ClickSpark";
 
@@ -277,6 +278,7 @@ const breadcrumbSchema = {
 import Navbar from "@/components/sections/Navbar";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import DynamicPageTitle from "@/components/ui/DynamicPageTitle";
+import BackToTop from "@/components/ui/BackToTop";
 
 export default function RootLayout({
   children,
@@ -287,15 +289,17 @@ export default function RootLayout({
     <html
       lang="en"
       className="h-full antialiased bg-brand-bg text-brand-text"
+      suppressHydrationWarning
     >
       <head>
         {/* Google Analytics Tag (gtag.js) */}
-        <script
-          async
+        <Script
+          strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-7YHE98KXLX"
         />
-        <script
+        <Script
           id="google-analytics"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -342,6 +346,7 @@ export default function RootLayout({
         <ClickSpark sparkColor="#00DFA2" sparkSize={12} sparkRadius={40} sparkCount={10} duration={500} />
         <Navbar />
         {children}
+        <BackToTop />
 
         {/* Ignitto External Tracking Script */}
         <script

@@ -29,7 +29,7 @@ export default function Testimonials() {
         </motion.div>
         <div className="text-center mb-8 md:mb-12">
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-wider text-center text-white mb-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-wider text-center text-white mb-4">
             Don't Take Our Word For It
           </h2>
           <p className="text-white text-base md:text-lg max-w-xl mx-auto font-light leading-relaxed">

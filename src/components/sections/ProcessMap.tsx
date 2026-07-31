@@ -58,7 +58,7 @@ export default function ProcessMap() {
         <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-brand-accent uppercase mb-6">
           How It Works
         </span>
-        <h2 className="text-3xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-wide leading-[1.1] max-w-4xl mx-auto">
+        <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold text-white tracking-wide leading-[1.1] max-w-4xl mx-auto">
           From raw footage to content that scales in four steps.
         </h2>
         <p className="mt-6 text-white text-base md:text-lg max-w-2xl mx-auto leading-relaxed">

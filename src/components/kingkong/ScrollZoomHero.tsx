@@ -53,10 +53,11 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
     offset: ["start start", "end end"],
   });
 
-  // Smooth spring smoothing for trackpads and momentum scroll
+  // Fast, responsive spring physics for instant trackpad & mouse scroll response
   const springProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 300,
+    damping: 40,
+    mass: 0.1,
     restDelta: 0.001,
   });
 
@@ -68,23 +69,32 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
 
   const easeInOut = cubicBezier(0.42, 0, 0.58, 1);
 
-  // CARD TRANSLATIONS & SCALE (0 -> 0.30 -> 0.65)
-  const x = useTransform(springProgress, [0, 0.3, 0.65], [startX, 0, 0], { ease: [easeInOut, easeInOut] });
-  const cardY = useTransform(springProgress, [0, 0.3, 0.65], [100, 0, 0], { ease: [easeInOut, easeInOut] });
-  const rotate = useTransform(springProgress, [0, 0.3, 0.65], [-10, 0, 0], { ease: [easeInOut, easeInOut] });
-  const scale = useTransform(springProgress, [0, 0.3, 0.65], [1, 1, endScale], { ease: [easeInOut, easeInOut] });
+  const midScale = 1 + (endScale - 1) * 0.5;
+  const midX = startX * 0.5;
 
-  // STAGE DISSOLVE & DRIFT OUT INTO NEXT SECTION (0.65 -> 0.95)
-  const stageOpacity = useTransform(springProgress, [0.65, 0.95], [1, 0], { ease: [easeInOut, easeInOut] });
-  const stageY = useTransform(springProgress, [0.65, 0.95], [0, -60], { ease: [easeInOut, easeInOut] });
+  // 5-STEP SCROLL SEQUENCE:
+  // Step 1 (0.20): First scroll -> video 50% in viewport
+  // Step 2 (0.40): Second scroll -> video 100% in viewport (full spotlight)
+  // Step 3 (0.60): Third scroll -> video holds 100% in viewport
+  // Step 4 (0.80): Fourth scroll -> 50% scrolled (video stage 50% faded / merging)
+  // Step 5 (1.00): Fifth scroll -> next section is 100% in viewport
+
+  const x = useTransform(springProgress, [0, 0.2, 0.4, 0.6, 1.0], [startX, midX, 0, 0, 0], { ease: [easeInOut, easeInOut] });
+  const cardY = useTransform(springProgress, [0, 0.2, 0.4, 0.6, 1.0], [100, 50, 0, 0, 0], { ease: [easeInOut, easeInOut] });
+  const rotate = useTransform(springProgress, [0, 0.2, 0.4, 0.6, 1.0], [-10, -5, 0, 0, 0], { ease: [easeInOut, easeInOut] });
+  const scale = useTransform(springProgress, [0, 0.2, 0.4, 0.6, 1.0], [1, midScale, endScale, endScale, endScale], { ease: [easeInOut, easeInOut] });
+
+  // STAGE DISSOLVE & DRIFT OUT INTO NEXT SECTION (0.60 -> 0.80 -> 1.0)
+  const stageOpacity = useTransform(springProgress, [0.6, 0.8, 1.0], [1, 0.5, 0], { ease: [easeInOut, easeInOut] });
+  const stageY = useTransform(springProgress, [0.6, 0.8, 1.0], [0, -30, -60], { ease: [easeInOut, easeInOut] });
 
   // CONSTANT VISUAL RADIUS (Dividing border radius by scale dynamically)
   const borderRadius = useTransform(scale, (s) => `${18 / s}px`);
 
-  // HERO CONTENT OPACITY & Y LIFTOFF (0 -> 0.30)
-  const heroOpacity = useTransform(springProgress, [0, 0.3, 0.65], [1, 0, 0], { ease: [easeInOut, easeInOut] });
-  const heroY = useTransform(springProgress, [0, 0.3, 0.65], [0, -60, -60], { ease: [easeInOut, easeInOut] });
-  const heroPointerEvents = useTransform(springProgress, (p) => p > 0.3 ? "none" : "auto");
+  // HERO CONTENT OPACITY & Y LIFTOFF (0 -> 0.20 -> 0.40)
+  const heroOpacity = useTransform(springProgress, [0, 0.2, 0.4], [1, 0.5, 0], { ease: [easeInOut, easeInOut] });
+  const heroY = useTransform(springProgress, [0, 0.2, 0.4], [0, -30, -60], { ease: [easeInOut, easeInOut] });
+  const heroPointerEvents = useTransform(springProgress, (p) => p > 0.2 ? "none" : "auto");
 
   // Dynamically control play/pause state of the video
   useEffect(() => {
@@ -201,19 +211,11 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
     }
   };
 
-  // Scroll to booking calendar widget
+  // Navigate to dedicated book-a-call booking calendar page
   const handleBookCall = () => {
     if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent("open-booking-calendar"));
+      window.location.href = "/book-a-call";
     }
-    setTimeout(() => {
-      const calendarEl = document.getElementById("booking-calendar-wrapper") || document.getElementById("DogUPsjbSk7gsEqnoDqm_1784107343568") || document.getElementById("contact");
-      if (calendarEl) {
-        calendarEl.scrollIntoView({ behavior: "smooth" });
-      } else {
-        window.location.href = "/#contact";
-      }
-    }, 50);
   };
 
   // Play hero manifesto video with audio and zoom into video player
@@ -248,14 +250,14 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
             <MagneticButton
               onClick={handleBookCall}
               variant="primary"
-              className="font-extrabold text-base focus:outline-none focus:ring-2 focus:ring-white"
+              className="font-bold text-base focus:outline-none focus:ring-2 focus:ring-white"
             >
               Book a Strategy Call
             </MagneticButton>
             <MagneticButton
               onClick={handleWatchManifesto}
               variant="secondary"
-              className="font-extrabold text-base border-brand-glow/30 focus:outline-none focus:ring-2 focus:ring-brand-glow"
+              className="font-bold text-base border-brand-glow/30 focus:outline-none focus:ring-2 focus:ring-brand-glow"
             >
               Watch Our Manifesto
             </MagneticButton>
@@ -265,7 +267,7 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
         {/* Static Card with AutoPlay Video and Spotlight */}
         <div
           style={{ width: dimensions.cardWidth, height: dimensions.cardHeight }}
-          className="bg-brand-bg rounded-2xl flex items-center justify-center border border-white/10 shadow-2xl overflow-hidden relative cursor-default z-100 "
+          className="bg-brand-bg rounded-2xl flex items-center justify-center border border-white/10 shadow-2xl overflow-hidden relative cursor-default z-30"
         >
           <GlowCard
             glowColor="theme"
@@ -308,14 +310,14 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
     );
   }
 
-  const sceneHeight = dimensions.isMobile ? "200vh" : "240vh";
+  const sceneHeight = dimensions.isMobile ? "150vh" : "180vh";
 
   return (
     <section ref={containerRef} style={{ height: sceneHeight }} className="relative bg-brand-bg w-full">
       {/* Sticky Stage Container */}
       <motion.div
         style={{ opacity: stageOpacity, y: stageY }}
-        className="sticky top-0 h-dvh w-full overflow-hidden flex items-center justify-center z-100 will-change-[transform,opacity]"
+        className="sticky top-0 h-dvh w-full overflow-hidden flex items-center justify-center z-30 will-change-[transform,opacity]"
       >
         {/* Background WebGL Particle Waves */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
@@ -349,14 +351,14 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
             <MagneticButton
               onClick={handleBookCall}
               variant="primary"
-              className="font-extrabold text-base focus:outline-none focus:ring-2 focus:ring-white"
+              className="font-bold text-base focus:outline-none focus:ring-2 focus:ring-white"
             >
               Book a Strategy Call
             </MagneticButton>
             <MagneticButton
               onClick={handleWatchManifesto}
               variant="secondary"
-              className="font-extrabold text-base border-brand-glow/30 focus:outline-none focus:ring-2 focus:ring-brand-glow"
+              className="font-bold text-base border-brand-glow/30 focus:outline-none focus:ring-2 focus:ring-brand-glow"
             >
               Watch Our Manifesto
             </MagneticButton>

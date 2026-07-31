@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import CustomCursor from "@/components/ui/CustomCursor";
 import BackgroundAtmosphere from "@/components/ui/BackgroundAtmosphere";
 import Story from "@/components/sections/Story";
@@ -13,6 +16,11 @@ import { CinematicFooter } from "@/components/ui/motion-footer";
 import ScrollZoomHero from "@/components/kingkong/ScrollZoomHero";
 
 export default function Home() {
+  useEffect(() => {
+    if (typeof window !== "undefined" && !window.location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
   return (
     <div className="relative w-full bg-brand-bg min-h-screen font-sans selection:bg-white/20 overflow-x-clip">
       <CustomCursor />
@@ -23,12 +31,7 @@ export default function Home() {
         <Story />
         <Metrics />
         <Services />
-        <div className="hidden md:block">
-          <Portfolio />
-        </div>
-        <div className="md:hidden block">
-          <FolderSection />
-        </div>
+        <Portfolio />
 
         <ProcessMap />
         <Testimonials />

@@ -79,7 +79,7 @@ export default function Services() {
           <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-brand-accent uppercase mb-4">
             Our Services
           </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-wider text-white">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-wider text-white">
             High-Impact Production
           </h2>
         </div>

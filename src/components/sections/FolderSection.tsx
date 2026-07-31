@@ -62,7 +62,7 @@ export default function FolderSection() {
           <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-brand-accent uppercase mb-3">
             Deliverables
           </span>
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-4">
             Client Deliverables
           </h2>
           <p className="text-brand-text-secondary text-sm sm:text-base md:text-lg max-w-xl font-light">

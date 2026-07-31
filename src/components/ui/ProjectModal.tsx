@@ -3,7 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { Project } from "@/data/projects";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { GlowCard } from "@/components/ui/spotlight-card";
 
 interface ProjectModalProps {
@@ -13,6 +14,12 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Prevent scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -36,7 +43,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  if (!project) return null;
+  if (!project || !mounted) return null;
 
   // Map aspect ratio to Tailwind classes
   const aspectClass = {
@@ -46,14 +53,14 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     "4:5": "aspect-[4/5] max-h-[50vh] md:max-h-[70vh]",
   }[project.aspectRatio];
 
-  return (
+  const modalContent = (
     <AnimatePresence>
       {isOpen && (
         <div 
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-project-title"
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 md:p-12"
         >
           {/* Backdrop */}
           <motion.div
@@ -61,30 +68,30 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/80 cursor-pointer"
+            className="absolute inset-0 bg-black/85 backdrop-blur-md cursor-pointer"
           />
 
-          {/* Modal Content */}
+          {/* Modal Content Container */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", duration: 0.4 }}
-            className="relative w-full max-w-5xl rounded-3xl overflow-y-auto overflow-x-hidden max-h-[90vh] shadow-[0_25px_80px_rgba(0,0,0,0.9)]"
+            className="relative z-10 w-full max-w-5xl rounded-3xl overflow-y-auto overflow-x-hidden max-h-[90vh] shadow-[0_25px_80px_rgba(0,0,0,0.95)] border border-white/15"
           >
-            <GlowCard customSize={true} glowColor="theme" className="w-full min-h-min bg-[#040D1A] border-white/15 !p-0">
-              <div className="w-full h-full flex flex-col md:flex-row">
-                {/* Close Button */}
-                <button
-                  onClick={onClose}
-                  className="absolute top-4 right-4 z-20 p-2.5 bg-black/70 hover:bg-brand-glow hover:text-black rounded-full text-white transition-all focus:outline-none focus:ring-2 focus:ring-brand-glow"
-                  aria-label="Close Project Modal"
-                >
-                  <X size={20} />
-                </button>
+            <GlowCard customSize={true} glowColor="theme" className="w-full min-h-min bg-[#040D1A] border-white/15 !p-0 relative">
+              {/* Close Button - Always visible and stacked above modal content & header */}
+              <button
+                onClick={onClose}
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 p-2.5 bg-black/80 hover:bg-brand-glow hover:text-black rounded-full text-white border border-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-brand-glow shadow-xl active:scale-95 cursor-pointer"
+                aria-label="Close Project Modal"
+              >
+                <X size={20} />
+              </button>
 
+              <div className="w-full h-full flex flex-col md:flex-row">
                 {/* Video Container */}
-                <div className={`w-full md:w-3/5 bg-black flex items-center justify-center ${project.aspectRatio === "9:16" || project.aspectRatio === "4:5" ? "py-8" : ""}`}>
+                <div className={`w-full md:w-3/5 bg-black flex items-center justify-center ${project.aspectRatio === "9:16" || project.aspectRatio === "4:5" ? "py-6 sm:py-8" : ""}`}>
                   <div className={`w-full ${aspectClass} relative flex items-center justify-center`}>
                     <video
                       src={project.videoUrl}
@@ -99,15 +106,15 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 </div>
 
                 {/* Info Container */}
-                <div className="w-full md:w-2/5 p-8 flex flex-col justify-center">
+                <div className="w-full md:w-2/5 p-6 sm:p-8 flex flex-col justify-center">
                   <span className="text-brand-glow text-xs font-bold tracking-widest uppercase mb-2">
                     {project.category}
                   </span>
-                  <h2 id="modal-project-title" className="text-3xl font-bold text-white mb-6">
+                  <h2 id="modal-project-title" className="text-2xl sm:text-3xl font-bold text-white mb-6">
                     {project.title}
                   </h2>
                   
-                  <div className="flex flex-wrap gap-2 mb-8">
+                  <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
                     {project.tags.map(tag => (
                       <span
                         key={tag}
@@ -118,7 +125,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     ))}
                   </div>
 
-                  <p className="text-brand-text-muted leading-relaxed">
+                  <p className="text-brand-text-muted text-sm leading-relaxed">
                     {project.description}
                   </p>
                 </div>
@@ -129,4 +136,6 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
       )}
     </AnimatePresence>
   );
+
+  return createPortal(modalContent, document.body);
 }

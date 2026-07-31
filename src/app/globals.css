@@ -94,29 +94,17 @@
     font-family: 'Clash Display', 'Segoe UI Variable Display', 'Segoe UI', sans-serif;
   }
 
-  h1 {
+  h1, h2, .font-heading, .font-clash {
     font-weight: 700;
-    letter-spacing: 0.01em;
   }
 
-  h2 {
+  h3, h4, h5, h6 {
     font-weight: 600;
-    letter-spacing: 0.025em;
   }
 
-  h3 {
-    font-weight: 600;
-    letter-spacing: 0.03em;
-  }
-
-  h4 {
-    font-weight: 500;
-    letter-spacing: 0.035em;
-  }
-
-  h5, h6 {
-    font-weight: 500;
-    letter-spacing: 0.04em;
+  /* Globally override extra-bold and black weights to bold (700) */
+  .font-extrabold, .font-black {
+    font-weight: 700 !important;
   }
 
   /* Hide default cursor only when the custom cursor class is active */
@@ -137,6 +125,6 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
   .text-glow {
-    text-shadow: 0 0 20px rgba(0, 179, 221, 0.4);
+    text-shadow: none;
   }
 }

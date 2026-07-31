@@ -25,8 +25,44 @@ export default function Contact() {
       handleOpenCalendar();
     }
 
+    // Listen for form submission and appointment booking events from LeadConnector / GoHighLevel widgets
+    const handleWidgetMessage = (e: MessageEvent) => {
+      try {
+        const dataStr = typeof e.data === "string" ? e.data : JSON.stringify(e.data || {});
+        
+        // Form submitted -> open calendar & scroll down smoothly
+        const isFormSubmitted =
+          (dataStr.includes("form-submit") ||
+           dataStr.includes("form_submit") ||
+           dataStr.includes("formSubmit")) &&
+          !dataStr.includes("loaded");
+
+        if (isFormSubmitted) {
+          handleOpenCalendar();
+        }
+
+        // Booking confirmed -> redirect to /thank-you page
+        const isBookingComplete =
+          dataStr.includes("appointment-booked") ||
+          dataStr.includes("appointment_booked") ||
+          dataStr.includes("appointmentBooked") ||
+          dataStr.includes("booking_successful") ||
+          dataStr.includes("bookingSuccessful") ||
+          dataStr.includes("PHPo59XlXcILHazsNUNp");
+
+        if (isBookingComplete) {
+          window.location.href = "/thank-you";
+        }
+      } catch {
+        // Safe fallback for unparseable postMessages
+      }
+    };
+
+    window.addEventListener("message", handleWidgetMessage);
+
     return () => {
       window.removeEventListener("open-booking-calendar", handleOpenCalendar);
+      window.removeEventListener("message", handleWidgetMessage);
     };
   }, []);
 
@@ -67,8 +103,8 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-wide mb-6 text-white">
-            Ready to Engineer <span className="text-brand-glow font-black tracking-wider">Attention?</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide mb-6 text-white">
+            Ready to Engineer <span className="text-brand-glow font-bold tracking-wider">Attention?</span>
           </h2>
           <p className="text-white max-w-xl mx-auto text-sm md:text-base leading-relaxed">
             Reach out or book a strategy call with us below to discuss how we can transform your content pipeline.
@@ -94,7 +130,7 @@ export default function Contact() {
               {!showCalendar && (
                 <button
                   onClick={handleManualOpenCalendar}
-                  className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-brand-glow text-black font-extrabold text-sm hover:bg-brand-accent hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(0,179,221,0.4)]"
+                  className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-brand-glow text-black font-bold text-sm hover:bg-brand-accent hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(0,179,221,0.4)]"
                 >
                   <Calendar size={18} />
                   Book a Strategy Call Directly

@@ -29,6 +29,7 @@ const ParticleWaves = ({
   const [separation, setSeparation] = useState(100);
   const [particleColor, setParticleColor] = useState(initialParticleColor);
   const [bgColor, setBgColor] = useState(initialBgColor);
+  const [hasWebGLError, setHasWebGLError] = useState(false);
 
   useEffect(() => {
     setParticleColor(initialParticleColor);
@@ -126,47 +127,71 @@ const ParticleWaves = ({
   };
 
   useEffect(() => {
+    let isMounted = true;
     if (!containerRef.current) return;
 
-    // Initialize Three.js
-    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
-    camera.position.z = 1000;
-    camera.position.y = 800;
-    cameraRef.current = camera;
+    try {
+      // Check if WebGL context can be safely created without triggering Three.js error logger
+      const testCanvas = document.createElement('canvas');
+      const gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl');
+      if (!gl) {
+        if (isMounted) setHasWebGLError(true);
+        return;
+      }
 
-    const scene = new THREE.Scene();
-    sceneRef.current = scene;
+      // Initialize Three.js
+      const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
+      camera.position.z = 1000;
+      camera.position.y = 800;
+      cameraRef.current = camera;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(new THREE.Color(bgColor), 1);
-    rendererRef.current = renderer;
+      const scene = new THREE.Scene();
+      sceneRef.current = scene;
 
-    containerRef.current.appendChild(renderer.domElement);
+      let renderer: THREE.WebGLRenderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
+      } catch (err) {
+        renderer = new THREE.WebGLRenderer({ antialias: false });
+      }
 
-    // Create initial material and particles
-    materialRef.current = createParticleMaterial(particleColor);
-    recreateParticles();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(new THREE.Color(bgColor), 1);
+      rendererRef.current = renderer;
 
-    // Event listeners
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('touchmove', handleTouchMove, { passive: true });
-    window.addEventListener('resize', handleResize);
+      containerRef.current.appendChild(renderer.domElement);
+
+      // Create initial material and particles
+      materialRef.current = createParticleMaterial(particleColor);
+      recreateParticles();
+
+      // Event listeners
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('touchmove', handleTouchMove, { passive: true });
+      window.addEventListener('resize', handleResize);
+    } catch (e) {
+      if (isMounted) {
+        setHasWebGLError(true);
+      }
+    }
 
     return () => {
+      isMounted = false;
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', handleResize);
       
-      if (containerRef.current && renderer.domElement && containerRef.current.contains(renderer.domElement)) {
-        containerRef.current.removeChild(renderer.domElement);
+      if (containerRef.current && rendererRef.current?.domElement && containerRef.current.contains(rendererRef.current.domElement)) {
+        containerRef.current.removeChild(rendererRef.current.domElement);
       }
 
       if (materialRef.current) {
         materialRef.current.dispose();
       }
-      renderer.dispose();
+      if (rendererRef.current) {
+        rendererRef.current.dispose();
+      }
     };
   }, []);
 
@@ -178,7 +203,13 @@ const ParticleWaves = ({
   };
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView) {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+      }
+      return;
+    }
 
     const animateLoop = () => {
       if (!cameraRef.current || !rendererRef.current || !sceneRef.current) return;
@@ -217,6 +248,7 @@ const ParticleWaves = ({
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
       }
     };
   }, [isInView, amplitude, density, speed]);
@@ -238,7 +270,13 @@ const ParticleWaves = ({
     recreateParticles();
   }, [density, separation]);
 
-  if (isMobile) return null;
+  if (isMobile || hasWebGLError) {
+    return (
+      <div style={{ backgroundColor: bgColor }} className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#00b3dd]/15 via-transparent to-transparent opacity-60 pointer-events-none" />
+      </div>
+    );
+  }
 
   return (
     <div style={{ backgroundColor: bgColor }} className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">

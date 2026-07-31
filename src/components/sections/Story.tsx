@@ -15,7 +15,7 @@ export default function Story() {
   ];
 
   return (
-    <section id="story" className="relative min-h-screen bg-brand-bg -mt-[100vh] pt-24 pb-20 md:pt-32 md:pb-28 px-6 overflow-hidden z-20">
+    <section id="story" className="relative min-h-screen bg-brand-bg pt-24 pb-20 md:pt-32 md:pb-28 px-6 overflow-hidden z-20">
       <ProgressiveBlur position="top" backgroundColor="#031e41" height="120px" />
       <ProgressiveBlur position="bottom" backgroundColor="#031e41" height="120px" />
       {/* Background ambient glow */}
@@ -41,7 +41,7 @@ export default function Story() {
             <span className="text-white block font-medium tracking-wide mb-2">We Became</span>
             <span className="text-white block font-medium tracking-normal mb-2">Editors Because</span>
             {/* <span className=" font-light tracking-widest mb-4 text-white block ">We are</span> */}
-            <span className="text-brand-glow inline-block font-black tracking-wider">
+            <span className="text-brand-glow inline-block font-bold tracking-wider">
               We are<br />Students of Attention.
             </span>
           </h2>

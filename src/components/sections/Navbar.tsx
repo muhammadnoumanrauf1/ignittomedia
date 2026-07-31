@@ -66,15 +66,7 @@ export default function Navbar() {
 
   const handleBookCallClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent("open-booking-calendar"));
-    }
-    setTimeout(() => {
-      const calendarEl = document.getElementById("booking-calendar-wrapper") || document.getElementById("DogUPsjbSk7gsEqnoDqm_1784107343568") || document.getElementById("contact");
-      if (calendarEl) {
-        calendarEl.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 50);
+    window.location.href = "/book-a-call";
     setIsMobileMenuOpen(false);
   };
 
