@@ -7,11 +7,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-8 md:gap-6">
         <div className="flex flex-col items-center md:items-start gap-4">
           <div className="flex items-center space-x-3">
-            <Image 
-              src="/ignitto-media-logo.png" 
-              alt="IgnittoMedia Logo" 
-              width={160} 
-              height={40} 
+            <Image
+              src="/ignitto-media-logo.png"
+              alt="IgnittoMedia Logo"
+              width={160}
+              height={40}
               className="object-contain"
             />
           </div>
@@ -19,7 +19,7 @@ export default function Footer() {
             Content that builds authority, earns trust, and drives measurable growth.
           </p>
         </div>
-        
+
         <nav className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-sm font-medium text-brand-text-secondary">
           <a href="#problem" className="hover:text-brand-glow transition-colors interactive">Problem</a>
           <a href="#services" className="hover:text-brand-glow transition-colors interactive">Services</a>
@@ -57,16 +57,16 @@ export default function Footer() {
       </div>
       <div className="max-w-7xl mx-auto w-full mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-brand-text-muted">
         <p>&copy; {new Date().getFullYear()} IgnittoMedia. All rights reserved.</p>
-        
+
         {/* Developer Credit */}
         <div className="flex items-center gap-2 text-xs py-1 z-20">
-          <span className="text-slate-400 font-medium">Developed by</span>
           <a
             href="https://www.linkedin.com/in/muhammad-umer-farooq-69450a294/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 hover:border-brand-glow/60 hover:bg-brand-glow/15 text-white hover:text-brand-glow transition-all shadow-md group"
+            className="inline-flex items-center gap-2 px-3 py-1.5 opacity-60 rounded-full bg-white/10 border border-white/15 hover:border-brand-glow/60 hover:bg-brand-glow/15 text-white hover:text-brand-glow transition-all shadow-md group"
           >
+            <span className="text-slate-400 font-medium">Developed by</span>
             <div className="w-5 h-5 rounded-full bg-brand-glow/20 border border-brand-glow/50 flex items-center justify-center overflow-hidden shrink-0 group-hover:border-brand-glow transition-colors">
               <img
                 src="https://unavatar.io/linkedin/muhammad-umer-farooq"

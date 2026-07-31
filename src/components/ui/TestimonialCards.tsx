@@ -19,7 +19,6 @@ export interface TestimonialItem {
 export const testimonialsData: TestimonialItem[] = [
   {
     id: 1,
-
     quote: "IgnittoMedia brought a level of strategy and creativity that completely elevated our content. Their attention to storytelling, pacing, and visual detail helped us produce videos that not only looked premium but also performed exceptionally well. They feel like a true extension of our team rather than just an editing service.",
     name: "Lewis Maguire",
     role: "Brand Strategist & Producer",
@@ -41,8 +40,8 @@ export const testimonialsData: TestimonialItem[] = [
   {
     id: 3,
     quote: "The turnaround speed is incredible, but what impressed us most was the strategic thinking behind every edit. Hooks are stronger, pacing is tighter, and viewers are staying engaged much longer than before.",
-    name: "Personal Brand Founder",
-    role: "Content Creator",
+    name: "Alex Rivers",
+    role: "Founder & Keynote Speaker",
     avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
     rating: 5,
     tag: "Strategic Pacing"
@@ -50,18 +49,17 @@ export const testimonialsData: TestimonialItem[] = [
   {
     id: 4,
     quote: "IgnittoMedia feels less like a freelancer and more like an extension of our marketing team. Communication is seamless, revisions are fast, and they consistently deliver content that aligns perfectly with our brand.",
-    name: "Marketing Director",
-    role: "E-commerce Brand",
+    name: "Sophia Martinez",
+    role: "VP of Marketing, E-commerce",
     avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
     rating: 5,
     tag: "Seamless Handoff"
-
   },
   {
     id: 5,
     quote: "Before working with IgnittoMedia, publishing content felt like a bottleneck. Now our pipeline runs effortlessly. We simply record, upload, and receive videos that are optimized for every platform. It's been one of the best investments we've made.",
-    name: "CEO",
-    role: "Digital Agency",
+    name: "Marcus Sterling",
+    role: "CEO, Sterling Digital Agency",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
     rating: 5,
     tag: "Pipeline Efficiency"
@@ -69,8 +67,8 @@ export const testimonialsData: TestimonialItem[] = [
   {
     id: 6,
     quote: "What separates IgnittoMedia is their obsession with attention. Every cut, every transition, every sound effect has a purpose. The final product keeps people watching, and that's exactly what today's platforms reward.",
-    name: "Business Coach",
-    role: "Content Creator",
+    name: "Elena Rostova",
+    role: "Executive Creator Coach",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
     rating: 5,
     tag: "Attention Retention"
@@ -78,8 +76,8 @@ export const testimonialsData: TestimonialItem[] = [
   {
     id: 7,
     quote: "Professional, reliable, and incredibly creative. They don't just make videos look better—they make the message stronger. Our audience immediately noticed the difference in quality.",
-    name: "Founder",
-    role: "B2B Company",
+    name: "David Vance",
+    role: "CMO & Co-Founder, B2B SaaS",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
     rating: 5,
     tag: "Brand Elevation"
@@ -87,8 +85,8 @@ export const testimonialsData: TestimonialItem[] = [
   {
     id: 8,
     quote: "From our very first project, the process was effortless. Fast delivery, clear communication, and edits that exceeded expectations. IgnittoMedia has become our long-term creative partner.",
-    name: "Podcast Host",
-    role: "Media Network",
+    name: "Rachel Bennett",
+    role: "Host, Growth Lab Podcast",
     avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
     rating: 5,
     tag: "Long-term Partner"
@@ -96,8 +94,8 @@ export const testimonialsData: TestimonialItem[] = [
   {
     id: 9,
     quote: "We've worked with multiple editing teams over the years, but IgnittoMedia operates on a different level. They understand storytelling, pacing, and psychology—not just editing. Every video feels intentional, and our engagement has consistently improved since partnering with them.",
-    name: "YouTube Creator",
-    role: "500K+ Subscribers",
+    name: "Julian Hayes",
+    role: "YouTube Creator (500K+ Subs)",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
     rating: 5,
     tag: "Engagement Growth"
@@ -105,8 +103,8 @@ export const testimonialsData: TestimonialItem[] = [
   {
     id: 10,
     quote: "Working with IgnittoMedia completely transformed our content workflow. Instead of spending hours inside editing software, we focused on growing the business while every video arrived polished, engaging, and ready to publish. The difference wasn't just in production quality—it was in audience retention and overall brand perception.",
-    name: "Founder",
-    role: "SaaS Company",
+    name: "Tariq Al-Mansoor",
+    role: "Managing Director, ScaleSaaS",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
     rating: 5,
     tag: "Workflow Transformation"
