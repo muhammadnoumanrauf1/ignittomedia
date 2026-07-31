@@ -420,7 +420,7 @@ export function CinematicFooter() {
                 <span className="text-slate-400 font-medium">Developed by</span>
                 <div className="w-5 h-5 rounded-full  flex items-center justify-center overflow-hidden shrink-0 group-hover:border-brand-glow transition-colors">
                   <img
-                    src="/dp 2.jpg"
+                    src="https://res.cloudinary.com/dopziapjw/image/upload/v1785481262/DP_2_vb6ikt.jpg"
                     alt="Muhammad Umer Farooq"
                     className="w-full h-full object-cover"
                     onError={(e) => {
