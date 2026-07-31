@@ -410,7 +410,7 @@ export function CinematicFooter() {
             </div>
 
             {/* Developer Credit */}
-            <div className="flex items-center gap-2 text-xs z-30 py-1 order-3 md:order-2">
+            <div className="flex items-center gap-2 text-xs opacity-40 z-30 py-1 order-3 md:order-2">
               <a
                 href="https://www.linkedin.com/in/umer-ai-agents/"
                 target="_blank"
