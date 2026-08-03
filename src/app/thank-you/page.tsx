@@ -16,13 +16,13 @@ export default function ThankYouPage() {
 
       <div className="relative z-10 w-full max-w-3xl flex flex-col items-center text-center">
         {/* Success Icon Emblem */}
-        <div className="w-20 h-20 rounded-full bg-[#00DFA2]/10 border border-[#00DFA2]/40 flex items-center justify-center text-[#00DFA2] mb-6 shadow-[0_0_30px_rgba(0,223,162,0.3)] animate-pulse">
+        {/* <div className="w-20 h-20 rounded-full bg-[#00DFA2]/10 border border-[#00DFA2]/40 flex items-center justify-center text-[#00DFA2] mb-6 shadow-[0_0_30px_rgba(0,223,162,0.3)] animate-pulse">
           <CheckCircle2 size={42} />
-        </div>
+        </div> */}
 
         {/* Status Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00DFA2]/40 bg-[#00DFA2]/10 text-xs font-mono font-bold text-[#00DFA2] tracking-wider uppercase mb-4 shadow-[0_0_20px_rgba(0,223,162,0.2)]">
-          <Sparkles size={14} />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00DFA2]/40 text-xs font-mono font-bold text-[#00DFA2] tracking-wider uppercase mb-4 ">
+          {/* <Sparkles size={14} /> */}
           <span>Strategy Call Locked In</span>
         </div>
 
@@ -39,17 +39,17 @@ export default function ThankYouPage() {
         <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 text-left">
           <div className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
             <Calendar className="text-[#00DFA2] mb-3" size={24} />
-            <h3 className="font-bold text-white text-sm mb-1">1. Calendar Invite</h3>
+            <h3 className="font-medium tracking-[0.09em] text-white text-sm mb-1">1. Calendar Invite</h3>
             <p className="text-xs text-brand-text-secondary leading-relaxed">Check your email for the Google Meet / Zoom link and calendar event.</p>
           </div>
           <div className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
             <Clock className="text-[#00b3dd] mb-3" size={24} />
-            <h3 className="font-bold text-white text-sm mb-1">2. Audit & Strategy</h3>
+            <h3 className="font-medium tracking-[0.09em] text-white text-sm mb-1">2. Audit & Strategy</h3>
             <p className="text-xs text-brand-text-secondary leading-relaxed">Our team will review your channel and existing video content before the call.</p>
           </div>
           <div className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
             <MessageSquare className="text-[#00DFA2] mb-3" size={24} />
-            <h3 className="font-bold text-white text-sm mb-1">3. Game Plan</h3>
+            <h3 className="font-medium tracking-[0.09em] text-white text-sm mb-1">3. Game Plan</h3>
             <p className="text-xs text-brand-text-secondary leading-relaxed">We'll map out your customized high-retention editing & production workflow.</p>
           </div>
         </div>

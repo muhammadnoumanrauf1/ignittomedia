@@ -35,7 +35,7 @@ export default function Home() {
 
         <ProcessMap />
         <Testimonials />
-        <Contact />
+        {/* <Contact /> */}
         <FinalCTA />
       </main>
 

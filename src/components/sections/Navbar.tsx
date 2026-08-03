@@ -12,7 +12,7 @@ const navLinks = [
   { name: "Portfolio", href: "/#portfolio", id: "portfolio" },
   { name: "Process", href: "/#process", id: "process" },
   { name: "Testimonials", href: "/#testimonials", id: "testimonials" },
-  { name: "Book Call", href: "/#contact", id: "contact" },
+  // { name: "Book Call", href: "/#contact", id: "contact" },
   { name: "Contact Us", href: "/contact", id: "contact-page" },
 ];
 
@@ -25,7 +25,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -73,32 +73,30 @@ export default function Navbar() {
 
   return (
     <>
-      <header 
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-[60] transition-all duration-500 w-[95%] max-w-5xl rounded-full ${
-          isFooterVisible && !isMobileMenuOpen
-            ? "-translate-y-32 opacity-0 pointer-events-none" 
-            : "translate-y-0 opacity-100"
-        } ${
-          scrolled || isMobileMenuOpen
-            ? "py-3 px-6 bg-brand-bg/80 backdrop-blur-md border border-white/10 shadow-2xl" 
+      <header
+        className={`fixed top-6 left-1/2 -translate-x-1/2 z-[60] transition-all duration-500 w-[95%] max-w-5xl rounded-full ${isFooterVisible && !isMobileMenuOpen
+          ? "-translate-y-32 opacity-0 pointer-events-none"
+          : "translate-y-0 opacity-100"
+          } ${scrolled || isMobileMenuOpen
+            ? "py-3 px-6 bg-brand-bg/80 backdrop-blur-md border border-white/10 shadow-2xl"
             : "py-4 px-6 bg-transparent"
-        }`}
+          }`}
       >
         <div className="w-full flex items-center justify-between">
           {/* Logo */}
-          <Link 
-            href="/" 
-            className="relative flex items-center group focus:outline-none focus:ring-2 focus:ring-brand-glow rounded" 
+          <Link
+            href="/"
+            className="relative flex items-center group focus:outline-none focus:ring-2 focus:ring-brand-glow rounded"
             onClick={() => {
               setIsMobileMenuOpen(false);
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
-            <Image 
-              src="/ignitto-media-logo.png" 
-              alt="Ignitto Media" 
-              width={160} 
-              height={40} 
+            <Image
+              src="/ignitto-media-logo.png"
+              alt="Ignitto Media"
+              width={160}
+              height={40}
               className="h-8 md:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               priority
             />
@@ -107,8 +105,8 @@ export default function Navbar() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
+              <Link
+                key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.id, link.href)}
                 className="text-sm font-medium text-brand-text-secondary hover:text-brand-glow transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-glow rounded px-2 py-1"
@@ -120,7 +118,7 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <MagneticButton 
+            <MagneticButton
               as="a"
               href="/#contact"
               onClick={handleBookCallClick}
@@ -130,7 +128,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <button 
+          <button
             className="md:hidden text-brand-text hover:text-brand-glow transition-colors z-50 p-2 focus:outline-none focus:ring-2 focus:ring-brand-glow rounded"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -145,7 +143,7 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(16px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
@@ -161,7 +159,7 @@ export default function Navbar() {
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: 0.1 + i * 0.05 }}
                 >
-                  <Link 
+                  <Link
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.id, link.href)}
                     className="text-3xl font-bold text-white hover:text-brand-glow transition-colors focus:outline-none focus:ring-2 focus:ring-brand-glow rounded px-4 py-2 block"

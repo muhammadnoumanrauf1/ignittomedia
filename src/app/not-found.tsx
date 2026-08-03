@@ -3,7 +3,7 @@ import { Sparkles, ArrowLeft, Play, PhoneCall, Layers, Video } from "lucide-reac
 import Metadata from "next";
 
 export const metadata = {
-  title: "404 - Page Off-Script | IgnittoMedia",
+  title: "404 | Page Off-Script | IgnittoMedia",
   description: "The page you are looking for was cut in post-production. Explore IgnittoMedia's video production and attention engineering services.",
 };
 
@@ -16,13 +16,13 @@ export default function NotFound() {
 
       <div className="relative z-10 w-full max-w-3xl flex flex-col items-center text-center">
         {/* Glowing Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00DFA2]/40 bg-[#00DFA2]/10 text-xs font-mono font-bold text-[#00DFA2] tracking-wider uppercase mb-6 shadow-[0_0_20px_rgba(0,223,162,0.25)]">
-          <Sparkles size={14} className="animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00DFA2]/40 text-xs font-mono font-bold text-[#00DFA2] tracking-wider uppercase mb-6 ">
+          {/* <Sparkles size={14} className="animate-pulse" /> */}
           <span>404 • Page Off-Script</span>
         </div>
 
         {/* Big 404 Headline */}
-        <h1 className="text-7xl sm:text-9xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-[#00DFA2]/50 mb-4">
+        <h1 className="text-9xl sm:text-9xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-[#00DFA2]/50 mb-4">
           404
         </h1>
 
@@ -63,17 +63,17 @@ export default function NotFound() {
         <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-white/10 text-left">
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#00DFA2]/40 transition-colors">
             <Video className="text-[#00DFA2] mb-2" size={24} />
-            <h3 className="font-bold text-white text-sm mb-1">Short Form Retention</h3>
+            <h3 className="font-medium tracking-[0.09em] text-white text-sm mb-1">Short Form Retention</h3>
             <p className="text-xs text-slate-400">Reels, Shorts & TikTok edits with cold open hooks.</p>
           </div>
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#00DFA2]/40 transition-colors">
             <Layers className="text-[#00b3dd] mb-2" size={24} />
-            <h3 className="font-bold text-white text-sm mb-1">Long Form Mastery</h3>
+            <h3 className="font-medium tracking-[0.09em] text-white text-sm mb-1">Long Form Mastery</h3>
             <p className="text-xs text-slate-400">Documentaries and YouTube essays engineered for 20M+ views.</p>
           </div>
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#00DFA2]/40 transition-colors">
             <Sparkles className="text-[#00DFA2] mb-2" size={24} />
-            <h3 className="font-bold text-white text-sm mb-1">Motion Graphics</h3>
+            <h3 className="font-medium tracking-[0.09em] text-white text-sm mb-1">Motion Graphics</h3>
             <p className="text-xs text-slate-400">Custom kinetic typography, UI mockups, and visual assets.</p>
           </div>
         </div>

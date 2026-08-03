@@ -190,7 +190,7 @@ export default function TestimonialCards() {
         {/* Index Counter Badge */}
         <div className="flex items-center gap-2">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00b3dd]/30 bg-[#031e41]/80 backdrop-blur-md text-xs font-mono font-bold text-[#00b3dd] shadow-md">
-            <Sparkles size={13} className="text-[#00DFA2] animate-pulse" />
+            {/* <Sparkles size={13} className="text-[#00DFA2] animate-pulse" /> */}
             <span>
               {String(currentIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
             </span>
@@ -263,7 +263,7 @@ export default function TestimonialCards() {
                 </div>
 
                 {currentItem.tag && (
-                  <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#00DFA2] px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-[#00DFA2]/10 border border-[#00DFA2]/20">
+                  <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#00DFA2] px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full  border border-[#00DFA2]/20">
                     {currentItem.tag}
                   </span>
                 )}

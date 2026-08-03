@@ -31,8 +31,8 @@ export default function ContactPage() {
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00DFA2]/10 border border-[#00DFA2]/30 text-[#00DFA2] backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(0,223,162,0.15)]">
-            <Sparkles size={14} className="animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00DFA2]/30 text-[#00DFA2] backdrop-blur-md mb-4 ">
+            {/* <Sparkles size={14} className="animate-pulse" /> */}
             <span className="text-xs font-bold tracking-[0.25em] uppercase">Get In Touch</span>
           </div>
 
@@ -50,7 +50,7 @@ export default function ContactPage() {
           {/* Left Column: Direct Info & Strategy Call Banner */}
           <div className="lg:col-span-5 flex flex-col gap-6 p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl">
             <div>
-              <h2 className="text-2xl font-extrabold text-white mb-3">Direct Channels</h2>
+              <h2 className="text-2xl font-semibold text-white mb-3">Direct Channels</h2>
               <p className="text-slate-300 text-sm leading-relaxed mb-6 font-light">
                 Our creative strategy team typically responds within 2-4 business hours.
               </p>
@@ -86,13 +86,13 @@ export default function ContactPage() {
                 <PhoneCall size={16} />
                 <span>Fast Track</span>
               </div>
-              <h3 className="text-lg font-extrabold text-white mb-2">Want Instant Scheduling?</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">Want Instant Scheduling?</h3>
               <p className="text-xs text-slate-300 mb-4 leading-relaxed font-light">
                 Skip the back-and-forth email and book a 1-on-1 discovery call directly on our calendar.
               </p>
               <Link
-                href="/#contact"
-                className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-[#00DFA2] text-[#040D1A] font-extrabold text-xs uppercase tracking-wider hover:bg-[#00b3dd] hover:text-white transition-all shadow-[0_0_20px_rgba(0,223,162,0.3)]"
+                href="/book-a-call"
+                className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-[#00DFA2] text-[#040D1A] font-semibold text-xs uppercase tracking-wider hover:bg-[#00b3dd] hover:text-white transition-all shadow-[0_0_20px_rgba(0,223,162,0.3)]"
               >
                 <Calendar size={15} />
                 <span>Book Strategy Call</span>

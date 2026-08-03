@@ -303,12 +303,11 @@ export function CinematicFooter() {
                   { name: "Portfolio", id: "portfolio", href: "/#portfolio" },
                   { name: "Process", id: "process", href: "/#process" },
                   { name: "Testimonials", id: "testimonials", href: "/#testimonials" },
-                  { name: "Book Strategy Call", id: "contact", href: "/#contact" },
                   { name: "Contact Us", id: "contact-page", href: "/contact" },
                 ].map((link) => (
-                  <MagneticButton 
-                    key={link.name} 
-                    as={link.href.startsWith("/") && !link.href.startsWith("/#") ? "a" : "button"} 
+                  <MagneticButton
+                    key={link.name}
+                    as={link.href.startsWith("/") && !link.href.startsWith("/#") ? "a" : "button"}
                     href={link.href.startsWith("/") && !link.href.startsWith("/#") ? link.href : undefined}
                     onClick={link.href.startsWith("/#") ? () => {
                       const el = document.getElementById(link.id);
@@ -317,7 +316,7 @@ export function CinematicFooter() {
                       } else {
                         window.location.href = link.href;
                       }
-                    } : undefined} 
+                    } : undefined}
                     className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-white hover:border-brand-glow/30 transition-all"
                   >
                     {link.name}

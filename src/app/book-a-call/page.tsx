@@ -107,9 +107,9 @@ export default function BookACallPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-glow/10 border border-brand-glow/30 text-brand-glow backdrop-blur-md mb-4 shadow-[0_0_20px_rgba(0,179,221,0.2)]"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-glow/30 text-brand-glow backdrop-blur-md mb-4"
           >
-            <Sparkles size={14} className="text-brand-glow animate-pulse" />
+            {/* <Sparkles size={14} className="text-brand-glow animate-pulse" /> */}
             <span className="text-xs font-bold tracking-[0.25em] uppercase text-brand-glow">
               Schedule Your Discovery Session
             </span>
@@ -150,7 +150,7 @@ export default function BookACallPage() {
                   <Calendar size={22} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">1-on-1 Strategy Call</h3>
+                  <h3 className="text-lg font-semibold tracking-[0.05em] text-white">1-on-1 Strategy Call</h3>
                   <p className="text-xs text-slate-400 font-mono flex items-center gap-1.5 mt-0.5">
                     <Clock size={12} className="text-brand-glow" /> 30 Minutes • Live Google Meet
                   </p>
@@ -195,7 +195,7 @@ export default function BookACallPage() {
             <div className="rounded-2xl border border-brand-accent/20 bg-brand-accent/5 p-5 flex items-start gap-4 backdrop-blur-md">
               <ShieldCheck size={28} className="text-brand-accent shrink-0 mt-1" />
               <div>
-                <h4 className="text-sm font-semibold text-white mb-1">100% Free Strategy Session</h4>
+                <h4 className="text-sm font-medium text-white mb-1">100% Free Strategy Session</h4>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   No pushy sales reps. Even if we don't work together, you will walk away with actionable hook strategies for your next campaign.
                 </p>
@@ -260,7 +260,7 @@ export default function BookACallPage() {
                       <Icon size={24} />
                     </div>
 
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-brand-glow transition-colors">
+                    <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-brand-glow transition-colors">
                       {topic.title}
                     </h3>
 
@@ -284,7 +284,7 @@ export default function BookACallPage() {
               Our Simple 4-Step Process
             </h2>
             <p className="text-slate-300 text-sm sm:text-base">
-              From your initial call to seamless hands-off video delivery — built for speed, quality, and retention.
+              From your initial call to seamless hands-off video delivery; built for speed, quality, and retention.
             </p>
           </div>
 
@@ -299,10 +299,10 @@ export default function BookACallPage() {
                 className="rounded-3xl border border-white/10 bg-[#040D1A]/60 p-6 flex flex-col justify-between relative"
               >
                 <div>
-                  <span className="text-xs font-mono font-bold text-brand-accent bg-brand-accent/10 px-3 py-1 rounded-full border border-brand-accent/20 inline-block mb-4">
+                  <span className="text-xs font-mono font-bold text-brand-accent py-1  inline-block mb-4">
                     STEP {step.step}
                   </span>
-                  <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+                  <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
                   <p className="text-xs text-slate-300 leading-relaxed">{step.description}</p>
                 </div>
               </motion.div>
