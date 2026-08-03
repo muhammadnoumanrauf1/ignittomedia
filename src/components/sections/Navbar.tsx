@@ -12,7 +12,8 @@ const navLinks = [
   { name: "Portfolio", href: "/#portfolio", id: "portfolio" },
   { name: "Process", href: "/#process", id: "process" },
   { name: "Testimonials", href: "/#testimonials", id: "testimonials" },
-  { name: "Contact", href: "/#contact", id: "contact" },
+  { name: "Book Call", href: "/#contact", id: "contact" },
+  { name: "Contact Us", href: "/contact", id: "contact-page" },
 ];
 
 export default function Navbar() {
