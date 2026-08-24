@@ -283,7 +283,7 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
               className="w-full h-full object-cover"
             >
               <source
-                src="https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689c7c2cfe8da14c94a020.mp4"
+                src="https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a8c2d7b67ecc8731d1ee30c.mp4"
                 type="video/mp4"
               />
             </video>
