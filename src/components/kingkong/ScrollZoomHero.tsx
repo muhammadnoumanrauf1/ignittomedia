@@ -320,13 +320,13 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
         className="sticky top-0 h-dvh w-full overflow-hidden flex items-center justify-center z-30 will-change-[transform,opacity]"
       >
         {/* Background WebGL Particle Waves */}
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+        {/* <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
           <ParticleWaves
             hideControls={true}
             particleColor="#00DFA2"
             bgColor="#030A12"
           />
-        </div>
+        </div> */}
 
         {/* Hero Content Layer */}
         <motion.div
@@ -395,7 +395,7 @@ export default function ScrollZoomHero({ nextSection }: ScrollZoomHeroProps = {}
                 className="w-full h-full object-cover pointer-events-none"
               >
                 <source
-                  src="https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a689c7c2cfe8da14c94a020.mp4"
+                  src="https://assets.cdn.filesafe.space/0fHl1lFzaTIrwq0wzwCw/media/6a8c2d7b67ecc8731d1ee30c.mp4"
                   type="video/mp4"
                 />
                 Your browser does not support the video tag.
