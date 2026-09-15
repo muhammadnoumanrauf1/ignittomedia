@@ -75,6 +75,10 @@ export const metadata: Metadata = {
       { url: "/favicon.png", type: "image/png" },
     ],
   },
+  other: {
+  "p:domain_verify": "d759aa5eda7cc3ae5d6e0b0405d6ba71",
+},
+
 };
 
 // JSON-LD Structured Data
