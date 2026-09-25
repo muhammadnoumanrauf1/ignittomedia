@@ -11,6 +11,7 @@ const navLinks = [
   { name: "Services", href: "/#services", id: "services" },
   { name: "Portfolio", href: "/#portfolio", id: "portfolio" },
   { name: "Process", href: "/#process", id: "process" },
+  { name: "Pricing", href: "/pricing", id: "pricing" },
   { name: "Testimonials", href: "/#testimonials", id: "testimonials" },
   // { name: "Book Call", href: "/#contact", id: "contact" },
   { name: "Contact Us", href: "/contact", id: "contact-page" },
