@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import ClickSpark from "@/components/ui/ClickSpark";
+import CustomQuoteModal from "@/components/ui/CustomQuoteModal";
 
 const BASE_URL = "https://ignittomedia.com";
 
@@ -351,6 +352,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <BackToTop />
+        <CustomQuoteModal />
 
         {/* Ignitto External Tracking Script */}
         <script

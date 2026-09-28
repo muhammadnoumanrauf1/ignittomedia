@@ -132,78 +132,15 @@ export default function BookACallPage() {
           >
             Choose a date & time on our live calendar below to discuss your video goals, audit your hook retention, and build a high-converting content machine.
           </motion.p>
+
+
         </div>
 
         {/* Top Grid: Trust Overview Card + Calendar Widget */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-24">
+        <div className="grid grid-cols-1 gap-8 items-start mb-24">
 
-          {/* Left Side: Session Guarantee & Trust Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-4 flex flex-col gap-6"
-          >
-            <div className="rounded-3xl border border-white/10 bg-[#040D1A]/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
-                <div className="w-12 h-12 rounded-2xl bg-brand-glow/10 border border-brand-glow/30 flex items-center justify-center text-brand-glow shrink-0">
-                  <Calendar size={22} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold tracking-[0.05em] text-white">1-on-1 Strategy Call</h3>
-                  <p className="text-xs text-slate-400 font-mono flex items-center gap-1.5 mt-0.5">
-                    <Clock size={12} className="text-brand-glow" /> 30 Minutes • Live Google Meet
-                  </p>
-                </div>
-              </div>
 
-              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-brand-accent mb-4">
-                What You Get From This Session:
-              </h4>
 
-              <ul className="space-y-3.5 mb-8">
-                <li className="flex items-start gap-3 text-sm text-slate-200">
-                  <CheckCircle2 size={18} className="text-brand-glow shrink-0 mt-0.5" />
-                  <span>Custom cold-open hook analysis for your niche</span>
-                </li>
-                <li className="flex items-start gap-3 text-sm text-slate-200">
-                  <CheckCircle2 size={18} className="text-brand-glow shrink-0 mt-0.5" />
-                  <span>2D/3D motion graphics & pattern interrupt recommendations</span>
-                </li>
-                <li className="flex items-start gap-3 text-sm text-slate-200">
-                  <CheckCircle2 size={18} className="text-brand-glow shrink-0 mt-0.5" />
-                  <span>Turnaround SLAs & fixed monthly volume pricing</span>
-                </li>
-                <li className="flex items-start gap-3 text-sm text-slate-200">
-                  <CheckCircle2 size={18} className="text-brand-glow shrink-0 mt-0.5" />
-                  <span>Direct Q&A with our senior creative lead</span>
-                </li>
-              </ul>
-
-              {/* Stats Grid */}
-              <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/10 text-center">
-                {stats.map((stat, idx) => (
-                  <div key={idx} className="bg-white/5 rounded-xl p-2.5 border border-white/5">
-                    <div className="text-base sm:text-lg font-bold text-brand-glow">{stat.value}</div>
-                    <div className="text-[10px] text-slate-400 font-mono leading-tight mt-0.5">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Zero-Sales-Pressure Guarantee Box */}
-            <div className="rounded-2xl border border-brand-accent/20 bg-brand-accent/5 p-5 flex items-start gap-4 backdrop-blur-md">
-              <ShieldCheck size={28} className="text-brand-accent shrink-0 mt-1" />
-              <div>
-                <h4 className="text-sm font-medium text-white mb-1">100% Free Strategy Session</h4>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  No pushy sales reps. Even if we don't work together, you will walk away with actionable hook strategies for your next campaign.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Side: Interactive LeadConnector Calendar Widget */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}

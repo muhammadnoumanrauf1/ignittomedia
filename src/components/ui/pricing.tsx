@@ -25,7 +25,8 @@ export interface Plan {
 	}[];
 	btn: {
 		text: string;
-		href: string;
+		href?: string;
+		onClick?: () => void;
 	};
 }
 
@@ -307,17 +308,32 @@ export function PricingCard({ plan, className, ...props }: PricingCardProps) {
 					plan.highlighted && 'bg-brand-accent/5',
 				)}
 			>
-				<Button
-					className={cn(
-						'w-full py-6 font-bold text-sm tracking-wide rounded-xl transition-all duration-300',
-						plan.highlighted
-							? 'bg-brand-accent text-[#031e41] hover:bg-brand-glow hover:text-white shadow-[0_0_25px_rgba(0,223,162,0.3)]'
-							: 'bg-white/5 border border-white/15 text-white hover:bg-white/10 hover:border-brand-glow/40',
-					)}
-					asChild
-				>
-					<Link href={plan.btn.href}>{plan.btn.text}</Link>
-				</Button>
+				{plan.btn.onClick ? (
+					<Button
+						type="button"
+						onClick={plan.btn.onClick}
+						className={cn(
+							'w-full py-6 font-bold text-sm tracking-wide rounded-xl transition-all duration-300 cursor-pointer',
+							plan.highlighted
+								? 'bg-brand-accent text-[#031e41] hover:bg-brand-glow hover:text-white shadow-[0_0_25px_rgba(0,223,162,0.3)]'
+								: 'bg-white/5 border border-white/15 text-white hover:bg-white/10 hover:border-brand-glow/40 hover:text-white',
+						)}
+					>
+						{plan.btn.text}
+					</Button>
+				) : (
+					<Button
+						className={cn(
+							'w-full py-6 font-bold text-sm tracking-wide rounded-xl transition-all duration-300',
+							plan.highlighted
+								? 'bg-brand-accent text-[#031e41] hover:bg-brand-glow hover:text-white shadow-[0_0_25px_rgba(0,223,162,0.3)]'
+								: 'bg-white/5 border border-white/15 text-white hover:bg-white/10 hover:border-brand-glow/40 hover:text-white',
+						)}
+						asChild
+					>
+						<Link href={plan.btn.href || '#'}>{plan.btn.text}</Link>
+					</Button>
+				)}
 			</div>
 		</div>
 	);
