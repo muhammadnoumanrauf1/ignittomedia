@@ -159,6 +159,7 @@ export default function CustomQuoteModal({
               setIframeHeight(`${height + 30}px`);
             }
           }
+          return; // Do not check booking completion on resize events
         }
 
         // Booking confirmed -> redirect to /thank-you page
@@ -167,8 +168,7 @@ export default function CustomQuoteModal({
           dataStr.includes("appointment_booked") ||
           dataStr.includes("appointmentBooked") ||
           dataStr.includes("booking_successful") ||
-          dataStr.includes("bookingSuccessful") ||
-          dataStr.includes("GegBtjOZBR7P2aQrQZkf");
+          dataStr.includes("bookingSuccessful");
 
         if (isBookingComplete) {
           window.location.href = "/thank-you";

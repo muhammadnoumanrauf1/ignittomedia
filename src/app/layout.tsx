@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import ClickSpark from "@/components/ui/ClickSpark";
 import CustomQuoteModal from "@/components/ui/CustomQuoteModal";
+import PackageOrderModal from "@/components/ui/PackageOrderModal";
 
 const BASE_URL = "https://ignittomedia.com";
 
@@ -353,6 +354,7 @@ export default function RootLayout({
         {children}
         <BackToTop />
         <CustomQuoteModal />
+        <PackageOrderModal />
 
         {/* Ignitto External Tracking Script */}
         <script

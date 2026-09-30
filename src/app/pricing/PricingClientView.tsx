@@ -61,16 +61,33 @@ export default function PricingClientView() {
     }
   };
 
+  const openPackageOrder = (
+    packageId: "1-short-form" | "5-short-form" | "1-long-form" | "5-long-form"
+  ) => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("open-package-order", {
+          detail: { packageId },
+        })
+      );
+    }
+  };
+
   const VIDEO_PACKAGES: PricingCategoryGroup[] = [
     {
       id: "short-form",
       label: "Short-Form Videos",
+      subheading: "For Videos Up to 90 Seconds",
       plans: [
         {
           name: "1 Short-Form Video",
           price: 100,
-          info: "Professional editing for one real estate Reel, TikTok, or Short.",
+          info: "Professional editing for one real estate Reel, TikTok, or Short (up to 90 seconds).",
           features: [
+            {
+              text: "Video duration up to 90 seconds",
+              tooltip: "Optimal length for Instagram Reels, TikTok, and YouTube Shorts",
+            },
             {
               text: "Up to 2 revision rounds",
               tooltip: "Frame-accurate notes on Frame.io",
@@ -91,7 +108,7 @@ export default function PricingClientView() {
           ],
           btn: {
             text: "Order 1 Video",
-            href: "/book-a-call",
+            onClick: () => openPackageOrder("1-short-form"),
           },
         },
         {
@@ -99,8 +116,12 @@ export default function PricingClientView() {
           price: 397,
           badge: "MOST POPULAR",
           highlighted: true,
-          info: "Ideal for agents, teams, and agencies building a consistent social media presence.",
+          info: "Ideal for agents, teams, and agencies building a consistent social media presence (up to 90 seconds per video).",
           features: [
+            {
+              text: "Video duration up to 90 seconds per video",
+              tooltip: "Optimal length for Instagram Reels, TikTok, and YouTube Shorts",
+            },
             {
               text: "Up to 2 revision rounds per video",
               tooltip: "Two comprehensive feedback cycles for every clip",
@@ -115,13 +136,10 @@ export default function PricingClientView() {
             {
               text: "Beat-synced sound design and Foley accents",
             },
-            {
-              text: "Dedicated editor workflow on Frame.io",
-            },
           ],
           btn: {
             text: "Order 5 Videos Package",
-            href: "/book-a-call",
+            onClick: () => openPackageOrder("5-short-form"),
           },
         },
         {
@@ -183,7 +201,7 @@ export default function PricingClientView() {
           ],
           btn: {
             text: "Order 1 Long-Form Video",
-            href: "/book-a-call",
+            onClick: () => openPackageOrder("1-long-form"),
           },
         },
         {
@@ -207,13 +225,10 @@ export default function PricingClientView() {
             {
               text: "Custom motion titles, lower thirds, and callouts",
             },
-            {
-              text: "Dedicated senior lead editor",
-            },
           ],
           btn: {
             text: "Order 5 Videos Package",
-            href: "/book-a-call",
+            onClick: () => openPackageOrder("5-long-form"),
           },
         },
         {
@@ -276,7 +291,7 @@ export default function PricingClientView() {
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Engineered for Quality, Speed, and Attention
             </h2>
-            <p className="text-brand-text-secondary text-sm sm:text-base leading-relaxed font-light">
+            <p className="text-brand-text-secondary text-sm sm:text-base leading-relaxed font-medium">
               Every package is handled by dedicated video editors using a streamlined Frame.io review workflow.
             </p>
           </div>
@@ -292,7 +307,7 @@ export default function PricingClientView() {
                   <div className="w-12 h-12 rounded-2xl bg-brand-glow/10 border border-brand-glow/30 flex items-center justify-center text-brand-glow mb-6 group-hover:scale-110 transition-transform">
                     <Icon size={24} />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-brand-glow transition-colors">
+                  <h3 className="text-xl font-semibold  text-white mb-3 group-hover:text-brand-glow transition-colors">
                     {item.title}
                   </h3>
                   <p className="text-brand-text-secondary text-sm leading-relaxed font-light">
@@ -324,7 +339,7 @@ export default function PricingClientView() {
                 key={index}
                 className="rounded-2xl border border-white/10 bg-[#040D1A]/80 backdrop-blur-xl p-6 hover:border-white/20 transition-all"
               >
-                <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-3">
+                <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-3">
                   <HelpCircle size={18} className="text-brand-accent shrink-0" />
                   {faq.question}
                 </h3>
